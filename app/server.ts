@@ -4,8 +4,15 @@ import TwilioClient from "twilio";
 import "react-router";
 import "dotenv/config";
 import { validateRequest } from "twilio/lib/webhooks/webhooks";
+import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+import * as schema from "app/db/schema";
 
 async function validateTwilioWebhook(request: Request) {
+  const params = Object.fromEntries((await request.formData()).entries());
+  if (process.env.SKIP_TWILIO_WEBHOOK_VALIDATION) {
+    return params;
+  }
+
   const twilioSignature = request.headers.get("X-Twilio-Signature");
   if (!twilioSignature) {
     throw new Response(
@@ -24,8 +31,6 @@ async function validateTwilioWebhook(request: Request) {
     webhookUrl.protocol = request.headers.get("X-Forwarded-Proto") ?? "";
   }
 
-  const params = Object.fromEntries((await request.formData()).entries());
-
   const isValid = validateRequest(
     process.env.TWILIO_AUTH_TOKEN ?? "",
     twilioSignature,
@@ -41,10 +46,20 @@ async function validateTwilioWebhook(request: Request) {
       },
     });
   }
+
+  return params;
 }
+
+const db = drizzle({
+  connection: process.env.DATABASE_URL!,
+  casing: "snake_case",
+  schema,
+  logger: true,
+});
 
 declare module "react-router" {
   interface AppLoadContext {
+    db: typeof db;
     twilioClient: TwilioClient.Twilio;
     validateTwilioWebhook: typeof validateTwilioWebhook;
   }
@@ -56,6 +71,6 @@ export default await createHonoServer({
       process.env.TWILIO_SID,
       process.env.TWILIO_AUTH_TOKEN
     );
-    return { twilioClient, validateTwilioWebhook };
+    return { db, twilioClient, validateTwilioWebhook };
   },
 });
