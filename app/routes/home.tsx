@@ -1,13 +1,34 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
+import { Link } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Rotator" },
+    {
+      name: "description",
+      content: "On-call rotation phone forwarding system",
+    },
   ];
 }
 
-export default function Home() {
-  return <Welcome />;
+export async function loader({ context }: Route.LoaderArgs) {
+  const phoneNumbers = await context.db.query.phoneNumbersTable.findMany();
+  return { phoneNumbers };
+}
+
+export default function Home({ loaderData }: Route.ComponentProps) {
+  return (
+    <>
+      <h1>Phone numbers</h1>
+      <ul className="list-group">
+        {loaderData.phoneNumbers.map((phoneNumber) => (
+          <li key={phoneNumber.id} className="list-group-item">
+            <Link to={`/phone_numbers/${phoneNumber.id}`}>
+              {phoneNumber.phoneNumber}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
