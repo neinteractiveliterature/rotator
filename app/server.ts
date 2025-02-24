@@ -4,7 +4,7 @@ import TwilioClient from "twilio";
 import "react-router";
 import "dotenv/config";
 import { validateRequest } from "twilio/lib/webhooks/webhooks";
-import { drizzle, NodePgDatabase } from "drizzle-orm/node-postgres";
+import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "app/db/schema";
 
 async function validateTwilioWebhook(request: Request) {
@@ -66,7 +66,7 @@ declare module "react-router" {
 }
 
 export default await createHonoServer({
-  getLoadContext(c, options) {
+  getLoadContext() {
     const twilioClient = TwilioClient(
       process.env.TWILIO_SID,
       process.env.TWILIO_AUTH_TOKEN

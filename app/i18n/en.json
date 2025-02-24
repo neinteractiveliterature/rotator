@@ -1,0 +1,26 @@
+{
+  "translation": {
+    "appName": "Rotator",
+    "buttons": {
+      "edit": "Edit",
+      "save": "Save"
+    },
+    "phoneNumbers": {
+      "title": "Phone numbers",
+      "editPage": {
+        "title": "Editing {{ phoneNumber }}"
+      },
+      "noActiveShiftMessage": {
+        "label": "No active shift message",
+        "helpText": "This message will be spoken when the number is called but no schedule is currently active."
+      },
+      "phoneNumber": {
+        "label": "Phone number"
+      }
+    },
+    "voiceResponses": {
+      "defaultNoActiveShiftMessage": "No active shift for this phone number.",
+      "unknownPhoneNumber": "The phone number you have dialed {{ phoneNumber }} is not set up. If you are the administrator, please add this phone number to the Rotator configuration."
+    }
+  }
+}

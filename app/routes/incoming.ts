@@ -10,6 +10,7 @@ import {
 import { and, eq, sql } from "drizzle-orm";
 import { twimlSayResponse } from "~/twimlUtils";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import i18n from "~/i18n";
 
 const voiceParams = z.object({
   Called: z.string(),
@@ -71,13 +72,14 @@ export async function action({ context, request }: Route.ActionArgs) {
     if (phoneNumber) {
       return twimlSayResponse(
         phoneNumber.noActiveShiftMessage ??
-          "No active shift for this phone number."
+          i18n.t("voiceResponses.defaultNoActiveShiftMessage")
       );
     } else {
-      return twimlSayResponse(`The phone number you have dialed ${calledNumber
-        .split("")
-        .join(" ")} is not set up. If you are
-        the administrator, please add this phone number to the Rotator configuration.`);
+      return twimlSayResponse(
+        i18n.t("voiceResponses.unknownPhoneNumber", {
+          phoneNumber: calledNumber.split("").join(" "),
+        })
+      );
     }
   }
 

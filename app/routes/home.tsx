@@ -1,7 +1,8 @@
+import { useTranslation } from "react-i18next";
 import type { Route } from "./+types/home";
 import { Link } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   return [
     { title: "Rotator" },
     {
@@ -17,9 +18,11 @@ export async function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
+  const { t } = useTranslation();
+
   return (
     <>
-      <h1>Phone numbers</h1>
+      <h1>{t("phoneNumbers.title")}</h1>
       <ul className="list-group">
         {loaderData.phoneNumbers.map((phoneNumber) => (
           <li key={phoneNumber.id} className="list-group-item">
