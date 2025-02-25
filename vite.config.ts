@@ -1,10 +1,19 @@
 import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { reactRouterHonoServer } from "react-router-hono-server/dev"; // add this
+import { reactRouterHonoServer } from "react-router-hono-server/dev";
+import { defaultOptions } from "@hono/vite-dev-server";
 
 export default defineConfig({
-  plugins: [reactRouterHonoServer(), reactRouter(), tsconfigPaths()],
+  plugins: [
+    reactRouterHonoServer({
+      dev: {
+        exclude: [/^\/.yarn/, ...defaultOptions.exclude],
+      },
+    }),
+    reactRouter(),
+    tsconfigPaths(),
+  ],
   css: {
     modules: {
       localsConvention: "camelCaseOnly",
