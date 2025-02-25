@@ -9,7 +9,7 @@ export default function ApplicationLayout() {
         className="navbar navbar-expand-lg bg-dark mb-4"
         data-bs-theme="dark"
       >
-        <div className="container-fluid">
+        <div className="container">
           <Link className="navbar-brand" to="/">
             {t("appName")}
           </Link>

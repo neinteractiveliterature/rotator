@@ -19,6 +19,9 @@
       },
       "phoneNumber": {
         "label": "Phone number"
+      },
+      "schedules": {
+        "title": "Schedules"
       }
     },
     "voiceResponses": {

@@ -41,6 +41,7 @@ export const respondersTable = pgTable("responders", {
 
 export const schedulesTable = pgTable("schedules", {
   id: bigint({ mode: "number" }).primaryKey().generatedAlwaysAsIdentity(),
+  name: text().notNull(),
 });
 
 export const schedulesRelations = relations(schedulesTable, ({ many }) => ({

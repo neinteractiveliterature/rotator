@@ -22,6 +22,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
+      <title>{[t("phoneNumbers.title"), t("appName")].join(" - ")}</title>
       <h1>{t("phoneNumbers.title")}</h1>
       <ul className="list-group">
         {loaderData.phoneNumbers.map((phoneNumber) => (

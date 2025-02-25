@@ -1,22 +1,25 @@
 import { useTranslation } from "react-i18next";
-import {
-  BootstrapFormInput,
-  BootstrapFormTextarea,
-  ErrorDisplay,
-} from "@neinteractiveliterature/litform";
+import { ErrorDisplay } from "@neinteractiveliterature/litform";
 import type { Route } from "./+types/edit";
 import { Form, redirect } from "react-router";
-import { findPhoneNumber } from "./utils";
 import { phoneNumbersTable } from "~/db/schema";
 import { eq } from "drizzle-orm";
-import { coerceId } from "~/db/utils";
+import { assertFound, coerceId } from "~/db/utils";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import i18n from "~/i18n";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
+import PhoneNumberFormFields from "~/phone-numbers/form";
+import { use, useMemo } from "react";
+import { RotatorGlobalContext } from "~/global-context";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const phoneNumber = await findPhoneNumber(context.db, params.phoneNumberId);
-  return { phoneNumber, defaultCountryCode: context.defaultCountryCode };
+  const phoneNumber = assertFound(
+    await context.db.query.phoneNumbersTable.findFirst({
+      where: (tbl, { eq }) => eq(tbl.id, coerceId(params.phoneNumberId)),
+    })
+  );
+
+  return { phoneNumber };
 }
 
 export async function action({ context, request, params }: Route.ActionArgs) {
@@ -49,12 +52,13 @@ export default function EditRouteForm({
   actionData,
 }: Route.ComponentProps) {
   const { t } = useTranslation();
-  const { defaultCountryCode, phoneNumber } = loaderData;
+  const { phoneNumber } = loaderData;
+  const { defaultCountryCode, parsePhoneNumber } = use(RotatorGlobalContext);
 
-  const parsed = parsePhoneNumberFromString(
-    phoneNumber.phoneNumber,
-    loaderData.defaultCountryCode
-  )!;
+  const parsed = useMemo(
+    () => parsePhoneNumber(phoneNumber.phoneNumber)!,
+    [phoneNumber.phoneNumber, parsePhoneNumber]
+  );
 
   return (
     <>
@@ -70,18 +74,7 @@ export default function EditRouteForm({
       </header>
 
       <Form method="PATCH">
-        <BootstrapFormInput
-          label={t("phoneNumbers.phoneNumber.label")}
-          name="phoneNumber"
-          defaultValue={formatPhoneNumberForDisplay(parsed, defaultCountryCode)}
-        />
-
-        <BootstrapFormTextarea
-          label={t("phoneNumbers.noActiveShiftMessage.label")}
-          name="noActiveShiftMessage"
-          defaultValue={phoneNumber.noActiveShiftMessage ?? ""}
-          helpText={t("phoneNumbers.noActiveShiftMessage.helpText")}
-        />
+        <PhoneNumberFormFields phoneNumber={phoneNumber} />
 
         <ErrorDisplay graphQLError={actionData} />
 

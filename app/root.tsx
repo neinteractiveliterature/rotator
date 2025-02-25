@@ -11,6 +11,11 @@ import "~/styles/application.scss";
 import type { Route } from "./+types/root";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
+import { useMemo } from "react";
+import {
+  buildRotatorGlobalContextValue,
+  RotatorGlobalContext,
+} from "./global-context";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -32,8 +37,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function App() {
-  return <Outlet />;
+export function loader({ context }: Route.LoaderArgs) {
+  return {
+    defaultCountryCode: context.defaultCountryCode,
+  };
+}
+
+export default function App({ loaderData }: Route.ComponentProps) {
+  const globalContextValue = useMemo(
+    () =>
+      buildRotatorGlobalContextValue({
+        defaultCountryCode: loaderData.defaultCountryCode,
+      }),
+    [loaderData.defaultCountryCode]
+  );
+
+  return (
+    <RotatorGlobalContext.Provider value={globalContextValue}>
+      <Outlet />
+    </RotatorGlobalContext.Provider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
