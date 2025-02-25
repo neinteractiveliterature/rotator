@@ -10,6 +10,9 @@
       "editPage": {
         "title": "Editing {{ phoneNumber }}"
       },
+      "errors": {
+        "invalidPhoneNumber": "The phone number \"{{ phoneNumber }}\" is not valid.  Please check the format of this number."
+      },
       "noActiveShiftMessage": {
         "label": "No active shift message",
         "helpText": "This message will be spoken when the number is called but no schedule is currently active."

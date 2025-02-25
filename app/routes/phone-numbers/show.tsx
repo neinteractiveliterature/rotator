@@ -2,24 +2,34 @@ import { useTranslation } from "react-i18next";
 import type { Route } from "./+types/show";
 import { Link } from "react-router";
 import { findPhoneNumber } from "./utils";
+import parsePhoneNumberFromString from "libphonenumber-js";
+import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
   const phoneNumber = await findPhoneNumber(context.db, params.phoneNumberId);
-  return { phoneNumber };
+  return { phoneNumber, defaultCountryCode: context.defaultCountryCode };
 }
 
 export default function PhoneNumberPage({ loaderData }: Route.ComponentProps) {
   const { t } = useTranslation();
 
+  const { phoneNumber, defaultCountryCode } = loaderData;
+  const parsed = parsePhoneNumberFromString(
+    phoneNumber.phoneNumber,
+    defaultCountryCode
+  )!;
+
   return (
     <>
-      <h1>{loaderData.phoneNumber.phoneNumber}</h1>
+      <header className="mb-4">
+        <h1>{formatPhoneNumberForDisplay(parsed, defaultCountryCode)}</h1>
+      </header>
 
       <table className="table table-bordered">
         <tbody>
           <tr>
             <th scope="row">{t("phoneNumbers.noActiveShiftMessage.label")}</th>
-            <td>{loaderData.phoneNumber.noActiveShiftMessage}</td>
+            <td>{phoneNumber.noActiveShiftMessage}</td>
           </tr>
         </tbody>
       </table>

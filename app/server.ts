@@ -6,6 +6,7 @@ import "dotenv/config";
 import { validateRequest } from "twilio/lib/webhooks/webhooks";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "app/db/schema";
+import type { CountryCode } from "libphonenumber-js";
 
 async function validateTwilioWebhook(request: Request) {
   const params = Object.fromEntries((await request.formData()).entries());
@@ -60,6 +61,7 @@ const db = drizzle({
 declare module "react-router" {
   interface AppLoadContext {
     db: typeof db;
+    defaultCountryCode: CountryCode;
     twilioClient: TwilioClient.Twilio;
     validateTwilioWebhook: typeof validateTwilioWebhook;
   }
@@ -71,6 +73,12 @@ export default await createHonoServer({
       process.env.TWILIO_SID,
       process.env.TWILIO_AUTH_TOKEN
     );
-    return { db, twilioClient, validateTwilioWebhook };
+    return {
+      db,
+      defaultCountryCode:
+        (process.env.DEFAULT_COUNTRY_CODE as CountryCode | undefined) ?? "US",
+      twilioClient,
+      validateTwilioWebhook,
+    };
   },
 });
