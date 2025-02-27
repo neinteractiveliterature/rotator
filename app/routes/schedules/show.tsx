@@ -10,15 +10,20 @@ export async function loader({ context, params }: Route.LoaderArgs) {
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
       with: {
         phoneNumbersSchedules: {
+          columns: {},
           with: {
-            phoneNumber: true,
+            phoneNumber: { columns: { phoneNumber: true } },
           },
         },
         shifts: {
+          columns: { id: true, timespan: true },
           with: {
             shiftAssignments: {
+              columns: { responderId: true, position: true },
               with: {
-                responder: true,
+                responder: {
+                  columns: { name: true },
+                },
               },
             },
           },
