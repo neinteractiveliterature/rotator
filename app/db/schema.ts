@@ -36,6 +36,16 @@ export const respondersTable = pgTable("responders", {
 export const schedulesTable = pgTable("schedules", {
   id: bigint({ mode: "number" }).primaryKey().generatedAlwaysAsIdentity(),
   name: text().notNull(),
+  timespan: tsRange().notNull(),
+  welcomeMessage: text().notNull(),
+  voicemailMessage: text().notNull(),
+  callTimeout: integer().notNull(),
+  voicemailSilenceTimeout: integer().notNull(),
+  postCallTextTemplate: text().notNull(),
+  voicemailTextTemplate: text().notNull(),
+  emailFrom: text().notNull(),
+  voicemailEmailSubjectTemplate: text().notNull(),
+  voicemailEmailBodyTemplate: text().notNull(),
 });
 
 export const schedulesRelations = relations(schedulesTable, ({ many }) => ({

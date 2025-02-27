@@ -15,5 +15,9 @@ export default [
     ]),
     ...prefix("schedules", [route(":scheduleId", "routes/schedules/show.tsx")]),
   ]),
-  route("/incoming", "routes/incoming.ts"),
+  ...prefix("webhooks", [
+    route("incoming", "routes/webhooks/incoming.ts"),
+    route("called/:responderId", "routes/webhooks/called.ts"),
+    route("voicemail", "routes/webhooks/voicemail.ts"),
+  ]),
 ] satisfies RouteConfig;

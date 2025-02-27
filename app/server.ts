@@ -7,6 +7,7 @@ import { validateRequest } from "twilio/lib/webhooks/webhooks";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "app/db/schema";
 import type { CountryCode } from "libphonenumber-js";
+import { createTransport } from "nodemailer";
 
 async function validateTwilioWebhook(request: Request) {
   const params = Object.fromEntries((await request.formData()).entries());
@@ -58,10 +59,15 @@ const db = drizzle({
   logger: true,
 });
 
+const mailTransport = createTransport({
+  url: process.env.SMTP_URL,
+});
+
 declare module "react-router" {
   interface AppLoadContext {
     db: typeof db;
     defaultCountryCode: CountryCode;
+    mailTransport: typeof mailTransport;
     twilioClient: TwilioClient.Twilio;
     validateTwilioWebhook: typeof validateTwilioWebhook;
   }
@@ -77,6 +83,7 @@ export default await createHonoServer({
       db,
       defaultCountryCode:
         (process.env.DEFAULT_COUNTRY_CODE as CountryCode | undefined) ?? "US",
+      mailTransport,
       twilioClient,
       validateTwilioWebhook,
     };
