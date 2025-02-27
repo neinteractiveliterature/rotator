@@ -13,6 +13,7 @@ export default [
       route(":phoneNumberId", "routes/phone-numbers/show.tsx"),
       route(":phoneNumberId/edit", "routes/phone-numbers/edit.tsx"),
     ]),
+    ...prefix("schedules", [route(":scheduleId", "routes/schedules/show.tsx")]),
   ]),
   route("/incoming", "routes/incoming.ts"),
 ] satisfies RouteConfig;

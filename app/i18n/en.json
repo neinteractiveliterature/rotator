@@ -24,6 +24,14 @@
         "title": "Schedules"
       }
     },
+    "schedules": {
+      "shifts": {
+        "title": "Shifts",
+        "timespan": "Timespan",
+        "responders": "Responders"
+      }
+    },
+    "timespan": "{{ timespan.start, datetime }} to {{ timespan.finish, datetime }}",
     "voiceResponses": {
       "defaultNoActiveShiftMessage": "No active shift for this phone number.",
       "unknownPhoneNumber": "The phone number you have dialed {{ phoneNumber }} is not set up. If you are the administrator, please add this phone number to the Rotator configuration."

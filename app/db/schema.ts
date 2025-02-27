@@ -1,7 +1,6 @@
 import { relations } from "drizzle-orm";
 import {
   bigint,
-  customType,
   index,
   integer,
   pgTable,
@@ -10,12 +9,7 @@ import {
   uniqueIndex,
   varchar,
 } from "drizzle-orm/pg-core";
-
-const tsRange = customType<{ data: string; notNull: true; default: true }>({
-  dataType() {
-    return "tsrange";
-  },
-});
+import { tsRange } from "./tsRange";
 
 export const phoneNumbersTable = pgTable("phone_numbers", {
   id: bigint({ mode: "number" }).primaryKey().generatedAlwaysAsIdentity(),
@@ -92,12 +86,13 @@ export const shiftsTable = pgTable(
   (t) => [index().using("gist", t.timespan), index().on(t.scheduleId)]
 );
 
-export const shiftsRelations = relations(shiftsTable, ({ one }) => ({
+export const shiftsRelations = relations(shiftsTable, ({ one, many }) => ({
   schedule: one(schedulesTable, {
     fields: [shiftsTable.scheduleId],
     references: [schedulesTable.id],
     relationName: "schedule",
   }),
+  shiftAssignments: many(shiftAssignmentsTable, { relationName: "shift" }),
 }));
 
 export const shiftAssignmentsTable = pgTable(
@@ -125,10 +120,12 @@ export const shiftAssignmentsRelations = relations(
     shift: one(shiftsTable, {
       fields: [shiftAssignmentsTable.shiftId],
       references: [shiftsTable.id],
+      relationName: "shift",
     }),
     responder: one(respondersTable, {
       fields: [shiftAssignmentsTable.responderId],
       references: [respondersTable.id],
+      relationName: "responder",
     }),
   })
 );
