@@ -13,7 +13,12 @@ export default [
       route(":phoneNumberId", "routes/phone-numbers/show.tsx"),
       route(":phoneNumberId/edit", "routes/phone-numbers/edit.tsx"),
     ]),
-    ...prefix("schedules", [route(":scheduleId", "routes/schedules/show.tsx")]),
+    ...prefix("schedules", [
+      index("routes/schedules/list.tsx"),
+      route(":scheduleId", "routes/schedules/show.tsx"),
+      route(":scheduleId/edit", "routes/schedules/edit.tsx"),
+      route("new", "routes/schedules/new.tsx"),
+    ]),
   ]),
   ...prefix("webhooks", [
     route("incoming", "routes/webhooks/incoming.ts"),

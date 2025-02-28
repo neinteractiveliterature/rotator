@@ -25,10 +25,65 @@
       }
     },
     "schedules": {
+      "callTimeout": {
+        "label": "Call timeout"
+      },
+      "editPage": {
+        "title": "Editing settings for {{ name }}"
+      },
+      "emailFrom": {
+        "label": "Email from"
+      },
+      "name": {
+        "label": "Name"
+      },
+      "newPage": {
+        "title": "New schedule"
+      },
+      "noActiveShiftTextMessage": {
+        "label": "“No active shift” text message"
+      },
+      "postCallTextTemplate": {
+        "label": "Post-call text message template"
+      },
       "shifts": {
         "title": "Shifts",
         "timespan": "Timespan",
         "responders": "Responders"
+      },
+      "textEmailSubjectTemplate": {
+        "label": "Email subject template"
+      },
+      "textEmailBodyTemplate": {
+        "label": "Email body template"
+      },
+      "textResponderTemplate": {
+        "label": "Text message template"
+      },
+      "textReceivedNotification": {
+        "title": "Text received notification"
+      },
+      "title": "Schedules",
+      "voicemailEmailSubjectTemplate": {
+        "label": "Email subject template"
+      },
+      "voicemailEmailBodyTemplate": {
+        "label": "Email body template"
+      },
+      "voicemailTextTemplate": {
+        "label": "Text message template"
+      },
+      "voicemailMessage": {
+        "label": "Voicemail outgoing message"
+      },
+      "voicemailNotification": {
+        "title": "Voicemail received notification"
+      },
+      "voicemailSilenceTimeout": {
+        "label": "Voicemail silence timeout"
+      },
+      "welcomeMessage": {
+        "label": "Welcome message"
       }
     },
     "textResponses": {

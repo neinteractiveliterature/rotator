@@ -44,6 +44,11 @@ export default function ApplicationLayout() {
                   {t("phoneNumbers.title")}
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/schedules">
+                  {t("schedules.title")}
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
