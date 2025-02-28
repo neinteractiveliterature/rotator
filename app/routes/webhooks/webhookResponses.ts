@@ -43,7 +43,10 @@ export function voicemailResponse({
     sayText: schedule.voicemailMessage,
     attributes: {
       timeout: schedule.voicemailSilenceTimeout,
-      action: new URL(`/voicemail`, process.env.APP_URL_BASE).toString(),
+      action: new URL(
+        `/webhooks/voicemail`,
+        process.env.APP_URL_BASE
+      ).toString(),
     },
   });
 }
