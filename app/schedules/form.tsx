@@ -2,15 +2,33 @@ import { BootstrapFormInput } from "@neinteractiveliterature/litform";
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Temporal, toTemporalInstant } from "temporal-polyfill";
 import type { schedulesTable } from "~/db/schema";
 import { LiquidInput } from "~/LiquidInput";
 
 export function parseScheduleFormData(
   formData: FormData
 ): InferInsertModel<typeof schedulesTable> {
+  const timeZone = formData.get("timeZone")?.toString() ?? "";
+
   return {
     name: formData.get("name")?.toString() ?? "",
     emailFrom: formData.get("emailFrom")?.toString() ?? "",
+    timeZone,
+    timespan: {
+      start: new Date(
+        Temporal.PlainDateTime.from(
+          formData.get("timespan.start")?.toString() ?? ""
+        ).toZonedDateTime(timeZone).epochMilliseconds
+      ),
+      finish: new Date(
+        Temporal.PlainDateTime.from(
+          formData.get("timespan.finish")?.toString() ?? ""
+        ).toZonedDateTime(timeZone).epochMilliseconds
+      ),
+      includeStart: true,
+      includeFinish: false,
+    },
     callTimeout: parseInt(formData.get("callTimeout")?.toString() ?? ""),
     noActiveShiftTextMessage:
       formData.get("noActiveShiftTextMessage")?.toString() ?? "",
@@ -54,6 +72,7 @@ export type ScheduleFormFieldsProps = {
     | "textEmailBodyTemplate"
     | "textEmailSubjectTemplate"
     | "textResponderTemplate"
+    | "timeZone"
   >;
 };
 
@@ -102,6 +121,45 @@ export default function ScheduleFormFields({
         name="emailFrom"
         defaultValue={schedule.emailFrom}
       />
+
+      <BootstrapFormInput
+        label={t("schedules.timeZone.label")}
+        name="timeZone"
+        defaultValue={schedule.timeZone}
+      />
+
+      <div className="d-flex">
+        <div className="col-md-6 me-2">
+          <BootstrapFormInput
+            label={t("schedules.timespan.startLabel")}
+            name="timespan.start"
+            type="datetime-local"
+            defaultValue={toTemporalInstant
+              .apply(schedule.timespan.start)
+              .toZonedDateTime({
+                timeZone: schedule.timeZone,
+                calendar: "iso8601",
+              })
+              .toPlainDateTime()
+              .toString()}
+          />
+        </div>
+        <div className="col-md-6">
+          <BootstrapFormInput
+            label={t("schedules.timespan.finishLabel")}
+            name="timespan.finish"
+            type="datetime-local"
+            defaultValue={toTemporalInstant
+              .apply(schedule.timespan.finish)
+              .toZonedDateTime({
+                timeZone: schedule.timeZone,
+                calendar: "iso8601",
+              })
+              .toPlainDateTime()
+              .toString()}
+          />
+        </div>
+      </div>
 
       <BootstrapFormInput
         label={t("schedules.welcomeMessage.label")}

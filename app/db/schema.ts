@@ -50,6 +50,7 @@ export const schedulesTable = pgTable("schedules", {
   textEmailSubjectTemplate: text().notNull(),
   textEmailBodyTemplate: text().notNull(),
   textResponderTemplate: text().notNull(),
+  timeZone: text().notNull(),
 });
 
 export const schedulesRelations = relations(schedulesTable, ({ many }) => ({

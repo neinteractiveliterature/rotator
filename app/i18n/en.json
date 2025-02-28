@@ -63,6 +63,13 @@
       "textReceivedNotification": {
         "title": "Text received notification"
       },
+      "timespan": {
+        "startLabel": "Starts at",
+        "finishLabel": "Ends at"
+      },
+      "timeZone": {
+        "label": "Time zone"
+      },
       "title": "Schedules",
       "voicemailEmailSubjectTemplate": {
         "label": "Email subject template"

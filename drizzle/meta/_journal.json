@@ -64,6 +64,13 @@
       "when": 1740703276803,
       "tag": "0008_add-text-templates-to-schedules",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1740766497449,
+      "tag": "0009_add-time-zone-to-schedules",
+      "breakpoints": true
     }
   ]
 }
