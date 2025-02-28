@@ -1,6 +1,7 @@
 import { relations } from "drizzle-orm";
 import {
   bigint,
+  boolean,
   index,
   integer,
   pgTable,
@@ -143,4 +144,17 @@ export const shiftAssignmentsRelations = relations(
       relationName: "responder",
     }),
   })
+);
+
+export const usersTable = pgTable(
+  "users",
+  {
+    id: bigint({ mode: "number" }).primaryKey().generatedAlwaysAsIdentity(),
+    provider: text().notNull(),
+    uid: text().notNull(),
+    email: text().notNull(),
+    name: text().notNull(),
+    site_admin: boolean().notNull().default(false),
+  },
+  (t) => [uniqueIndex().on(t.provider, t.uid)]
 );

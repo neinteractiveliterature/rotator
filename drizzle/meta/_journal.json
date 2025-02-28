@@ -71,6 +71,13 @@
       "when": 1740766497449,
       "tag": "0009_add-time-zone-to-schedules",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1740770060439,
+      "tag": "0010_create-users",
+      "breakpoints": true
     }
   ]
 }

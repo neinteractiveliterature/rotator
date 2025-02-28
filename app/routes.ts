@@ -9,15 +9,23 @@ import {
 export default [
   layout("routes/layouts/application.tsx", [
     index("routes/home.tsx"),
-    ...prefix("phone_numbers", [
-      route(":phoneNumberId", "routes/phone-numbers/show.tsx"),
-      route(":phoneNumberId/edit", "routes/phone-numbers/edit.tsx"),
+    ...prefix("oauth", [
+      route("login", "routes/oauth/login.ts"),
+      route("logout", "routes/oauth/logout.ts"),
+      route("redirect", "routes/oauth/redirect.ts"),
     ]),
-    ...prefix("schedules", [
-      index("routes/schedules/list.tsx"),
-      route(":scheduleId", "routes/schedules/show.tsx"),
-      route(":scheduleId/edit", "routes/schedules/edit.tsx"),
-      route("new", "routes/schedules/new.tsx"),
+    layout("routes/layouts/site-admin-required.tsx", [
+      ...prefix("phone_numbers", [
+        index("routes/phone-numbers/list.tsx"),
+        route(":phoneNumberId", "routes/phone-numbers/show.tsx"),
+        route(":phoneNumberId/edit", "routes/phone-numbers/edit.tsx"),
+      ]),
+      ...prefix("schedules", [
+        index("routes/schedules/list.tsx"),
+        route(":scheduleId", "routes/schedules/show.tsx"),
+        route(":scheduleId/edit", "routes/schedules/edit.tsx"),
+        route("new", "routes/schedules/new.tsx"),
+      ]),
     ]),
   ]),
   ...prefix("webhooks", [

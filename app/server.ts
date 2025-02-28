@@ -8,6 +8,12 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "app/db/schema";
 import type { CountryCode } from "libphonenumber-js";
 import { createTransport } from "nodemailer";
+import { Authenticator } from "remix-auth";
+import { OAuth2Strategy } from "remix-auth-oauth2";
+import { createRemoteJWKSet, jwtVerify } from "jose";
+import z from "zod";
+import type { InferSelectModel } from "drizzle-orm";
+import type { AppLoadContext, Session } from "react-router";
 
 async function validateTwilioWebhook(request: Request) {
   const params = Object.fromEntries((await request.formData()).entries());
@@ -63,11 +69,52 @@ const mailTransport = createTransport({
   url: process.env.SMTP_URL,
 });
 
+const jwkSet = createRemoteJWKSet(
+  new URL("/oauth/discovery/keys", process.env.OAUTH2_SERVER_BASE)
+);
+
+const UserPayload = z.object({
+  user: z.object({
+    id: z.union([z.number(), z.string()]),
+    email: z.string(),
+    name: z.string(),
+  }),
+});
+
+type AuthResult = {
+  userPayload: z.infer<typeof UserPayload>;
+  accessToken: string;
+};
+
+const oauth2Strategy = await OAuth2Strategy.discover<AuthResult>(
+  process.env.OAUTH2_SERVER_BASE ?? "",
+  {
+    clientId: process.env.OAUTH2_CLIENT_ID ?? "",
+    clientSecret: process.env.OAUTH2_CLIENT_SECRET ?? "",
+    redirectURI: new URL("/oauth/redirect", process.env.APP_URL_BASE),
+    scopes: ["openid", "public"],
+  },
+  async ({ tokens }) => {
+    const accessToken = tokens.accessToken();
+    const { payload } = await jwtVerify(accessToken, jwkSet);
+    const userPayload = UserPayload.parse(payload);
+    return { userPayload, accessToken };
+  }
+);
+
+const authenticator = new Authenticator<AuthResult>();
+authenticator.use(oauth2Strategy, "oauth2");
+
 declare module "react-router" {
   interface AppLoadContext {
+    authenticator: typeof authenticator;
     db: typeof db;
     defaultCountryCode: CountryCode;
+    getCurrentUser: (
+      session: Session
+    ) => Promise<InferSelectModel<typeof schema.usersTable> | undefined>;
     mailTransport: typeof mailTransport;
+    oauth2Strategy: typeof oauth2Strategy;
     twilioClient: TwilioClient.Twilio;
     validateTwilioWebhook: typeof validateTwilioWebhook;
   }
@@ -79,13 +126,38 @@ export default await createHonoServer({
       process.env.TWILIO_SID,
       process.env.TWILIO_AUTH_TOKEN
     );
+
+    let currentUser: InferSelectModel<typeof schema.usersTable> | undefined =
+      undefined;
+    let fetchedCurrentUser = false;
+
+    const getCurrentUser = async (session: Session) => {
+      if (fetchedCurrentUser) {
+        return currentUser;
+      }
+
+      const userId = session.get("userId");
+
+      if (userId) {
+        currentUser = await db.query.usersTable.findFirst({
+          where: (tbl, { eq }) => eq(tbl.id, userId),
+        });
+      }
+
+      fetchedCurrentUser = true;
+      return currentUser;
+    };
+
     return {
+      authenticator,
       db,
       defaultCountryCode:
         (process.env.DEFAULT_COUNTRY_CODE as CountryCode | undefined) ?? "US",
+      getCurrentUser,
       mailTransport,
+      oauth2Strategy,
       twilioClient,
       validateTwilioWebhook,
-    };
+    } satisfies AppLoadContext;
   },
 });

@@ -1,6 +1,10 @@
 {
   "translation": {
     "appName": "Rotator",
+    "auth": {
+      "loginLink": "Log in",
+      "logoutLink": "Log out {{ name }}"
+    },
     "buttons": {
       "edit": "Edit",
       "save": "Save"

@@ -12,7 +12,9 @@ export default function SchedulesList({ loaderData }: Route.ComponentProps) {
 
   return (
     <>
-      <header className="mb-4">{t("schedules.title")}</header>
+      <header className="mb-4">
+        <h1>{t("schedules.title")}</h1>
+      </header>
 
       <table className="table table-striped">
         <thead>

@@ -548,6 +548,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@edgefirst-dev/data@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@edgefirst-dev/data@npm:0.0.2"
+  checksum: 10c0/6a9e5b7decc1cb2be0999edb264b62bb95918068968096b4d708270003d4c57eb3febcdb73c835626c66b7ef06646cdbfac9e442f4273076b7bba1bad8823504
+  languageName: node
+  linkType: hard
+
 "@emotion/babel-plugin@npm:^11.13.5":
   version: 11.13.5
   resolution: "@emotion/babel-plugin@npm:11.13.5"
@@ -1961,6 +1968,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mjackson/headers@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "@mjackson/headers@npm:0.9.0"
+  checksum: 10c0/cb88e471c85754fd74c625138b7c4d98b54a3508028f7f0cf7df3260ca83a0883cf27fe735815feeb0c292d725218ad9bfd3fb9108a8976c326022b3b5adb77d
+  languageName: node
+  linkType: hard
+
 "@mjackson/node-fetch-server@npm:^0.2.0":
   version: 0.2.0
   resolution: "@mjackson/node-fetch-server@npm:0.2.0"
@@ -2154,6 +2168,55 @@ __metadata:
   version: 0.1.1
   resolution: "@one-ini/wasm@npm:0.1.1"
   checksum: 10c0/54700e055037f1a63bfcc86d24822203b25759598c2c3e295d1435130a449108aebc119c9c2e467744767dbe0b6ab47a182c61aa1071ba7368f5e20ab197ba65
+  languageName: node
+  linkType: hard
+
+"@oslojs/asn1@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@oslojs/asn1@npm:1.0.0"
+  dependencies:
+    "@oslojs/binary": "npm:1.0.0"
+  checksum: 10c0/993856b931cb0087fa6a6323f09de388aa20fbab3322acdb178a7c35fcd05983c44c7a47bac7364cd96b45125c27586265e8fc9fec733d3183ffc56b6bec2634
+  languageName: node
+  linkType: hard
+
+"@oslojs/binary@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@oslojs/binary@npm:1.0.0"
+  checksum: 10c0/d416a393af23f42b50c6f8412a3a6d94a84707c2006511abce1c4bed680c22ed2247ccb442b09237fa78ca06c355875573d1c08ccba2942f292ec0534310e4f8
+  languageName: node
+  linkType: hard
+
+"@oslojs/crypto@npm:1.0.1":
+  version: 1.0.1
+  resolution: "@oslojs/crypto@npm:1.0.1"
+  dependencies:
+    "@oslojs/asn1": "npm:1.0.0"
+    "@oslojs/binary": "npm:1.0.0"
+  checksum: 10c0/a1b3e4875f3df8bf357dd2b59e1d55ced099227bbeb0975b48bf8e001002780575c5df9e7c174bcc42f89713ed9ad4a965e181e835ff569ccaa3b258781a615b
+  languageName: node
+  linkType: hard
+
+"@oslojs/encoding@npm:0.4.1":
+  version: 0.4.1
+  resolution: "@oslojs/encoding@npm:0.4.1"
+  checksum: 10c0/e3ccee039f385cca8a53afb1584c85d66d3685e20142649aab8f6e7f71ea11e026861e60e3d61de8d34a78adf9049e6da6813e3de51ba2b86239a4200c08ee76
+  languageName: node
+  linkType: hard
+
+"@oslojs/encoding@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@oslojs/encoding@npm:1.1.0"
+  checksum: 10c0/5553a0974dca60e1a8b247b7b97abcb141cc7ee4e22444f424a07921d6a5f76a43c316f3ee669222787fdef6549f8749cc6d68ff5a631e2542521c56fe36417f
+  languageName: node
+  linkType: hard
+
+"@oslojs/jwt@npm:0.2.0":
+  version: 0.2.0
+  resolution: "@oslojs/jwt@npm:0.2.0"
+  dependencies:
+    "@oslojs/encoding": "npm:0.4.1"
+  checksum: 10c0/aadcda3e5274293e07fca6842ef4f4dccecce11b1f7e655ad2f042983233eb5d121db981e9f64451b66abb417b66744371ce29743282df7319d40b420c3c93be
   languageName: node
   linkType: hard
 
@@ -3251,6 +3314,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"arctic@npm:^3.0.0":
+  version: 3.4.0
+  resolution: "arctic@npm:3.4.0"
+  dependencies:
+    "@oslojs/crypto": "npm:1.0.1"
+    "@oslojs/encoding": "npm:1.1.0"
+    "@oslojs/jwt": "npm:0.2.0"
+  checksum: 10c0/690d1c10c921b1f907d57ff142cd3c69cbbe92e95d5d8cb06672288483b8ffd5cf58a50c722f096fc1f908e67e4dc845757ab89ad4cdebc8bf7153fe9048e6cd
+  languageName: node
+  linkType: hard
+
 "arg@npm:^5.0.1":
   version: 5.0.2
   resolution: "arg@npm:5.0.2"
@@ -4124,7 +4198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.4.0":
+"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.7, debug@npm:^4.4.0":
   version: 4.4.0
   resolution: "debug@npm:4.4.0"
   dependencies:
@@ -5793,7 +5867,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.6.11":
+"hono@npm:^4.6.11, hono@npm:^4.7.2":
   version: 4.7.2
   resolution: "hono@npm:4.7.2"
   checksum: 10c0/2bf7a85f25048c0deb181a767cf020491be611089a51f45448018fc4fa8a33ab9d34d8d0d39fe4e05c0abd5cd338d9c973984583c27ce7dc8d8919cadd2991d9
@@ -6330,6 +6404,13 @@ __metadata:
   bin:
     jake: bin/cli.js
   checksum: 10c0/c4597b5ed9b6a908252feab296485a4f87cba9e26d6c20e0ca144fb69e0c40203d34a2efddb33b3d297b8bd59605e6c1f44f6221ca1e10e69175ecbf3ff5fe31
+  languageName: node
+  linkType: hard
+
+"jose@npm:^6.0.8":
+  version: 6.0.8
+  resolution: "jose@npm:6.0.8"
+  checksum: 10c0/ab795679225a72eafef31e2d8aefa8196de9917e9f6c76c997963e617fba86762c19c6713c83d836adb28854d99fbd6547c83d825585094be29f0d6f9712f6cd
   languageName: node
   linkType: hard
 
@@ -8093,6 +8174,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remix-auth-oauth2@npm:^3.2.2":
+  version: 3.2.2
+  resolution: "remix-auth-oauth2@npm:3.2.2"
+  dependencies:
+    "@edgefirst-dev/data": "npm:^0.0.2"
+    "@mjackson/headers": "npm:^0.9.0"
+    arctic: "npm:^3.0.0"
+    debug: "npm:^4.3.7"
+  peerDependencies:
+    remix-auth: ^4.0.0
+  checksum: 10c0/376a99e77d3088ec494bc796e2f63c4196bcff8a699a5eadcb1d435f1753b197c94248fc9df475c68ebe44c88e5f1f8ad2c023b51a10fbbb8e43cb575ef20824
+  languageName: node
+  linkType: hard
+
+"remix-auth@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "remix-auth@npm:4.1.0"
+  checksum: 10c0/902475a53a0d3109dbad148c7474b96c891cf010988eea244187a7b5bd89443acc2762400fe9ab75139c90d513470af66398735fd0b5c5c11a6991809134dafa
+  languageName: node
+  linkType: hard
+
 "require-directory@npm:^2.1.1":
   version: 2.1.1
   resolution: "require-directory@npm:2.1.1"
@@ -8312,8 +8414,10 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.4"
     eslint-plugin-react-hooks: "npm:^5.1.0"
     graphql: "npm:^16.10.0"
+    hono: "npm:^4.7.2"
     i18next: "npm:^24.2.2"
     isbot: "npm:^5.1.23"
+    jose: "npm:^6.0.8"
     libphonenumber-js: "npm:^1.11.20"
     liquidjs: "npm:^10.21.0"
     lodash: "npm:^4.17.21"
@@ -8327,6 +8431,8 @@ __metadata:
     react-router: "npm:^7.2.0"
     react-router-devtools: "npm:^1.1.5"
     react-router-hono-server: "npm:^2.9.0"
+    remix-auth: "npm:^4.1.0"
+    remix-auth-oauth2: "npm:^3.2.2"
     sass-embedded: "npm:^1.85.0"
     temporal-polyfill: "npm:^0.2.5"
     tslib: "npm:^2.8.1"
