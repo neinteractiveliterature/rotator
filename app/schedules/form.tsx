@@ -49,7 +49,7 @@ export function parseScheduleFormData(
       formData.get("voicemailSilenceTimeout")?.toString() ?? ""
     ),
     voicemailTextTemplate:
-      formData.get("voicemailTextTemlate")?.toString() ?? "",
+      formData.get("voicemailTextTemplate")?.toString() ?? "",
     welcomeMessage: formData.get("welcomeMessage")?.toString() ?? "",
   };
 }
