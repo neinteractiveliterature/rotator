@@ -49,6 +49,13 @@ export async function action({ context, request }: Route.ActionArgs) {
     activeShift?.shiftAssignments ?? []
   );
 
+  const emailSubjectTemplate = liquid.parse(
+    activeSchedule.schedules.voicemailEmailSubjectTemplate
+  );
+  const emailBodyTemplate = liquid.parse(
+    activeSchedule.schedules.voicemailEmailBodyTemplate
+  );
+
   const mailPromises = sortedResponders.map((responder, index) => {
     const templateVars: VoicemailReceivedTemplateVariables = {
       from: webhookParams.From,
@@ -61,14 +68,8 @@ export async function action({ context, request }: Route.ActionArgs) {
     return context.mailTransport.sendMail({
       from: activeSchedule.schedules.emailFrom,
       to: responder.email,
-      subject: liquid.parseAndRenderSync(
-        activeSchedule.schedules.voicemailEmailSubjectTemplate,
-        templateVars
-      ),
-      text: liquid.parseAndRenderSync(
-        activeSchedule.schedules.voicemailEmailBodyTemplate,
-        templateVars
-      ),
+      subject: liquid.renderSync(emailSubjectTemplate, templateVars),
+      text: liquid.renderSync(emailBodyTemplate, templateVars),
     });
   });
 

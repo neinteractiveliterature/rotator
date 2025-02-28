@@ -46,6 +46,10 @@ export const schedulesTable = pgTable("schedules", {
   emailFrom: text().notNull(),
   voicemailEmailSubjectTemplate: text().notNull(),
   voicemailEmailBodyTemplate: text().notNull(),
+  noActiveShiftTextMessage: text().notNull(),
+  textEmailSubjectTemplate: text().notNull(),
+  textEmailBodyTemplate: text().notNull(),
+  textResponderTemplate: text().notNull(),
 });
 
 export const schedulesRelations = relations(schedulesTable, ({ many }) => ({

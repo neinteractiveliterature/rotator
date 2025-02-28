@@ -1,26 +1,17 @@
 import type { Route } from "./+types/incoming";
 import { twimlSayResponse } from "./twimlUtils";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
 import i18n from "~/i18n";
 import { callActiveShiftResponse, voicemailResponse } from "./webhookResponses";
-import { TwilioWebhookParams } from "./twimlWebhookParams";
+import { VoiceWebhookParams } from "./twimlWebhookParams";
 import {
   activeSchedulesForPhoneNumber,
   activeShiftForSchedule,
   bestResponderForShift,
 } from "./schedules";
-
-function normalizePhoneNumber(phoneNumber: string) {
-  const parsed = parsePhoneNumberFromString(phoneNumber);
-  if (!parsed) {
-    return phoneNumber;
-  }
-
-  return parsed.format("E.164");
-}
+import { normalizePhoneNumber } from "./normalizePhoneNumber";
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const params = TwilioWebhookParams.parse(
+  const params = VoiceWebhookParams.parse(
     await context.validateTwilioWebhook(request)
   );
 

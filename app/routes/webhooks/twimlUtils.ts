@@ -1,3 +1,4 @@
+import MessagingResponse from "twilio/lib/twiml/MessagingResponse";
 import type TwiML from "twilio/lib/twiml/TwiML";
 import VoiceResponse from "twilio/lib/twiml/VoiceResponse";
 
@@ -11,6 +12,21 @@ export function twimlResponse(twiml: TwiML) {
 export function twimlSayResponse(text: string) {
   const twiml = new VoiceResponse();
   twiml.say({ voice: "woman" }, text);
+
+  return twimlResponse(twiml);
+}
+
+export function twimlMessageResponse({
+  text,
+  fromPhoneNumber,
+  toPhoneNumber,
+}: {
+  text: string;
+  fromPhoneNumber: string;
+  toPhoneNumber: string;
+}) {
+  const twiml = new MessagingResponse();
+  twiml.message({ to: toPhoneNumber, from: fromPhoneNumber }, text);
 
   return twimlResponse(twiml);
 }

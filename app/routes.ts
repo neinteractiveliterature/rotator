@@ -17,6 +17,7 @@ export default [
   ]),
   ...prefix("webhooks", [
     route("incoming", "routes/webhooks/incoming.ts"),
+    route("text", "routes/webhooks/text.ts"),
     route("called/:responderId", "routes/webhooks/called.ts"),
     route("voicemail", "routes/webhooks/voicemail.ts"),
   ]),

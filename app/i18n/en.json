@@ -31,6 +31,10 @@
         "responders": "Responders"
       }
     },
+    "textResponses": {
+      "defaultNoActiveShiftMessage": "No active shift for this phone number.",
+      "unknownPhoneNumber": "{{ phoneNumber }} is not set up to receive texts yet. If you are the administrator, please add this phone number to the Rotator configuration."
+    },
     "timespan": "{{ timespan.start, datetime }} to {{ timespan.finish, datetime }}",
     "voiceResponses": {
       "defaultNoActiveShiftMessage": "No active shift for this phone number.",
