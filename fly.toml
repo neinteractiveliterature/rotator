@@ -11,6 +11,7 @@ DEFAULT_COUNTRY_CODE = "US"
 
 [deploy]
 release_command = "yarn run drizzle-kit migrate"
+strategy = "bluegreen"
 
 [http_service]
 internal_port = 3000
