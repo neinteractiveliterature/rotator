@@ -37,11 +37,6 @@ export async function action({ context, request }: Route.ActionArgs) {
 
   const activeSchedule = schedules[0];
 
-  if (schedules.length == 0) {
-    // TODO
-    throw new Error("Figure out wtf to do about this");
-  }
-
   const liquid = new Liquid();
 
   const activeShift = await activeShiftForSchedule(
