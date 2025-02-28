@@ -1,11 +1,12 @@
 import type { UnwrapPromise } from "@neinteractiveliterature/litform";
-import { eq, and, sql } from "drizzle-orm";
+import { eq, and, sql, type InferSelectModel } from "drizzle-orm";
 import sortBy from "lodash/sortBy";
 import type { AppLoadContext } from "react-router";
 import {
   schedulesTable,
   phoneNumbersSchedulesTable,
   phoneNumbersTable,
+  respondersTable,
 } from "~/db/schema";
 
 export async function activeSchedulesForPhoneNumber(
@@ -62,7 +63,7 @@ export function sortShiftAssignments<T>(
 export function bestResponderForShift(
   shift: NonNullable<UnwrapPromise<ReturnType<typeof activeShiftForSchedule>>>,
   afterResponderId?: number
-) {
+): InferSelectModel<typeof respondersTable> | undefined {
   const sortedResponders = sortShiftAssignments(shift.shiftAssignments);
   const afterResponderIndex = afterResponderId
     ? sortedResponders.findIndex(

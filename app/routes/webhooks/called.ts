@@ -62,18 +62,21 @@ export async function action({ context, request, params }: Route.ActionArgs) {
     );
 
     if (activeShift) {
-      return callActiveShiftResponse({
-        callerId: activeSchedule.phone_numbers.phoneNumber,
-        schedule: activeSchedule.schedules,
-        responder: bestResponderForShift(
-          activeShift,
-          coerceId(params.responderId)
-        ),
-      });
-    } else {
-      return voicemailResponse({
-        schedule: activeSchedule.schedules,
-      });
+      const responder = bestResponderForShift(
+        activeShift,
+        coerceId(params.responderId)
+      );
+      if (responder) {
+        return callActiveShiftResponse({
+          callerId: activeSchedule.phone_numbers.phoneNumber,
+          schedule: activeSchedule.schedules,
+          responder,
+        });
+      }
     }
+
+    return voicemailResponse({
+      schedule: activeSchedule.schedules,
+    });
   }
 }
