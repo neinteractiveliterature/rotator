@@ -24,7 +24,7 @@ min_machines_running = 0
 grace_period = "15s"
 interval = "30s"
 method = "GET"
-path = "/healthz"
+path = "/"
 protocol = "http"
 timeout = "5s"
 
