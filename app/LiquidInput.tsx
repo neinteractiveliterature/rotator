@@ -28,6 +28,8 @@ export type LiquidInputProps = {
   helpText?: ReactNode;
 };
 
+const extensions = [liquid()];
+
 function LiquidInputControl({
   value,
   onChange,
@@ -35,7 +37,7 @@ function LiquidInputControl({
   const [editorRef] = useStandardCodeMirror({
     value,
     onChange,
-    extensions: [liquid()],
+    extensions,
   });
 
   return <CodeInput editorRef={editorRef} value={value} />;
