@@ -6,6 +6,9 @@
 app = 'rotator'
 swap_size_mb = 512
 
+[env]
+DEFAULT_COUNTRY_CODE = "US"
+
 [deploy]
 release_command = "yarn run drizzle-kit migrate"
 
