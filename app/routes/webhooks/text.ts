@@ -110,7 +110,7 @@ export async function action({ context, request }: Route.ActionArgs) {
 
     return twimlMessageResponse({
       fromPhoneNumber: activeSchedule.phone_numbers.phoneNumber,
-      toPhoneNumber: sortedResponders[0].email,
+      toPhoneNumber: sortedResponders[0].phoneNumber,
       text: liquid.parseAndRenderSync(
         activeSchedule.schedules.textResponderTemplate,
         {
