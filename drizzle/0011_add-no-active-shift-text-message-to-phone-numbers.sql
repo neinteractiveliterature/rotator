@@ -1,0 +1,1 @@
+ALTER TABLE "phone_numbers" ADD COLUMN "no_active_shift_text_message" text;

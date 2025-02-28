@@ -45,7 +45,7 @@ export async function action({ context, request }: Route.ActionArgs) {
         toPhoneNumber: params.From,
         fromPhoneNumber: textedNumber,
         text:
-          phoneNumber.noActiveShiftMessage ??
+          phoneNumber.noActiveShiftTextMessage ??
           i18n.t("textResponses.defaultNoActiveShiftMessage"),
       });
     } else {

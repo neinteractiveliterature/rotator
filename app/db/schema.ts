@@ -16,6 +16,7 @@ export const phoneNumbersTable = pgTable("phone_numbers", {
   id: bigint({ mode: "number" }).primaryKey().generatedAlwaysAsIdentity(),
   phoneNumber: varchar({ length: 255 }).notNull(),
   noActiveShiftMessage: text(),
+  noActiveShiftTextMessage: text(),
 });
 
 export const phoneNumbersRelations = relations(
