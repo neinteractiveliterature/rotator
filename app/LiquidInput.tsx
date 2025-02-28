@@ -4,21 +4,8 @@ import {
   CodeInput,
   FormGroupWithLabel,
 } from "@neinteractiveliterature/litform";
-import { useSyncExternalStore, type ReactNode } from "react";
-
-// copied from remix-utils
-function subscribe() {
-  return () => {};
-}
-
-// copied from remix-utils
-function useHydrated() {
-  return useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false
-  );
-}
+import { type ReactNode } from "react";
+import { useHydrated } from "./useHydrated";
 
 export type LiquidInputProps = {
   name: string;

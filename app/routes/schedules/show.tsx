@@ -158,6 +158,14 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
                     .map(({ responder }) => responder.name)
                     .join(", ")}
                 </td>
+                <td>
+                  <Link
+                    to={`./shifts/${shift.id}/edit`}
+                    className="btn btn-primary"
+                  >
+                    {t("buttons.edit")}
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
