@@ -20,14 +20,13 @@ auto_stop_machines = "suspend"
 auto_start_machines = true
 min_machines_running = 0
 
-[[services.http_checks]]
-interval = 10000
-grace_period = "5s"
-method = "get"
-path = "/"
+[[http_service.checks]]
+grace_period = "15s"
+interval = "30s"
+method = "GET"
+path = "/healthz"
 protocol = "http"
-timeout = 2000
-tls_skip_verify = false
+timeout = "5s"
 
 [[vm]]
 memory = "512mb"
