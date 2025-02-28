@@ -1,22 +1,24 @@
-FROM node:20-alpine AS development-dependencies-env
+FROM node:22-alpine AS development-dependencies-env
 COPY . /app
 WORKDIR /app
-RUN npm ci
+RUN corepack enable && yarn install
 
-FROM node:20-alpine AS production-dependencies-env
-COPY ./package.json package-lock.json /app/
+FROM node:22-alpine AS production-dependencies-env
+COPY ./package.json yarn.lock /app/
 WORKDIR /app
-RUN npm ci --omit=dev
+RUN corepack enable && yarn install
 
-FROM node:20-alpine AS build-env
+FROM node:22-alpine AS build-env
 COPY . /app/
-COPY --from=development-dependencies-env /app/node_modules /app/node_modules
+COPY --from=development-dependencies-env /app/.yarn /app/.yarn
 WORKDIR /app
-RUN npm run build
+RUN corepack enable && yarn install
+RUN yarn run build
 
-FROM node:20-alpine
-COPY ./package.json package-lock.json /app/
-COPY --from=production-dependencies-env /app/node_modules /app/node_modules
+FROM node:22-alpine
+COPY ./package.json yarn.lock /app/
+COPY --from=production-dependencies-env /app/.yarn /app/.yarn
 COPY --from=build-env /app/build /app/build
 WORKDIR /app
-CMD ["npm", "run", "start"]
+RUN corepack enable && yarn install
+CMD ["yarn", "run", "start"]
