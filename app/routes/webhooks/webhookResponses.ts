@@ -23,7 +23,7 @@ export function callActiveShiftResponse({
       callerId,
       timeout: schedule.callTimeout,
       action: new URL(
-        `/called/${responder.id}`,
+        `/webhooks/called/${responder.id}`,
         process.env.APP_URL_BASE
       ).toString(),
       method: "POST",
