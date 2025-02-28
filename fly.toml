@@ -6,6 +6,9 @@
 app = 'rotator'
 swap_size_mb = 512
 
+[deploy]
+release_command = "yarn run drizzle-kit migrate"
+
 [http_service]
 internal_port = 3000
 force_https = true

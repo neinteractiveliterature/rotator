@@ -16,7 +16,7 @@ RUN corepack enable && yarn install
 RUN yarn run build
 
 FROM node:22-alpine
-COPY ./package.json yarn.lock drizzle.config.ts /app/
+COPY ./package.json yarn.lock drizzle.config.ts rds-global-bundle.pem /app/
 COPY ./drizzle /app/drizzle
 COPY --from=production-dependencies-env /app/.yarn /app/.yarn
 COPY --from=build-env /app/build /app/build
