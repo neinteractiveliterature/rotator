@@ -1,0 +1,17 @@
+# fly.toml app configuration file generated for rotator on 2025-02-28T11:57:30-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'rotator'
+swap_size_mb = 512
+
+[http_service]
+internal_port = 3000
+force_https = true
+auto_stop_machines = "suspend"
+auto_start_machines = true
+min_machines_running = 0
+
+[[vm]]
+memory = "512mb"
