@@ -31,6 +31,7 @@ const blankSchedule: ScheduleFormFieldsProps["schedule"] = {
   textEmailBodyTemplate: "",
   textEmailSubjectTemplate: "",
   textResponderTemplate: "",
+  timeZone: "America/New_York",
   timespan: {
     start: new Date("1970-01-01T00:00:00Z"),
     finish: new Date("2100-01-01T00:00:00Z"),
