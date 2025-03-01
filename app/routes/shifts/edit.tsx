@@ -30,6 +30,8 @@ export async function loader({ context, params }: Route.LoaderArgs) {
   return { shift, responders };
 }
 
+export async function action({ request }: Route.ActionArgs) {}
+
 export default function EditShift({
   loaderData,
   actionData,

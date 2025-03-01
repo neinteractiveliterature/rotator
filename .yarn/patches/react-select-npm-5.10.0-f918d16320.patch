@@ -1,0 +1,37 @@
+diff --git a/package.json b/package.json
+index 99f0e341c8e111a27d032dbfe1c95e0bd3eec5a6..f7ee4810d0c8c24404d5ea14be9d04f5ba7b5482 100644
+--- a/package.json
++++ b/package.json
+@@ -62,32 +62,26 @@
+   },
+   "exports": {
+     ".": {
+-      "module": "./dist/react-select.esm.js",
+       "import": "./dist/react-select.cjs.mjs",
+       "default": "./dist/react-select.cjs.js"
+     },
+     "./base": {
+-      "module": "./base/dist/react-select-base.esm.js",
+       "import": "./base/dist/react-select-base.cjs.mjs",
+       "default": "./base/dist/react-select-base.cjs.js"
+     },
+     "./async": {
+-      "module": "./async/dist/react-select-async.esm.js",
+       "import": "./async/dist/react-select-async.cjs.mjs",
+       "default": "./async/dist/react-select-async.cjs.js"
+     },
+     "./animated": {
+-      "module": "./animated/dist/react-select-animated.esm.js",
+       "import": "./animated/dist/react-select-animated.cjs.mjs",
+       "default": "./animated/dist/react-select-animated.cjs.js"
+     },
+     "./creatable": {
+-      "module": "./creatable/dist/react-select-creatable.esm.js",
+       "import": "./creatable/dist/react-select-creatable.cjs.mjs",
+       "default": "./creatable/dist/react-select-creatable.cjs.js"
+     },
+     "./async-creatable": {
+-      "module": "./async-creatable/dist/react-select-async-creatable.esm.js",
+       "import": "./async-creatable/dist/react-select-async-creatable.cjs.mjs",
+       "default": "./async-creatable/dist/react-select-async-creatable.cjs.js"
+     },

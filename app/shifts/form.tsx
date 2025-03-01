@@ -2,7 +2,9 @@ import type { InferSelectModel } from "drizzle-orm";
 import { useTranslation } from "react-i18next";
 import type { respondersTable, schedulesTable, shiftsTable } from "~/db/schema";
 import { TimespanInput } from "~/TimespanInput";
-import Downshift from "downshift";
+import Select from "react-select";
+import { useHydrated } from "~/useHydrated";
+import { FormGroupWithLabel } from "@neinteractiveliterature/litform";
 
 export type ShiftFormFieldsProps = {
   shift: Pick<InferSelectModel<typeof shiftsTable>, "timespan"> & {
@@ -16,7 +18,7 @@ export type ShiftFormFieldsProps = {
 
 export function ShiftFormFields({ shift, responders }: ShiftFormFieldsProps) {
   const { t } = useTranslation();
-  // const hydrated = useHydrated();
+  const hydrated = useHydrated();
 
   return (
     <>
@@ -29,7 +31,23 @@ export function ShiftFormFields({ shift, responders }: ShiftFormFieldsProps) {
         timeZone={shift.schedule.timeZone}
       />
 
-      <Downshift>{() => <div></div>}</Downshift>
+      {hydrated && (
+        <FormGroupWithLabel label={t("shifts.timespan.respondersLabel")}>
+          {(id) => (
+            <Select
+              id={id}
+              name="responders"
+              options={responders}
+              formatOptionLabel={(option) => option.name}
+              isMulti
+              getOptionValue={(option) => option.id.toString()}
+              defaultValue={shift.shiftAssignments.map(
+                (assignment) => assignment.responder
+              )}
+            />
+          )}
+        </FormGroupWithLabel>
+      )}
     </>
   );
 }
