@@ -1,0 +1,67 @@
+name: Continuous integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  typescript:
+    name: typescript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read .node-version
+        id: node-version
+        run: echo "node-version=$(cat .node-version)" >> $GITHUB_OUTPUT
+      - name: install node
+        uses: actions/setup-node@v4
+        with:
+          cache: yarn
+          node-version: ${{ steps.node-version.outputs.node-version }}
+      - name: yarn install
+        run: yarn install
+      - name: graphql-codegen
+        run: yarn run graphql:codegen
+      - name: tsc on resulting generated files
+        run: yarn run tsc --noEmit
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read .node-version
+        id: node-version
+        run: echo "node-version=$(cat .node-version)" >> $GITHUB_OUTPUT
+      - name: install node
+        uses: actions/setup-node@v4
+        with:
+          cache: yarn
+          node-version: ${{ steps.node-version.outputs.node-version }}
+      - name: yarn install
+        run: yarn install
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@master
+      - name: Build (and push to registry, if on main)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name == 'push' && github.event.ref == 'refs/heads/main' }}
+          load: ${{ !(github.event_name == 'push' && github.event.ref == 'refs/heads/main') }}
+          platforms: linux/amd64
+          target: production
+          tags: |
+            ghcr.io/neinteractiveliterature/rotator:${{ github.sha }}
+          build-args: |
+            REVISION=${{ github.sha }}
+      - name: Check that app can boot
+        run: >
+          docker run -e DATABASE_URL=postgresql://fakehost/not_a_real_database
+          ghcr.io/neinteractiveliterature/rotator:${{ github.sha }}
