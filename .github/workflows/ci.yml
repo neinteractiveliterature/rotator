@@ -26,6 +26,7 @@ jobs:
           node-version: ${{ steps.node-version.outputs.node-version }}
       - name: yarn install
         run: yarn install
+      - run: yarn run react-router typegen
       - name: type check
         run: yarn run tsc --noEmit
   docker-build:
