@@ -16,3 +16,8 @@
 
 /.env
 /.eslintcache
+
+# Test artifacts
+/test/html_reports
+/test/reports
+/coverage

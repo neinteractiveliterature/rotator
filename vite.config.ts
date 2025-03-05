@@ -1,17 +1,17 @@
 import { reactRouter } from "@react-router/dev/vite";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { reactRouterHonoServer } from "react-router-hono-server/dev";
 import { defaultOptions } from "@hono/vite-dev-server";
 
-export default defineConfig({
+const config = defineConfig({
   plugins: [
     reactRouterHonoServer({
       dev: {
         exclude: [/^\/.yarn/, ...defaultOptions.exclude],
       },
     }),
-    reactRouter(),
+    ...(process.env.VITEST ? [] : [reactRouter()]),
     tsconfigPaths(),
   ],
   css: {
@@ -29,4 +29,29 @@ export default defineConfig({
   server: {
     allowedHosts: ["2e9a-98-175-201-111.ngrok-free.app"],
   },
+  test: {
+    coverage: {
+      enabled: process.env["COVERAGE"] ? true : false,
+      include: ["app/**/*.{js,jsx,ts,tsx}"],
+      reportsDirectory: "./coverage",
+      reporter: ["text", "cobertura"],
+      reportOnFailure: true,
+    },
+    environment: "jsdom",
+    globals: true,
+    setupFiles: ["./test/setupTests.ts"],
+    testTimeout: 10000,
+    reporters: [
+      "default",
+      ["junit", { outputFile: "./test/reports/TEST-jest.xml" }],
+      ["html", { outputFile: "./test/html_reports/jest-report.html" }],
+    ],
+    server: {
+      deps: {
+        inline: ["@neinteractiveliterature/litform"],
+      },
+    },
+  },
 });
+
+export default config;

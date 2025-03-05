@@ -85,6 +85,27 @@
       "when": 1740774714663,
       "tag": "0011_add-no-active-shift-text-message-to-phone-numbers",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1741121064934,
+      "tag": "0012_add-oauth2-providers",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1741121321454,
+      "tag": "0013_add-oauth2-providers-token-revocation-endiopnt",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1741122107064,
+      "tag": "0014_solid_leech",
+      "breakpoints": true
     }
   ]
 }

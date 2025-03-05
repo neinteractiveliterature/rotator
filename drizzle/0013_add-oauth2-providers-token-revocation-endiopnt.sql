@@ -1,0 +1,1 @@
+ALTER TABLE "oauth2_providers" ADD COLUMN "token_revocation_endpoint" text;

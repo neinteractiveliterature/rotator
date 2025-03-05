@@ -8,7 +8,10 @@
     "start": "node ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
     "lint": "eslint --cache",
-    "ci": "yarn run typecheck && yarn run lint"
+    "ci": "yarn run typecheck && yarn run lint",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest watch"
   },
   "dependencies": {
     "@apollo/client": "^3.13.1",
@@ -61,6 +64,10 @@
     "@flydotio/dockerfile": "^0.7.8",
     "@hono/vite-dev-server": "^0.18.2",
     "@react-router/dev": "^7.2.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/bootstrap": "^5",
     "@types/lodash": "^4",
     "@types/luxon": "^3",
@@ -69,21 +76,19 @@
     "@types/pg": "^8.11.11",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@vitest/ui": "3.0.7",
     "eslint": "^9.21.0",
     "eslint-plugin-drizzle": "^0.2.3",
     "eslint-plugin-i18next": "^6.1.1",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "jsdom": "^26.0.0",
     "react-router-devtools": "^1.1.5",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.25.0",
     "vite": "^6.2.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.7"
   },
-  "packageManager": "yarn@4.6.0",
-  "dependenciesMeta": {
-    "vite@6.2.0": {
-      "unplugged": true
-    }
-  }
+  "packageManager": "yarn@4.6.0"
 }

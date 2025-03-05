@@ -159,3 +159,16 @@ export const usersTable = pgTable(
   },
   (t) => [uniqueIndex().on(t.provider, t.uid)]
 );
+
+export const oauth2ProvidersTable = pgTable(
+  "oauth2_providers",
+  {
+    id: bigint({ mode: "number" }).primaryKey().generatedAlwaysAsIdentity(),
+    url: text().notNull(),
+    authorizationEndpoint: text().notNull(),
+    tokenEndpoint: text().notNull(),
+    codeChallengeMethod: integer(),
+    tokenRevocationEndpoint: text(),
+  },
+  (t) => [uniqueIndex().on(t.url)]
+);
