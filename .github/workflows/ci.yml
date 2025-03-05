@@ -84,3 +84,20 @@ jobs:
             ghcr.io/neinteractiveliterature/rotator:${{ github.sha }}
           build-args: |
             REVISION=${{ github.sha }}
+  update-release-draft:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
+    needs:
+      - typescript
+      - vitest
+      - docker-build
+    outputs:
+      name: ${{ steps.release-drafter.outputs.name }}
+      html_url: ${{ steps.release-drafter.outputs.html_url }}
+    steps:
+      - uses: release-drafter/release-drafter@v6
+        id: release-drafter
+        with:
+          config-name: release-drafter.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
