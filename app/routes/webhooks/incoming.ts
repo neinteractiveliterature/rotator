@@ -51,15 +51,19 @@ export async function action({ context, request }: Route.ActionArgs) {
   );
 
   if (activeShift) {
-    return callActiveShiftResponse({
-      sayText: activeSchedule.schedules.welcomeMessage,
-      callerId: activeSchedule.phone_numbers.phoneNumber,
-      schedule: activeSchedule.schedules,
-      responder: bestResponderForShift(activeShift),
-    });
-  } else {
-    return voicemailResponse({
-      schedule: activeSchedule.schedules,
-    });
+    const responder = bestResponderForShift(activeShift);
+
+    if (responder) {
+      return callActiveShiftResponse({
+        sayText: activeSchedule.schedules.welcomeMessage,
+        callerId: activeSchedule.phone_numbers.phoneNumber,
+        schedule: activeSchedule.schedules,
+        responder,
+      });
+    }
   }
+
+  return voicemailResponse({
+    schedule: activeSchedule.schedules,
+  });
 }
