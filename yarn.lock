@@ -621,10 +621,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@edgefirst-dev/data@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "@edgefirst-dev/data@npm:0.0.2"
-  checksum: 10c0/6a9e5b7decc1cb2be0999edb264b62bb95918068968096b4d708270003d4c57eb3febcdb73c835626c66b7ef06646cdbfac9e442f4273076b7bba1bad8823504
+"@edgefirst-dev/data@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@edgefirst-dev/data@npm:0.0.4"
+  checksum: 10c0/0de174cd5a3afe01e419b569fe3c66cf8aab6fa07b6216792aab55e54deeecd4513b6c039203f03eda34898172e8c01afdcdf0745a98842dfd40ae6b54bba33d
   languageName: node
   linkType: hard
 
@@ -1873,10 +1873,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mjackson/headers@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "@mjackson/headers@npm:0.9.0"
-  checksum: 10c0/cb88e471c85754fd74c625138b7c4d98b54a3508028f7f0cf7df3260ca83a0883cf27fe735815feeb0c292d725218ad9bfd3fb9108a8976c326022b3b5adb77d
+"@mjackson/headers@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@mjackson/headers@npm:0.10.0"
+  checksum: 10c0/eafc2c18aecc6bbd0905de8bec8e53ea3b2de840841cfac5892b6bbca3d9fd50573d0e248e10ba502264618ed0bdf5687b3282949ecc36a746a792d1d5d61752
   languageName: node
   linkType: hard
 
@@ -8589,16 +8589,16 @@ __metadata:
   linkType: hard
 
 "remix-auth-oauth2@npm:^3.2.2":
-  version: 3.2.2
-  resolution: "remix-auth-oauth2@npm:3.2.2"
+  version: 3.3.0
+  resolution: "remix-auth-oauth2@npm:3.3.0"
   dependencies:
-    "@edgefirst-dev/data": "npm:^0.0.2"
-    "@mjackson/headers": "npm:^0.9.0"
+    "@edgefirst-dev/data": "npm:^0.0.4"
+    "@mjackson/headers": "npm:^0.10.0"
     arctic: "npm:^3.0.0"
     debug: "npm:^4.3.7"
   peerDependencies:
     remix-auth: ^4.0.0
-  checksum: 10c0/376a99e77d3088ec494bc796e2f63c4196bcff8a699a5eadcb1d435f1753b197c94248fc9df475c68ebe44c88e5f1f8ad2c023b51a10fbbb8e43cb575ef20824
+  checksum: 10c0/4f660c5dda8f91a5872664d7ed86fb40a83b40ae89bbac7f400aa64d3b08e9b949f82d102a53ace9bf29e2d131e7409aef2b45b0ca9b3c1921e1f06dcabfa204
   languageName: node
   linkType: hard
 
