@@ -3678,14 +3678,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bippy@npm:^0.3.3":
-  version: 0.3.6
-  resolution: "bippy@npm:0.3.6"
+"bippy@npm:^0.3.7":
+  version: 0.3.7
+  resolution: "bippy@npm:0.3.7"
   dependencies:
     "@types/react-reconciler": "npm:^0.28.9"
   peerDependencies:
     react: ">=17.0.1"
-  checksum: 10c0/abeb818dd775f12fedc1d91ce5da47d9814b32cca01a37c344079d2c35f5c7cc518a2485eb92f8bf10055355cb314a8d6a6d0484734693febec2b3f2408d5d00
+  checksum: 10c0/0822f457650ebc94575d5dbe44ee10e53bae221d96dab58fd907ece4e5e72e2dc42af3d96f79053c2ef3d04cae808077be57c2750a9455216596fee179e559aa
   languageName: node
   linkType: hard
 
@@ -8384,8 +8384,8 @@ __metadata:
   linkType: hard
 
 "react-router-devtools@npm:^1.1.5":
-  version: 1.1.5
-  resolution: "react-router-devtools@npm:1.1.5"
+  version: 1.1.6
+  resolution: "react-router-devtools@npm:1.1.6"
   dependencies:
     "@babel/core": "npm:^7.26.7"
     "@babel/generator": "npm:^7.26.5"
@@ -8398,7 +8398,7 @@ __metadata:
     "@rollup/rollup-darwin-arm64": "npm:^4.32.1"
     "@rollup/rollup-linux-x64-gnu": "npm:^4.32.1"
     beautify: "npm:^0.0.8"
-    bippy: "npm:^0.3.3"
+    bippy: "npm:^0.3.7"
     chalk: "npm:^5.4.1"
     clsx: "npm:^2.1.1"
     date-fns: "npm:^4.1.0"
@@ -8419,7 +8419,7 @@ __metadata:
       optional: true
     "@rollup/rollup-linux-x64-gnu":
       optional: true
-  checksum: 10c0/606b79ceeffbab23a54b2302b38343b6e2f5f6e578feecea7030e626b1f9bd2cb90b433e78f725f5bd5cb465b855a295e5dea8237488e1377d884533669e1a70
+  checksum: 10c0/b08e92cf72df15ad49bbe44f185cf6f8e8793ce16b07e475e1d8862d6b65249e4b1f48d169d691c3ad8e64c45dbf3519533a8f580415cf61589d39ae2f909f98
   languageName: node
   linkType: hard
 
