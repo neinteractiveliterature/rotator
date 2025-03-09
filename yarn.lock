@@ -8322,8 +8322,8 @@ __metadata:
   linkType: hard
 
 "react-router-hono-server@npm:^2.9.0":
-  version: 2.10.0
-  resolution: "react-router-hono-server@npm:2.10.0"
+  version: 2.11.0
+  resolution: "react-router-hono-server@npm:2.11.0"
   dependencies:
     "@drizzle-team/brocli": "npm:^0.11.0"
     "@hono/node-server": "npm:^1.13.7"
@@ -8347,7 +8347,7 @@ __metadata:
       optional: true
   bin:
     react-router-hono-server: dist/cli.js
-  checksum: 10c0/d803528bd143534c82c1eafe5730b702ebc3a89e21b8f31339b9cedce03cc3a8178ea030b47dbbccc0e36d8f5871d34afb13583cd5832f84a632eea3cb657859
+  checksum: 10c0/2b7181b8ae0325dc17c90dcc2a892783ba8e55fdfdbdc269ffd6753a02479e7dfddaf5a83afb830d50894662e3c96472cbe4b338031dfc4ae481a21b7fcfabe2
   languageName: node
   linkType: hard
 
