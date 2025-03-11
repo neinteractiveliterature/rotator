@@ -8490,8 +8490,8 @@ __metadata:
   linkType: hard
 
 "remix-auth-oauth2@npm:^3.2.2":
-  version: 3.3.0
-  resolution: "remix-auth-oauth2@npm:3.3.0"
+  version: 3.4.0
+  resolution: "remix-auth-oauth2@npm:3.4.0"
   dependencies:
     "@edgefirst-dev/data": "npm:^0.0.4"
     "@mjackson/headers": "npm:^0.10.0"
@@ -8499,7 +8499,7 @@ __metadata:
     debug: "npm:^4.3.7"
   peerDependencies:
     remix-auth: ^4.0.0
-  checksum: 10c0/4f660c5dda8f91a5872664d7ed86fb40a83b40ae89bbac7f400aa64d3b08e9b949f82d102a53ace9bf29e2d131e7409aef2b45b0ca9b3c1921e1f06dcabfa204
+  checksum: 10c0/dbaa9da51352b8d8e9c7cfa4fd474fca0084760b0306c10bf69b22aedfe956964457d0474ae0b3cd34aa17b19c024b51e1609ef54de07fb9c9335747a1d4bb89
   languageName: node
   linkType: hard
 
