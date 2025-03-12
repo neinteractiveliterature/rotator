@@ -9850,8 +9850,8 @@ __metadata:
   linkType: hard
 
 "twilio@npm:^5.4.5":
-  version: 5.4.5
-  resolution: "twilio@npm:5.4.5"
+  version: 5.5.0
+  resolution: "twilio@npm:5.5.0"
   dependencies:
     axios: "npm:^1.7.8"
     dayjs: "npm:^1.11.9"
@@ -9860,7 +9860,7 @@ __metadata:
     qs: "npm:^6.9.4"
     scmp: "npm:^2.1.0"
     xmlbuilder: "npm:^13.0.2"
-  checksum: 10c0/8ef600653e630957a0cd52d128edd9982fa7854bba9ea9b93c22500bf0f3e11e59e910ebc19a14ecc5efb9772d55a78ad9b747e64df6a183625942c233c68873
+  checksum: 10c0/bce86b7877283f36f6ef9cb6eb04f6b3342eb52572607d0960d537a841e3529b5f02a01a0a8cce6bc25dcd0cebb6c716ccf3fa2e27ad924f122b5254d1d86f3b
   languageName: node
   linkType: hard
 
