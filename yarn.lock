@@ -1393,8 +1393,8 @@ __metadata:
   linkType: hard
 
 "@flydotio/dockerfile@npm:^0.7.8":
-  version: 0.7.8
-  resolution: "@flydotio/dockerfile@npm:0.7.8"
+  version: 0.7.9
+  resolution: "@flydotio/dockerfile@npm:0.7.9"
   dependencies:
     chalk: "npm:^5.4.1"
     diff: "npm:^7.0.0"
@@ -1404,7 +1404,7 @@ __metadata:
     yargs: "npm:^17.7.2"
   bin:
     dockerfile: index.js
-  checksum: 10c0/5a818767d7aec52800e07476def219b4ca691f3048e6248e6be2abffdaeeee7e48ca6f6e69210a1da938d1d4796f9faaebf927447bb6037855df1602864ce4df
+  checksum: 10c0/d4a1b5508ed8a97ef8db53bcdb807dfb90b8d537cface74afa39d91a4f7825778f6e99f6e61bf88e86f3644037ab4d4b673d7882faaefaa30f0deacc59a62978
   languageName: node
   linkType: hard
 
