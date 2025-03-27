@@ -8282,8 +8282,8 @@ __metadata:
   linkType: hard
 
 "react-router-devtools@npm:^1.1.5":
-  version: 1.1.6
-  resolution: "react-router-devtools@npm:1.1.6"
+  version: 1.1.7
+  resolution: "react-router-devtools@npm:1.1.7"
   dependencies:
     "@babel/core": "npm:^7.26.7"
     "@babel/generator": "npm:^7.26.5"
@@ -8317,7 +8317,7 @@ __metadata:
       optional: true
     "@rollup/rollup-linux-x64-gnu":
       optional: true
-  checksum: 10c0/b08e92cf72df15ad49bbe44f185cf6f8e8793ce16b07e475e1d8862d6b65249e4b1f48d169d691c3ad8e64c45dbf3519533a8f580415cf61589d39ae2f909f98
+  checksum: 10c0/f1249f63003a680aed003a2d44759031a6538034730748701483123c301c067964861f4ebd3cad96991ac75de43ddde5188decd2d0c7a7978b504804932893da
   languageName: node
   linkType: hard
 
