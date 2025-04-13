@@ -8484,9 +8484,9 @@ __metadata:
   linkType: hard
 
 "remix-auth@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "remix-auth@npm:4.1.0"
-  checksum: 10c0/902475a53a0d3109dbad148c7474b96c891cf010988eea244187a7b5bd89443acc2762400fe9ab75139c90d513470af66398735fd0b5c5c11a6991809134dafa
+  version: 4.2.0
+  resolution: "remix-auth@npm:4.2.0"
+  checksum: 10c0/e01f6e18acbac801584c0a0127c29846923e229fe5f630065fc4b277e0721a34405dbb6bdb4736be578653d60600cbdef2f0e1920817fbcde559882e7b2e03af
   languageName: node
   linkType: hard
 
