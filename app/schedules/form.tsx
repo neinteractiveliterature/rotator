@@ -136,10 +136,8 @@ export default function ScheduleFormFields({
             type="datetime-local"
             defaultValue={toTemporalInstant
               .apply(schedule.timespan.start)
-              .toZonedDateTime({
-                timeZone: schedule.timeZone,
-                calendar: "iso8601",
-              })
+              .toZonedDateTimeISO(schedule.timeZone)
+              .withCalendar("iso8601")
               .toPlainDateTime()
               .toString()}
           />
@@ -151,10 +149,8 @@ export default function ScheduleFormFields({
             type="datetime-local"
             defaultValue={toTemporalInstant
               .apply(schedule.timespan.finish)
-              .toZonedDateTime({
-                timeZone: schedule.timeZone,
-                calendar: "iso8601",
-              })
+              .toZonedDateTimeISO(schedule.timeZone)
+              .withCalendar("iso8601")
               .toPlainDateTime()
               .toString()}
           />
