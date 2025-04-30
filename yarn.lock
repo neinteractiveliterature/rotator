@@ -7991,9 +7991,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-devtools@npm:^1.1.5":
-  version: 1.1.10
-  resolution: "react-router-devtools@npm:1.1.10"
+"react-router-devtools@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "react-router-devtools@npm:5.0.0"
   dependencies:
     "@babel/core": "npm:^7.26.10"
     "@babel/generator": "npm:^7.26.5"
@@ -8015,7 +8015,10 @@ __metadata:
     react-diff-viewer-continued: "npm:^4.0.5"
     react-hotkeys-hook: "npm:^4.6.1"
     react-tooltip: "npm:^5.28.0"
+    tailwind-merge: "npm:^3.0.1"
   peerDependencies:
+    "@types/react": ">=17"
+    "@types/react-dom": ">=17"
     react: ">=17"
     react-dom: ">=17"
     react-router: ">=7.0.0"
@@ -8027,7 +8030,7 @@ __metadata:
       optional: true
     "@rollup/rollup-linux-x64-gnu":
       optional: true
-  checksum: 10c0/97df3223e9094c520201d378c7240b9d4e0e51bea12fb1162ce68618cc354069ba0686eb85e22286fd64aadaa8493aa74ba28a7726bf9d761136aa98bc23dccc
+  checksum: 10c0/6f86cd98353b05087387d65fed8ba1e978ac679d1b069dacbbcad9e5ffbbb086fae66e6d03c37bdfeb52a98ed8145d8f499e5c741ecd276b2f8b1a547eda6443
   languageName: node
   linkType: hard
 
@@ -8463,7 +8466,7 @@ __metadata:
     react-dom: "npm:^19.0.0"
     react-i18next: "npm:^15.4.1"
     react-router: "npm:^7.2.0"
-    react-router-devtools: "npm:^1.1.5"
+    react-router-devtools: "npm:^5.0.0"
     react-router-hono-server: "npm:^2.9.0"
     remix-auth: "npm:^4.1.0"
     remix-auth-oauth2: "npm:^3.2.2"
@@ -9351,6 +9354,13 @@ __metadata:
   version: 1.1.3
   resolution: "sync-message-port@npm:1.1.3"
   checksum: 10c0/d259b08ab6da284135ba45bc13724268688b469371259f5978b2905e2c79342032b9240093b2483e83cfeccfd3a5e8300978e67090385f9b6b38941fcce1aec4
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^3.0.1":
+  version: 3.2.0
+  resolution: "tailwind-merge@npm:3.2.0"
+  checksum: 10c0/294f6c2db0df74405bff126107107426c3126a70a1717d78e8d6811db65546c9bb3d61282bdb8d9fbded23f6bc8ec3e8e61031a4f53265f90b7f3dba558f88f4
   languageName: node
   linkType: hard
 
