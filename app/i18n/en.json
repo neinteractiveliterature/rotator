@@ -55,8 +55,8 @@
         "timespan": "Timespan",
         "responders": "Responders"
       },
-      "show": {
-        "header": "Settings"
+      "showPage": {
+        "settingsHeader": "Settings"
       },
       "textEmailSubjectTemplate": {
         "label": "Email subject template"
