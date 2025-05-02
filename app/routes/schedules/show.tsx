@@ -88,9 +88,7 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
             </tr>
             <tr>
               <th scope="row">{t("schedules.voicemailMessage.label")}</th>
-              <td>
-                <HighlightedText text={schedule.voicemailMessage} />
-              </td>
+              <td>{schedule.voicemailMessage}</td>
             </tr>
             <tr>
               <th scope="row">
