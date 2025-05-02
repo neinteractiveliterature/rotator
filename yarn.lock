@@ -8471,6 +8471,7 @@ __metadata:
     remix-auth: "npm:^4.1.0"
     remix-auth-oauth2: "npm:^3.2.2"
     sass-embedded: "npm:^1.85.0"
+    style-mod: "npm:^4.1.2"
     temporal-polyfill: "npm:^0.3.0"
     tslib: "npm:^2.8.1"
     twilio: "npm:^5.4.5"
@@ -9288,7 +9289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-mod@npm:^4.0.0, style-mod@npm:^4.1.0":
+"style-mod@npm:^4.0.0, style-mod@npm:^4.1.0, style-mod@npm:^4.1.2":
   version: 4.1.2
   resolution: "style-mod@npm:4.1.2"
   checksum: 10c0/ad4d870b3642b0e42ecc7be0e106dd14b7af11985e34fee8de34e5e38c3214bfc96fa7055acea86d75a3a59ddea3f6a8c6641001a66494d7df72d09685e3fadb

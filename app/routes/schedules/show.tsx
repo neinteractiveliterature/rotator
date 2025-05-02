@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import sortBy from "lodash/sortBy";
 import dateTimeFormats from "~/dateTimeFormats";
 import { Link } from "react-router";
+import HighlightedText from "~/components/highlighted-text";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
   const schedule = assertFound(
@@ -51,7 +52,7 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
       <section className="mb-2">
         <div className="d-flex">
           <div className="flex-grow-1">
-            <h2>Settings</h2>
+            <h2>{t("schedules.showPage.settingsHeader")}</h2>
           </div>
           <div>
             <Link to="./edit" className="btn btn-primary">
@@ -72,7 +73,9 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
             </tr>
             <tr>
               <th scope="row">{t("schedules.postCallTextTemplate.label")}</th>
-              <td>{schedule.postCallTextTemplate}</td>
+              <td>
+                <HighlightedText text={schedule.postCallTextTemplate} />
+              </td>
             </tr>
             <tr>
               <th scope="row">{t("schedules.callTimeout.label")}</th>
@@ -80,7 +83,9 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
             </tr>
             <tr>
               <th scope="row">{t("schedules.voicemailMessage.label")}</th>
-              <td>{schedule.voicemailMessage}</td>
+              <td>
+                <HighlightedText text={schedule.voicemailMessage} />
+              </td>
             </tr>
             <tr>
               <th scope="row">
@@ -93,13 +98,23 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
               <td>
                 <dl>
                   <dt>{t("schedules.voicemailEmailSubjectTemplate.label")}</dt>
-                  <dd>{schedule.voicemailEmailSubjectTemplate}</dd>
+                  <dd>
+                    <HighlightedText
+                      text={schedule.voicemailEmailSubjectTemplate}
+                    />
+                  </dd>
 
                   <dt>{t("schedules.voicemailEmailBodyTemplate.label")}</dt>
-                  <dd>{schedule.voicemailEmailBodyTemplate}</dd>
+                  <dd>
+                    <HighlightedText
+                      text={schedule.voicemailEmailBodyTemplate}
+                    />
+                  </dd>
 
                   <dt>{t("schedules.voicemailTextTemplate.label")}</dt>
-                  <dd>{schedule.voicemailTextTemplate}</dd>
+                  <dd>
+                    <HighlightedText text={schedule.voicemailTextTemplate} />
+                  </dd>
                 </dl>
               </td>
             </tr>
@@ -116,13 +131,19 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
               <td>
                 <dl>
                   <dt>{t("schedules.textEmailSubjectTemplate.label")}</dt>
-                  <dd>{schedule.textEmailSubjectTemplate}</dd>
+                  <dd>
+                    <HighlightedText text={schedule.textEmailSubjectTemplate} />
+                  </dd>
 
                   <dt>{t("schedules.textEmailBodyTemplate.label")}</dt>
-                  <dd>{schedule.textEmailBodyTemplate}</dd>
+                  <dd>
+                    <HighlightedText text={schedule.textEmailBodyTemplate} />
+                  </dd>
 
                   <dt>{t("schedules.textResponderTemplate.label")}</dt>
-                  <dd>{schedule.textResponderTemplate}</dd>
+                  <dd>
+                    <HighlightedText text={schedule.textResponderTemplate} />
+                  </dd>
                 </dl>
               </td>
             </tr>

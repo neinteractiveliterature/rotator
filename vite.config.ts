@@ -27,7 +27,7 @@ const config = defineConfig({
     },
   },
   server: {
-    allowedHosts: ["2e9a-98-175-201-111.ngrok-free.app"],
+    allowedHosts: ["silkworm-calm-evenly.ngrok-free.app"],
   },
   test: {
     coverage: {
