@@ -65,6 +65,11 @@ export default function ApplicationLayout({
                   {t("schedules.title")}
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/responders">
+                  {t("responders.title")}
+                </NavLink>
+              </li>
             </ul>
             <div className="navbar-nav">
               {loaderData.user ? (
