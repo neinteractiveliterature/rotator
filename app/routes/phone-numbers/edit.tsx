@@ -8,7 +8,7 @@ import { assertFound, coerceId } from "~/db/utils";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import i18n from "~/i18n";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
-import PhoneNumberFormFields from "~/phone-numbers/form";
+import PhoneNumberFormFields from "~/components/forms/phone-number";
 import { use, useMemo } from "react";
 import { RotatorGlobalContext } from "~/global-context";
 import { dbContext, defaultCountryCodeContext } from "~/contexts";

@@ -28,6 +28,40 @@
         "title": "Schedules"
       }
     },
+    "responders": {
+      "title": "Responders",
+      "name": {
+        "label": "Name"
+      },
+      "phoneNumber": {
+        "label": "Phone number"
+      },
+      "email": {
+        "label": "Email"
+      },
+      "editPage": {
+        "title": "Editing responder {{ name }}"
+      },
+      "newPage": {
+        "title": "New responder"
+      },
+      "respondersTable": {
+        "title": "Responders",
+        "nameHeader": "Name",
+        "phoneNumberHeader": "Phone number",
+        "emailHeader": "Email"
+      },
+      "showPage": {
+        "settingsHeader": "Settings",
+        "upcomingShifts": {
+          "title": "Upcoming shifts",
+          "noShifts": "No upcoming shifts",
+          "timeHeader": "Time",
+          "scheduleHeader": "Schedule",
+          "positionHeader": "Position"
+        }
+      }
+    },
     "schedules": {
       "callTimeout": {
         "label": "Call timeout"
