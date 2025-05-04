@@ -1,22 +1,25 @@
 import { useTranslation } from "react-i18next";
-import type { Route } from "./+types/edit";
+import type { Route } from "./+types/new";
 import { Form, redirect } from "react-router";
 import { ErrorDisplay } from "@neinteractiveliterature/litform";
 import ScheduleFormFields, {
   parseScheduleFormData,
   type ScheduleFormFieldsProps,
-} from "~/schedules/form";
+} from "~/components/forms/schedule";
 import { schedulesTable } from "~/db/schema";
 
-export async function action({ context, request, params }: Route.ActionArgs) {
+export async function action({ context, request }: Route.ActionArgs) {
   try {
     const formData = await request.formData();
 
-    await context.db
-      .insert(schedulesTable)
-      .values(parseScheduleFormData(formData));
+    const schedule = (
+      await context.db
+        .insert(schedulesTable)
+        .values(parseScheduleFormData(formData))
+        .returning()
+    )[0];
 
-    return redirect(`/schedules/${params.scheduleId}`);
+    return redirect(`/schedules/${schedule.id}`);
   } catch (error) {
     return error;
   }

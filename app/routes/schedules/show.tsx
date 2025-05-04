@@ -24,7 +24,7 @@ export async function loader({ context, params }: Route.LoaderArgs) {
               columns: { responderId: true, position: true },
               with: {
                 responder: {
-                  columns: { name: true },
+                  columns: { id: true, name: true },
                 },
               },
             },
@@ -173,9 +173,14 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
                   {sortBy(
                     shift.shiftAssignments,
                     (shiftAssignment) => shiftAssignment.position
-                  )
-                    .map(({ responder }) => responder.name)
-                    .join(", ")}
+                  ).map(({ responder }, index) => (
+                    <>
+                      {index > 0 && ", "}
+                      <Link to={`/responders/${responder.id}`}>
+                        {responder.name}
+                      </Link>
+                    </>
+                  ))}
                 </td>
               </tr>
             ))}
