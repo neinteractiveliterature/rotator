@@ -28,8 +28,11 @@ export default [
       ]),
       ...prefix("schedules", [
         index("routes/schedules/list.tsx"),
-        route(":scheduleId", "routes/schedules/show.tsx"),
-        route(":scheduleId/edit", "routes/schedules/edit.tsx"),
+        route(":scheduleId", "routes/schedules/$scheduleId.tsx", [
+          index("routes/schedules/show.tsx"),
+          route("edit", "routes/schedules/edit.tsx"),
+          route("shifts", "routes/schedules/shifts.tsx"),
+        ]),
         route("new", "routes/schedules/new.tsx"),
       ]),
     ]),

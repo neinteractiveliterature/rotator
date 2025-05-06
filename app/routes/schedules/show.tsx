@@ -1,14 +1,7 @@
-import { assertFound, coerceId } from "~/db/utils";
-import type { Route } from "./+types/show";
 import { useTranslation } from "react-i18next";
-import sortBy from "lodash/sortBy";
-import dateTimeFormats from "~/dateTimeFormats";
 import { Link } from "react-router";
-<<<<<<< HEAD
 import { dbContext } from "~/contexts";
-=======
 import HighlightedText from "~/components/highlighted-text";
->>>>>>> b3d8c45 (Add HighlightedText component)
 
 export async function loader({ context, params }: Route.LoaderArgs) {
   const db = context.get(dbContext);
@@ -36,15 +29,126 @@ export async function loader({ context, params }: Route.LoaderArgs) {
           },
         },
       },
-    })
+    }),
   );
-
-  return { schedule };
 }
 
-export default function SchedulePage({ loaderData }: Route.ComponentProps) {
-  const { schedule } = loaderData;
+import { useSchedule } from "./$scheduleId";
+import { Suspense, useMemo } from "react";
+import { LoadingIndicator } from "@neinteractiveliterature/litform";
+import LayoutFlow from "~/components/flowcharts/layout-flow";
+import { buildGraph } from "~/components/flowcharts/build-graph";
+
+export default function SchedulePage() {
+  const schedule = useSchedule();
   const { t } = useTranslation();
+
+  const phoneFlow = useMemo(
+    () =>
+      buildGraph(
+        t,
+        "schedules.flowChart.",
+        ({ labelWithIcon }) => [
+          labelWithIcon({ id: "voiceCall", icon: "telephone-inbound" }),
+          labelWithIcon({ id: "welcomeMessage", icon: "chat-quote-fill" }),
+          labelWithIcon({
+            id: "callPrimaryResponder",
+            icon: "telephone-outbound-fill",
+          }),
+          labelWithIcon({ id: "connectCall", icon: "telephone-forward-fill" }),
+          labelWithIcon({ id: "checkForMoreResponders", icon: "people" }),
+          labelWithIcon({
+            id: "callNextResponder",
+            icon: "telephone-forward-fill",
+          }),
+          labelWithIcon({ id: "voicemail", icon: "voicemail" }),
+          labelWithIcon({
+            id: "voicemailReceivedText",
+            icon: "chat-right-text-fill",
+          }),
+          labelWithIcon({
+            id: "voicemailReceivedEmail",
+            icon: "envelope-arrow-down-fill",
+          }),
+          labelWithIcon({
+            id: "postCallText",
+            icon: "chat-right-text-fill",
+          }),
+        ],
+        ({ edge }) => [
+          edge({ source: "voiceCall", target: "welcomeMessage" }),
+          edge({ source: "welcomeMessage", target: "callPrimaryResponder" }),
+          edge({
+            source: "callPrimaryResponder",
+            target: "connectCall",
+            labelId: "ifCallAnswered",
+          }),
+          edge({
+            source: "callPrimaryResponder",
+            target: "checkForMoreResponders",
+            labelId: "ifCallNotAnswered",
+          }),
+          edge({
+            source: "checkForMoreResponders",
+            target: "callNextResponder",
+            labelId: "ifMoreResponders",
+          }),
+          edge({
+            source: "callNextResponder",
+            target: "connectCall",
+            labelId: "ifCallAnswered",
+          }),
+          edge({
+            source: "connectCall",
+            target: "postCallText",
+            labelId: "whenCallComplete",
+          }),
+          edge({
+            source: "callNextResponder",
+            target: "checkForMoreResponders",
+            labelId: "ifCallNotAnswered",
+          }),
+          edge({
+            source: "checkForMoreResponders",
+            target: "voicemail",
+            labelId: "ifNoMoreResponders",
+          }),
+          edge({ source: "voicemail", target: "voicemailReceivedText" }),
+          edge({ source: "voicemail", target: "voicemailReceivedEmail" }),
+        ],
+      ),
+    [t],
+  );
+
+  const textFlow = useMemo(
+    () =>
+      buildGraph(
+        t,
+        "schedules.flowChart.",
+        ({ labelWithIcon }) => [
+          labelWithIcon({ id: "textMessage", icon: "chat-left-text" }),
+          labelWithIcon({
+            id: "noActiveShiftTextMessage",
+            icon: "chat-right-text-fill",
+          }),
+          labelWithIcon({ id: "outboundText", icon: "chat-right-text-fill" }),
+          labelWithIcon({
+            id: "outboundEmail",
+            icon: "envelope-arrow-down-fill",
+          }),
+        ],
+        ({ edge }) => [
+          edge({ source: "textMessage", target: "outboundText" }),
+          edge({ source: "textMessage", target: "outboundEmail" }),
+          edge({
+            source: "textMessage",
+            target: "noActiveShiftTextMessage",
+            labelId: "ifNoActiveShift",
+          }),
+        ],
+      ),
+    [t],
+  );
 
   return (
     <>
@@ -56,14 +160,29 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
 
       <section className="mb-2">
         <div className="d-flex">
-          <div className="flex-grow-1">
-            <h2>{t("schedules.showPage.settingsHeader")}</h2>
-          </div>
+          <div className="flex-grow-1"></div>
           <div>
             <Link to="./edit" className="btn btn-primary">
               {t("buttons.edit")}
             </Link>
           </div>
+        </div>
+
+        <div style={{ width: "100%", height: "40vh" }}>
+          <Suspense fallback={<LoadingIndicator />}>
+            <LayoutFlow
+              initialNodes={phoneFlow.nodes}
+              initialEdges={phoneFlow.edges}
+            />
+          </Suspense>
+        </div>
+        <div style={{ width: "100%", height: "40vh" }}>
+          <Suspense fallback={<LoadingIndicator />}>
+            <LayoutFlow
+              initialNodes={textFlow.nodes}
+              initialEdges={textFlow.edges}
+            />
+          </Suspense>
         </div>
 
         <table className="table table-striped">
@@ -150,45 +269,6 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
                 </dl>
               </td>
             </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section className="mb-2">
-        <h2>{t("schedules.shifts.title")}</h2>
-
-        <table className="table table-striped">
-          <thead>
-            <th>{t("schedules.shifts.timespan")}</th>
-            <th>{t("schedules.shifts.responders")}</th>
-          </thead>
-          <tbody>
-            {schedule.shifts.map((shift) => (
-              <tr key={shift.id}>
-                <td>
-                  {t("timespan", {
-                    timespan: shift.timespan,
-                    formatParams: {
-                      "timespan.start": dateTimeFormats.short,
-                      "timespan.finish": dateTimeFormats.short,
-                    },
-                  })}
-                </td>
-                <td>
-                  {sortBy(
-                    shift.shiftAssignments,
-                    (shiftAssignment) => shiftAssignment.position
-                  ).map(({ responder }, index) => (
-                    <>
-                      {index > 0 && ", "}
-                      <Link to={`/responders/${responder.id}`}>
-                        {responder.name}
-                      </Link>
-                    </>
-                  ))}
-                </td>
-              </tr>
-            ))}
           </tbody>
         </table>
       </section>
