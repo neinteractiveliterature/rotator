@@ -27,3 +27,6 @@
 
 # sst
 .sst
+
+# Local database dumps
+/*.sql
