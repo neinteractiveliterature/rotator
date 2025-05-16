@@ -4278,7 +4278,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.3.7, debug@npm:^4.4.0":
+"debug@npm:4, debug@npm:^4.1.0, debug@npm:^4.1.1, debug@npm:^4.3.1, debug@npm:^4.3.2, debug@npm:^4.3.4, debug@npm:^4.3.5, debug@npm:^4.4.0":
   version: 4.4.0
   resolution: "debug@npm:4.4.0"
   dependencies:
@@ -8425,16 +8425,15 @@ __metadata:
   linkType: hard
 
 "remix-auth-oauth2@npm:^3.2.2":
-  version: 3.4.0
-  resolution: "remix-auth-oauth2@npm:3.4.0"
+  version: 3.4.1
+  resolution: "remix-auth-oauth2@npm:3.4.1"
   dependencies:
     "@edgefirst-dev/data": "npm:^0.0.4"
     "@mjackson/headers": "npm:^0.10.0"
     arctic: "npm:^3.0.0"
-    debug: "npm:^4.3.7"
   peerDependencies:
     remix-auth: ^4.0.0
-  checksum: 10c0/dbaa9da51352b8d8e9c7cfa4fd474fca0084760b0306c10bf69b22aedfe956964457d0474ae0b3cd34aa17b19c024b51e1609ef54de07fb9c9335747a1d4bb89
+  checksum: 10c0/e3e88bcfb682821a4f050879794ba04bb6c96c2d3d0f0d9ad3c84ac420a1457d0b7ffc544e3516d21dae1aae00669b7778ef8f2b7d1af5716bc58ed9c1f20ff4
   languageName: node
   linkType: hard
 
