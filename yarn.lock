@@ -1297,6 +1297,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hono/vite-dev-server@npm:^0.20.0":
+  version: 0.20.0
+  resolution: "@hono/vite-dev-server@npm:0.20.0"
+  dependencies:
+    "@hono/node-server": "npm:^1.14.2"
+    minimatch: "npm:^9.0.3"
+  peerDependencies:
+    hono: "*"
+    miniflare: "*"
+    wrangler: "*"
+  peerDependenciesMeta:
+    hono:
+      optional: false
+    miniflare:
+      optional: true
+    wrangler:
+      optional: true
+  checksum: 10c0/bf4fa848b37f9f711f0f198a369ae9e4b1f7d455059ab36f6dcae5281de037baf0ab3a8128d678b38e454be290db3908b7565387d054eb06e8ed58888069efbe
+  languageName: node
+  linkType: hard
+
 "@humanfs/core@npm:^0.19.1":
   version: 0.19.1
   resolution: "@humanfs/core@npm:0.19.1"
@@ -8382,7 +8403,7 @@ __metadata:
     "@eslint/eslintrc": "npm:^3.3.0"
     "@eslint/js": "npm:^9.21.0"
     "@flydotio/dockerfile": "npm:^0.7.8"
-    "@hono/vite-dev-server": "npm:^0.19.0"
+    "@hono/vite-dev-server": "npm:^0.20.0"
     "@lezer/common": "npm:^1.2.3"
     "@lezer/highlight": "npm:^1.2.1"
     "@lezer/lr": "npm:^1.4.2"
