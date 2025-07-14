@@ -8014,8 +8014,8 @@ __metadata:
   linkType: hard
 
 "react-router-hono-server@npm:^2.9.0":
-  version: 2.13.0
-  resolution: "react-router-hono-server@npm:2.13.0"
+  version: 2.15.0
+  resolution: "react-router-hono-server@npm:2.15.0"
   dependencies:
     "@drizzle-team/brocli": "npm:^0.11.0"
     "@hono/node-server": "npm:^1.14.0"
@@ -8028,7 +8028,7 @@ __metadata:
     "@types/react": ^18.3.10 || ^19.0.0
     miniflare: ^3.20241205.0
     react-router: ^7.2.0
-    vite: ^6.0.0
+    vite: ^6.0.0 || ^7.0.0
     wrangler: ^4.2.0
   peerDependenciesMeta:
     "@cloudflare/workers-types":
@@ -8039,7 +8039,7 @@ __metadata:
       optional: true
   bin:
     react-router-hono-server: dist/cli.js
-  checksum: 10c0/58f6687755e60dccc7f4d3943e2108d0f945caebf6836e6c64ccd75b63c03d7ed6ec216842dbe6af5c9b5db6dc569a16a449c02a5bdd92fbc0492ff6d5aed345
+  checksum: 10c0/67e3b8d6c78c4951ab4b3a9305c7e9a178ca2e688d925e61c0fd872483eae2d1fbce779fede7ca5b73adaedad9f53ad552998e4a66314e6186a0f3ed0a902074
   languageName: node
   linkType: hard
 
