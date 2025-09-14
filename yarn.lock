@@ -1769,9 +1769,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/vite-dev-server@npm:^0.20.0":
-  version: 0.20.1
-  resolution: "@hono/vite-dev-server@npm:0.20.1"
+"@hono/vite-dev-server@npm:^0.21.0":
+  version: 0.21.0
+  resolution: "@hono/vite-dev-server@npm:0.21.0"
   dependencies:
     "@hono/node-server": "npm:^1.14.2"
     minimatch: "npm:^9.0.3"
@@ -1786,7 +1786,7 @@ __metadata:
       optional: true
     wrangler:
       optional: true
-  checksum: 10c0/ed24ee3c053d76512d57093deba103baf454daa52fcced3eed7c814819b140ac283a401ab006099b48b7123c4c3a00acd2d3e72aa5f4b9f50ee8db065f51ccb1
+  checksum: 10c0/d7c6c55964e55ec2771f655db616f3b48de45ef92f4d7bfb8c72b1b4c2e6ba72894d102ee13cd771146dd3a16437a21f566cf28b9c9411a5d1d02fd67113619c
   languageName: node
   linkType: hard
 
@@ -9562,7 +9562,7 @@ __metadata:
     "@eslint/eslintrc": "npm:^3.3.0"
     "@eslint/js": "npm:^9.21.0"
     "@flydotio/dockerfile": "npm:^0.7.8"
-    "@hono/vite-dev-server": "npm:^0.20.0"
+    "@hono/vite-dev-server": "npm:^0.21.0"
     "@lezer/common": "npm:^1.2.3"
     "@lezer/highlight": "npm:^1.2.1"
     "@lezer/lr": "npm:^1.4.2"
