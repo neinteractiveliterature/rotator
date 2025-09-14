@@ -2196,13 +2196,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mjackson/node-fetch-server@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "@mjackson/node-fetch-server@npm:0.7.0"
-  checksum: 10c0/d2bb7ab2c1038195c93b2a405ac0357ccb8aab5d214badd918be2e7326a508a6522af21310b7a94e2726561e810fd8d178d306b426e5a4fdf5004aab8e2fa45f
-  languageName: node
-  linkType: hard
-
 "@neinteractiveliterature/litform-codemirror@npm:^0.35.0":
   version: 0.35.0
   resolution: "@neinteractiveliterature/litform-codemirror@npm:0.35.0"
@@ -3092,8 +3085,8 @@ __metadata:
   linkType: hard
 
 "@react-router/dev@npm:^7.2.0":
-  version: 7.8.2
-  resolution: "@react-router/dev@npm:7.8.2"
+  version: 7.9.1
+  resolution: "@react-router/dev@npm:7.9.1"
   dependencies:
     "@babel/core": "npm:^7.27.7"
     "@babel/generator": "npm:^7.27.5"
@@ -3103,8 +3096,7 @@ __metadata:
     "@babel/traverse": "npm:^7.27.7"
     "@babel/types": "npm:^7.27.7"
     "@npmcli/package-json": "npm:^4.0.1"
-    "@react-router/node": "npm:7.8.2"
-    "@vitejs/plugin-rsc": "npm:0.4.11"
+    "@react-router/node": "npm:7.9.1"
     arg: "npm:^5.0.1"
     babel-dead-code-elimination: "npm:^1.0.6"
     chokidar: "npm:^4.0.0"
@@ -3124,13 +3116,16 @@ __metadata:
     valibot: "npm:^0.41.0"
     vite-node: "npm:^3.2.2"
   peerDependencies:
-    "@react-router/serve": ^7.8.2
-    react-router: ^7.8.2
+    "@react-router/serve": ^7.9.1
+    "@vitejs/plugin-rsc": "*"
+    react-router: ^7.9.1
     typescript: ^5.1.0
     vite: ^5.1.0 || ^6.0.0 || ^7.0.0
     wrangler: ^3.28.2 || ^4.0.0
   peerDependenciesMeta:
     "@react-router/serve":
+      optional: true
+    "@vitejs/plugin-rsc":
       optional: true
     typescript:
       optional: true
@@ -3138,57 +3133,57 @@ __metadata:
       optional: true
   bin:
     react-router: bin.js
-  checksum: 10c0/bd2889fa4f2bea6c1c6760edde1d613437cf48c0f3283ab5ca583277f6b97dad4132cc5d226ea4494da6be441422347d327615b47a81d135b1b72aee5ea8d2f3
+  checksum: 10c0/68219c999bd7809fd0dde1ac9c3bc2a2936e8da94d3023c27167c0af808018f44318bdd176dd68d8458d86043b6a7a22b5308d072e16c14e8b8fe49cc228a31c
   languageName: node
   linkType: hard
 
-"@react-router/express@npm:7.8.2":
-  version: 7.8.2
-  resolution: "@react-router/express@npm:7.8.2"
+"@react-router/express@npm:7.9.1":
+  version: 7.9.1
+  resolution: "@react-router/express@npm:7.9.1"
   dependencies:
-    "@react-router/node": "npm:7.8.2"
+    "@react-router/node": "npm:7.9.1"
   peerDependencies:
     express: ^4.17.1 || ^5
-    react-router: 7.8.2
+    react-router: 7.9.1
     typescript: ^5.1.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/104b1b0cbd6ae00eb65bad3310b1fe8a920b940fb4abb743599ec35964b34bd321babc97954b68f25da44b295af85c7ce3b4d0d1aed020bf046c64cd54a67f74
+  checksum: 10c0/59f9ce2aecbeb5a5cf9d0845f1d8d6535ff3280b57c2abd1cf31870c05ef4b7fc066c763a43c691b31d71cee27056b02f6c308d4d8bffaf5b026a6ff27526be4
   languageName: node
   linkType: hard
 
-"@react-router/node@npm:7.8.2, @react-router/node@npm:^7.2.0":
-  version: 7.8.2
-  resolution: "@react-router/node@npm:7.8.2"
+"@react-router/node@npm:7.9.1, @react-router/node@npm:^7.2.0":
+  version: 7.9.1
+  resolution: "@react-router/node@npm:7.9.1"
   dependencies:
     "@mjackson/node-fetch-server": "npm:^0.2.0"
   peerDependencies:
-    react-router: 7.8.2
+    react-router: 7.9.1
     typescript: ^5.1.0
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/aab6aa24098a1883d2aff5a77ee1ae26e51049901d2278ca0bde35925c0046da9151245b311023ac5e3ce57bd416f796a5a06ed5543b3ff1fff2886bb35ecf19
+  checksum: 10c0/b12e5934da13906e1c36f64c1590084479f03e00cf0022b9400271ebb319e90077dc2e5b93b5576187066a9dd3632af8280630dfccb2d00035cf060e9c7f7a86
   languageName: node
   linkType: hard
 
 "@react-router/serve@npm:^7.2.0":
-  version: 7.8.2
-  resolution: "@react-router/serve@npm:7.8.2"
+  version: 7.9.1
+  resolution: "@react-router/serve@npm:7.9.1"
   dependencies:
-    "@react-router/express": "npm:7.8.2"
-    "@react-router/node": "npm:7.8.2"
+    "@react-router/express": "npm:7.9.1"
+    "@react-router/node": "npm:7.9.1"
     compression: "npm:^1.7.4"
     express: "npm:^4.19.2"
     get-port: "npm:5.1.1"
     morgan: "npm:^1.10.0"
     source-map-support: "npm:^0.5.21"
   peerDependencies:
-    react-router: 7.8.2
+    react-router: 7.9.1
   bin:
     react-router-serve: bin.js
-  checksum: 10c0/81275129db061fb67d4b61e5c96b349668c48e67941764378b7f5260af9cc9b59496e894cd4e1560b6dea9683b8e674d0842370a03bdd6051caaa5427d6f41f9
+  checksum: 10c0/d898a9077edf27119bc53824cde052df2ec468c83d03e57ab7eb7e9eb56b539a0572c5f9376c53b1e56c2dc5ca4d4aae7242544505f3c52ea8f39b518334da46
   languageName: node
   linkType: hard
 
@@ -3907,7 +3902,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:*, @types/estree@npm:1.0.8, @types/estree@npm:^1.0.0, @types/estree@npm:^1.0.6":
+"@types/estree@npm:1.0.8, @types/estree@npm:^1.0.0, @types/estree@npm:^1.0.6":
   version: 1.0.8
   resolution: "@types/estree@npm:1.0.8"
   checksum: 10c0/39d34d1afaa338ab9763f37ad6066e3f349444f9052b9676a7cc0252ef9485a41c6d81c9c4e0d26e9077993354edf25efc853f3224dd4b447175ef62bdcc86a5
@@ -4149,25 +4144,6 @@ __metadata:
     "@typescript-eslint/types": "npm:8.43.0"
     eslint-visitor-keys: "npm:^4.2.1"
   checksum: 10c0/5d576eaf7bea41933ba726f4b24410bd3fc2521ef286967c3dc630c6a90fabff2a2d7c4d12cb841d3f946d2e5e6fb2605e7edd84e3360308fe379dbf2b8dc2fa
-  languageName: node
-  linkType: hard
-
-"@vitejs/plugin-rsc@npm:0.4.11":
-  version: 0.4.11
-  resolution: "@vitejs/plugin-rsc@npm:0.4.11"
-  dependencies:
-    "@mjackson/node-fetch-server": "npm:^0.7.0"
-    es-module-lexer: "npm:^1.7.0"
-    estree-walker: "npm:^3.0.3"
-    magic-string: "npm:^0.30.17"
-    periscopic: "npm:^4.0.2"
-    turbo-stream: "npm:^3.1.0"
-    vitefu: "npm:^1.1.1"
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-    vite: "*"
-  checksum: 10c0/904c0c1965fa305b886fc9003b9ce3742a52af2f1dd3a47c636072912151fa87ebc23c91948c25a70b4c12240aa4166498316ffc68e30ea25f243c6891c294e4
   languageName: node
   linkType: hard
 
@@ -7323,15 +7299,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-reference@npm:^3.0.2":
-  version: 3.0.3
-  resolution: "is-reference@npm:3.0.3"
-  dependencies:
-    "@types/estree": "npm:^1.0.6"
-  checksum: 10c0/35edd284cfb4cd9e9f08973f20e276ec517eaca31f5f049598e97dbb2d05544973dde212dac30fddee5b420930bff365e2e67dcd1293d0866c6720377382e3e5
-  languageName: node
-  linkType: hard
-
 "is-regex@npm:^1.2.1":
   version: 1.2.1
   resolution: "is-regex@npm:1.2.1"
@@ -8650,17 +8617,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"periscopic@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "periscopic@npm:4.0.2"
-  dependencies:
-    "@types/estree": "npm:*"
-    is-reference: "npm:^3.0.2"
-    zimmerframe: "npm:^1.0.0"
-  checksum: 10c0/841869f013513e9d28795dfcf2c7e0cba435d3e6b854c27cb00b0ac4bbd31e519264784354c30001158684a4a7ba98d67beda8e392b82a566f0e1fb7197bbb38
-  languageName: node
-  linkType: hard
-
 "pg-cloudflare@npm:^1.2.7":
   version: 1.2.7
   resolution: "pg-cloudflare@npm:1.2.7"
@@ -9218,8 +9174,8 @@ __metadata:
   linkType: hard
 
 "react-router@npm:^7.2.0":
-  version: 7.8.2
-  resolution: "react-router@npm:7.8.2"
+  version: 7.9.1
+  resolution: "react-router@npm:7.9.1"
   dependencies:
     cookie: "npm:^1.0.1"
     set-cookie-parser: "npm:^2.6.0"
@@ -9229,7 +9185,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 10c0/e3122c2949bcad5e9c990cfb88e9cbd139e5a2a5c1d29664732623907a488634c0ddbf673d07af8f113d418f66270c174f014de8b885996722f431d09f5734be
+  checksum: 10c0/27448e4c84199d240f6a15d503cf26509320fd4ea31aec6f12a427ac4a560a320321e9b119981eddad25801c062be0f814d4461174f69efdc9f9e5af14cf6915
   languageName: node
   linkType: hard
 
@@ -10712,13 +10668,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-stream@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "turbo-stream@npm:3.1.0"
-  checksum: 10c0/08829863fdfe97026407e6a2137ebd8a744afef75f5af113d181cf29673784febd1797366e1b87362a46f3eca73b79b5d495b2310527c147bbf8c080bb7eeb5b
-  languageName: node
-  linkType: hard
-
 "twilio@npm:^5.4.5":
   version: 5.9.0
   resolution: "twilio@npm:5.9.0"
@@ -11200,18 +11149,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitefu@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "vitefu@npm:1.1.1"
-  peerDependencies:
-    vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0-beta.0
-  peerDependenciesMeta:
-    vite:
-      optional: true
-  checksum: 10c0/7e0d0dd6fb73bd80cb56a3f47ccc44159e0330c3e94b2951648079b35711226f9088dbe616d910b931740b92259230b874fbe351108b49f5c11b629b641292a5
-  languageName: node
-  linkType: hard
-
 "vitest@npm:^3.0.7":
   version: 3.1.4
   resolution: "vitest@npm:3.1.4"
@@ -11612,13 +11549,6 @@ __metadata:
   version: 0.8.15
   resolution: "zen-observable@npm:0.8.15"
   checksum: 10c0/71cc2f2bbb537300c3f569e25693d37b3bc91f225cefce251a71c30bc6bb3e7f8e9420ca0eb57f2ac9e492b085b8dfa075fd1e8195c40b83c951dd59c6e4fbf8
-  languageName: node
-  linkType: hard
-
-"zimmerframe@npm:^1.0.0":
-  version: 1.1.2
-  resolution: "zimmerframe@npm:1.1.2"
-  checksum: 10c0/8f693609c31cbb4449db223acd61661bc93b73e615f9db6fb8c86d4ceea84ca54cbbeebcf53cf74c22a1f923b92abd18e97988a5e175c76b6ab17238e5593a9d
   languageName: node
   linkType: hard
 
