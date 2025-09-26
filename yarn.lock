@@ -4636,14 +4636,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.11.0":
-  version: 1.11.0
-  resolution: "axios@npm:1.11.0"
+"axios@npm:^1.12.0":
+  version: 1.12.2
+  resolution: "axios@npm:1.12.2"
   dependencies:
     follow-redirects: "npm:^1.15.6"
     form-data: "npm:^4.0.4"
     proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/5de273d33d43058610e4d252f0963cc4f10714da0bfe872e8ef2cbc23c2c999acc300fd357b6bce0fc84a2ca9bd45740fa6bb28199ce2c1266c8b1a393f2b36e
+  checksum: 10c0/80b063e318cf05cd33a4d991cea0162f3573481946f9129efb7766f38fde4c061c34f41a93a9f9521f02b7c9565ccbc197c099b0186543ac84a24580017adfed
   languageName: node
   linkType: hard
 
@@ -10739,17 +10739,17 @@ __metadata:
   linkType: hard
 
 "twilio@npm:^5.4.5":
-  version: 5.9.0
-  resolution: "twilio@npm:5.9.0"
+  version: 5.10.1
+  resolution: "twilio@npm:5.10.1"
   dependencies:
-    axios: "npm:^1.11.0"
+    axios: "npm:^1.12.0"
     dayjs: "npm:^1.11.9"
     https-proxy-agent: "npm:^5.0.0"
     jsonwebtoken: "npm:^9.0.2"
     qs: "npm:^6.9.4"
     scmp: "npm:^2.1.0"
     xmlbuilder: "npm:^13.0.2"
-  checksum: 10c0/c50b3ea344649ac570ad0c023c74ab9d67b6222767e5e9c3239054d3f33ad86384a08107a59d4344996b7dd442c4bce9b76a41c3c760045f689e78dfce11785b
+  checksum: 10c0/419aca94d8125da358d34f8a09f609175f67fa9839dbfa1457036432f67972b9cdaa77361724cf166a8ed0fbed9c80956bca0980b7cc407b6ff5babe23f9991b
   languageName: node
   linkType: hard
 
