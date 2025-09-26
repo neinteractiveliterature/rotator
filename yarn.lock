@@ -1755,30 +1755,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hono/node-server@npm:^1.14.0, @hono/node-server@npm:^1.14.2":
-  version: 1.14.2
-  resolution: "@hono/node-server@npm:1.14.2"
+"@hono/node-server@npm:^1.14.2, @hono/node-server@npm:^1.18.1":
+  version: 1.19.4
+  resolution: "@hono/node-server@npm:1.19.4"
   peerDependencies:
     hono: ^4
-  checksum: 10c0/03bf6f421adcbabdf2f91a749028f7b733832e8592878dab6a831b48e1897b5b5c7868f659419a81dc84401ae5b720befdb76b8e8eda9f815edc7d10f35e8253
+  checksum: 10c0/3cbdaa1901131c6815b377c921e74739207230ed4aae361a11c44f7791180316bcf034474a64073c5ff1dc4aa400be4beeebc3660cae451461e81e4f8b754a76
   languageName: node
   linkType: hard
 
-"@hono/node-ws@npm:^1.1.1":
-  version: 1.1.1
-  resolution: "@hono/node-ws@npm:1.1.1"
+"@hono/node-ws@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@hono/node-ws@npm:1.2.0"
   dependencies:
     ws: "npm:^8.17.0"
   peerDependencies:
     "@hono/node-server": ^1.11.1
     hono: ^4.6.0
-  checksum: 10c0/d99505da2048500ba8e6d075af6e88a306e99ad30df7c3cbc3199b2068ca85e8730e9124a29ec429abf4b294da51fc4a17ed760186e60eb68337c223ddff6e6f
+  checksum: 10c0/4a59e8bd5d1a50e12cd2b971458164670b89f339add3ba64444de3d316df7d26c5735db4245565dd8e0495276ba19b79520b137336467e863a84f8e76d75e5e3
   languageName: node
   linkType: hard
 
-"@hono/vite-dev-server@npm:^0.19.0":
-  version: 0.19.1
-  resolution: "@hono/vite-dev-server@npm:0.19.1"
+"@hono/vite-dev-server@npm:^0.20.0":
+  version: 0.20.1
+  resolution: "@hono/vite-dev-server@npm:0.20.1"
   dependencies:
     "@hono/node-server": "npm:^1.14.2"
     minimatch: "npm:^9.0.3"
@@ -1793,7 +1793,7 @@ __metadata:
       optional: true
     wrangler:
       optional: true
-  checksum: 10c0/fc643c23ad04aba0a12b35af4b2d6373651e5d9781b0e23c740e3041b919e7b372e02787fbb463b26f7b75027a667db9a4bbbdaec2517ef85c47d49629779d07
+  checksum: 10c0/ed24ee3c053d76512d57093deba103baf454daa52fcced3eed7c814819b140ac283a401ab006099b48b7123c4c3a00acd2d3e72aa5f4b9f50ee8db065f51ccb1
   languageName: node
   linkType: hard
 
@@ -9207,17 +9207,18 @@ __metadata:
   linkType: hard
 
 "react-router-hono-server@npm:^2.9.0":
-  version: 2.16.0
-  resolution: "react-router-hono-server@npm:2.16.0"
+  version: 2.21.0
+  resolution: "react-router-hono-server@npm:2.21.0"
   dependencies:
     "@drizzle-team/brocli": "npm:^0.11.0"
-    "@hono/node-server": "npm:^1.14.0"
-    "@hono/node-ws": "npm:^1.1.1"
-    "@hono/vite-dev-server": "npm:^0.19.0"
+    "@hono/node-server": "npm:^1.18.1"
+    "@hono/node-ws": "npm:^1.2.0"
+    "@hono/vite-dev-server": "npm:^0.20.0"
     hono: "npm:^4.7.5"
   peerDependencies:
     "@cloudflare/workers-types": ^4.20250317.0
-    "@react-router/dev": ^7.2.0
+    "@hono/node-server": ^1.18.1
+    "@react-router/dev": ^7.8.0
     "@types/react": ^18.3.10 || ^19.0.0
     miniflare: ^3.20241205.0
     react-router: ^7.2.0
@@ -9226,13 +9227,15 @@ __metadata:
   peerDependenciesMeta:
     "@cloudflare/workers-types":
       optional: true
+    "@hono/node-server":
+      optional: false
     miniflare:
       optional: true
     wrangler:
       optional: true
   bin:
     react-router-hono-server: dist/cli.js
-  checksum: 10c0/7ebca75e537e6013aa68dda20da155655d056237994434ff9805083ae2e322e2d04eaa87821ca3627c3799f2b46ce3116e41d91a5948e5421b6ad9d9c870396a
+  checksum: 10c0/29e61604e182a1669aa7d7debf872f44d874c20959c7ebf79f15b1ace86f7be9add68d7726ebacc20deef0285a87418759eaf5da3aa0b8482de0cebcdaf2e8a3
   languageName: node
   linkType: hard
 
