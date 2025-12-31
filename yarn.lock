@@ -8379,10 +8379,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemailer@npm:^6.10.0":
-  version: 6.10.1
-  resolution: "nodemailer@npm:6.10.1"
-  checksum: 10c0/e81fde258ea4f4e5646e9e3eebe89294d007939999d2d1a8c96c5488fa00bf659e46cf76fccb2697e9aa6ef9807a1ed47ff2aef6ad30b795e3849b6997066d16
+"nodemailer@npm:^7.0.0":
+  version: 7.0.12
+  resolution: "nodemailer@npm:7.0.12"
+  checksum: 10c0/b03948744423386b5fd7cb5bdf60797f2f71c4d3db202eedf7e0037429b5887cb90b641e7ca244af3b96e0b76949e3135cba96336fb0d3ade00ae33727ca8cf8
   languageName: node
   linkType: hard
 
@@ -9676,7 +9676,7 @@ __metadata:
     liquidjs: "npm:^10.21.0"
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.5.0"
-    nodemailer: "npm:^6.10.0"
+    nodemailer: "npm:^7.0.0"
     pg: "npm:^8.13.3"
     react: "npm:^19.0.0"
     react-bootstrap4-modal: "npm:^3.0.10"
