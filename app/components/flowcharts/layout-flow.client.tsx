@@ -1,4 +1,3 @@
-import Dagre from "dagre";
 import {
   MarkerType,
   ReactFlow,
@@ -7,46 +6,111 @@ import {
   useNodesState,
   useReactFlow,
   type Edge,
-  type Node,
 } from "@xyflow/react";
 import { useCallback, useMemo, type ComponentProps } from "react";
+import ELK, {
+  type ElkLabel,
+  type ElkNode,
+  type LayoutOptions,
+} from "elkjs/lib/elk.bundled.js";
 
 import "@xyflow/react/dist/style.css";
 import { nodeTypes, type NodeTypes } from "./node-types";
 import type { UnpositionedNode } from "./build-graph";
+import { edgeTypes, SplineEdge } from "./edge-types";
 
-function layoutElements<NodeType extends Node>(
-  nodes: NodeType[],
-  edges: Edge[],
-  options: { direction: string }
-) {
-  const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
-  g.setGraph({ rankdir: options.direction });
+const elk = new ELK();
+const defaultOptions: LayoutOptions = {
+  "elk.algorithm": "layered",
+  "elk.edgeRouting": "SPLINES",
+  "elk.direction": "DOWN",
+  "elk.layered.spacing.nodeNodeBetweenLayers": "60",
+  "elk.layered.feedbackEdges": "true",
+  "elk.spacing.nodeNode": "40",
+};
 
-  edges.forEach((edge) => g.setEdge(edge.source, edge.target));
-  nodes.forEach((node) =>
-    g.setNode(node.id, {
-      ...node,
-      width: node.measured?.width ?? 0,
-      height: node.measured?.height ?? 0,
-    })
+const useLayoutedElements = () => {
+  const { getNodes, setNodes, getEdges, setEdges, fitView } = useReactFlow();
+
+  const getLayoutedElements = useCallback(
+    async (options?: LayoutOptions) => {
+      const layoutOptions = { ...defaultOptions, ...options };
+      const nodes = getNodes();
+      const edges = getEdges();
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const graph: ElkNode = {
+        id: "root",
+        layoutOptions: layoutOptions,
+        children: nodes.map((node) => ({
+          ...node,
+          width: node.measured?.width,
+          height: node.measured?.height,
+        })),
+        edges: edges.map((edge) => {
+          const measuredLabel = edge.label
+            ? context?.measureText(edge.label.toString())
+            : undefined;
+          return {
+            id: edge.id,
+            sources: [edge.source],
+            targets: [edge.target],
+            labels: edge.label
+              ? [
+                  {
+                    text: edge.label.toString(),
+                    width: measuredLabel?.width,
+                    height: measuredLabel?.actualBoundingBoxAscent,
+                  } satisfies ElkLabel,
+                ]
+              : undefined,
+          };
+        }),
+      };
+
+      const result = await elk.layout(graph);
+      const resultNodesById = Object.fromEntries(
+        (result.children ?? []).map((node) => [node.id, node])
+      );
+      const resultEdgesById = Object.fromEntries(
+        (result.edges ?? []).map((edge) => [edge.id, edge])
+      );
+
+      setNodes(
+        nodes.map((node) => {
+          const resultNode = resultNodesById[node.id];
+          if (resultNode) {
+            return {
+              ...node,
+              position: { x: resultNode.x ?? 0, y: resultNode.y ?? 0 },
+            };
+          } else {
+            return node;
+          }
+        })
+      );
+
+      setEdges(
+        edges.map((edge) => {
+          const resultEdge = resultEdgesById[edge.id];
+          if (resultEdge) {
+            return {
+              ...edge,
+              type: "spline",
+              data: { elkEdge: resultEdge },
+            } satisfies SplineEdge;
+          }
+          return edge;
+        })
+      );
+
+      fitView();
+    },
+    [getEdges, getNodes, setNodes, setEdges, fitView]
   );
 
-  Dagre.layout(g);
-
-  return {
-    nodes: nodes.map((node) => {
-      const position = g.node(node.id);
-      // We are shifting the dagre node position (anchor=center center) to the top left
-      // so it matches the React Flow node anchor point (top left).
-      const x = position.x - (node.measured?.width ?? 0) / 2;
-      const y = position.y - (node.measured?.height ?? 0) / 2;
-
-      return { ...node, position: { x, y } };
-    }),
-    edges,
-  };
-}
+  return { getLayoutedElements };
+};
 
 export function LayoutFlow({
   initialNodes,
@@ -63,36 +127,14 @@ export function LayoutFlow({
       })),
     [initialNodes]
   );
-  const { fitView } = useReactFlow();
-  const [nodes, setNodes, onNodesChange] = useNodesState(
-    initialNodesWithPosition
-  );
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  const recalculateLayout = useCallback(
-    (direction: string) => {
-      // we're using functional setters in order to avoid making nodes or edges a dependency
-      // of the useCallback, which would cause an infinite loop
-      setEdges((prevEdges) => {
-        setNodes((prevNodes) => {
-          const layouted = layoutElements(prevNodes, prevEdges, {
-            direction,
-          });
-          return layouted.nodes;
-        });
-
-        // edges don't change, so we can just return the previous edges
-        return prevEdges;
-      });
-
-      fitView();
-    },
-    [fitView, setNodes, setEdges]
-  );
+  const [nodes, , onNodesChange] = useNodesState(initialNodesWithPosition);
+  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+  const { getLayoutedElements } = useLayoutedElements();
 
   return (
     <ReactFlow
       nodeTypes={nodeTypes}
+      edgeTypes={edgeTypes}
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}
@@ -107,7 +149,7 @@ export function LayoutFlow({
       nodesConnectable={false}
       nodesDraggable={false}
       nodesFocusable={false}
-      onInit={() => recalculateLayout("LR")}
+      onInit={() => getLayoutedElements()}
       defaultEdgeOptions={{
         markerEnd: { type: MarkerType.ArrowClosed, width: 20, height: 20 },
       }}

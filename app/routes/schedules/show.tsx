@@ -150,6 +150,14 @@ export default function SchedulePage() {
     [t],
   );
 
+  const combinedFlow = useMemo(
+    () => ({
+      nodes: [...phoneFlow.nodes, ...textFlow.nodes],
+      edges: [...phoneFlow.edges, ...textFlow.edges],
+    }),
+    [phoneFlow, textFlow]
+  );
+
   return (
     <>
       <title>{schedule.name}</title>
@@ -168,19 +176,11 @@ export default function SchedulePage() {
           </div>
         </div>
 
-        <div style={{ width: "100%", height: "40vh" }}>
+        <div style={{ width: "100%", height: "80vh" }}>
           <Suspense fallback={<LoadingIndicator />}>
             <LayoutFlow
-              initialNodes={phoneFlow.nodes}
-              initialEdges={phoneFlow.edges}
-            />
-          </Suspense>
-        </div>
-        <div style={{ width: "100%", height: "40vh" }}>
-          <Suspense fallback={<LoadingIndicator />}>
-            <LayoutFlow
-              initialNodes={textFlow.nodes}
-              initialEdges={textFlow.edges}
+              initialNodes={combinedFlow.nodes}
+              initialEdges={combinedFlow.edges}
             />
           </Suspense>
         </div>
