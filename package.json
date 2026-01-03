@@ -36,6 +36,7 @@
     "dotenv": "^16.4.7",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.45.0",
+    "elkjs": "^0.10.0",
     "express": "^5.2.1",
     "graphql": "^16.10.0",
     "i18next": "^25.0.0",

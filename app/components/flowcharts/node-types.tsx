@@ -13,14 +13,14 @@ export function LabelWithIconNode({ data }: { data: LabelWithIconNodeData }) {
       className="rounded border border-2 border-dark p-2 shadow-sm"
       style={{ maxWidth: "8em" }}
     >
-      <Handle type="target" position={Position.Left} className="invisible" />
+      <Handle type="target" position={Position.Top} className="invisible" />
       {data.icon && (
         <div className="float-end ms-2">
           <BootstrapIcon name={data.icon} />
         </div>
       )}
       {data.label}
-      <Handle type="source" position={Position.Right} className="invisible" />
+      <Handle type="source" position={Position.Bottom} className="invisible" />
     </div>
   );
 }
