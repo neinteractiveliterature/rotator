@@ -5,5 +5,8 @@
   },
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "eslint.nodePath": ".yarn/sdks"
+  "eslint.nodePath": ".yarn/sdks",
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "/Users/nbudin/.local/share/mise/shims/node"
+  }
 }
