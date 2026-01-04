@@ -14,7 +14,6 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@apollo/client": "^3.13.1",
     "@codemirror/commands": "^6.8.0",
     "@codemirror/lang-html": "^6.4.9",
     "@codemirror/language": "^6.10.8",
@@ -42,7 +41,7 @@
     "liquidjs": "^10.21.0",
     "lodash": "^4.17.21",
     "luxon": "^3.5.0",
-    "nodemailer": "^6.10.0",
+    "nodemailer": "^7.0.12",
     "pg": "^8.13.3",
     "react": "^19.0.0",
     "react-bootstrap4-modal": "^3.0.10",
