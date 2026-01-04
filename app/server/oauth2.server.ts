@@ -18,12 +18,12 @@ const UserPayload = z.object({
   }),
 });
 
-type AuthResult = {
+export type AuthResult = {
   userPayload: z.infer<typeof UserPayload>;
   accessToken: string;
 };
 
-class DBCachedOAuth2Strategy<U> extends OAuth2Strategy<U> {
+export class DBCachedOAuth2Strategy<U> extends OAuth2Strategy<U> {
   static async loadOrDiscover<U>(
     db: NodePgDatabase<typeof schema>,
     uri: string | URL,

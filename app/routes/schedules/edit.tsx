@@ -6,10 +6,12 @@ import { ErrorDisplay } from "@neinteractiveliterature/litform";
 import ScheduleFormFields, { parseScheduleFormData } from "~/schedules/form";
 import { schedulesTable } from "~/db/schema";
 import { eq } from "drizzle-orm";
+import { dbContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
+  const db = context.get(dbContext);
   const schedule = assertFound(
-    await context.db.query.schedulesTable.findFirst({
+    await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
     })
   );
@@ -18,10 +20,11 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 }
 
 export async function action({ context, request, params }: Route.ActionArgs) {
+  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
 
-    await context.db
+    await db
       .update(schedulesTable)
       .set(parseScheduleFormData(formData))
       .where(eq(schedulesTable.id, coerceId(params.scheduleId)));

@@ -2,14 +2,17 @@ import { usersTable } from "~/db/schema";
 import type { Route } from "./+types/redirect";
 import { redirect } from "react-router";
 import { commitSession, getSession } from "~/sessions.server";
+import { authenticatorContext, dbContext } from "~/contexts";
 
 export async function loader({ request, context }: Route.LoaderArgs) {
-  const { userPayload, accessToken } = await context.authenticator.authenticate(
+  const authenticator = context.get(authenticatorContext);
+  const db = context.get(dbContext);
+  const { userPayload, accessToken } = await authenticator.authenticate(
     "oauth2",
     request
   );
 
-  const existingUser = await context.db.query.usersTable.findFirst({
+  const existingUser = await db.query.usersTable.findFirst({
     where: (tbl, { and, eq }) =>
       and(
         eq(tbl.provider, "oauth2"),
@@ -23,7 +26,7 @@ export async function loader({ request, context }: Route.LoaderArgs) {
   if (existingUser) {
     session.set("userId", existingUser.id);
   } else {
-    const [newUser] = await context.db
+    const [newUser] = await db
       .insert(usersTable)
       .values({
         email: userPayload.user.email,
