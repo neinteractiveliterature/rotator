@@ -13,6 +13,12 @@ import i18n from "~/i18n";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { Liquid } from "liquidjs";
+import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import {
+  dbContext,
+  defaultCountryCodeContext,
+  mailTransportContext,
+} from "~/contexts";
 
 export type TextReceivedTemplateVariables = {
   from: string;
@@ -22,8 +28,12 @@ export type TextReceivedTemplateVariables = {
 };
 
 export async function action({ context, request }: Route.ActionArgs) {
+  const db = context.get(dbContext);
+  const defaultCountryCode = context.get(defaultCountryCodeContext);
+  const mailTransport = context.get(mailTransportContext);
+
   const params = MessagingWebhookParams.parse(
-    await context.validateTwilioWebhook(request)
+    await validateTwilioWebhook(request)
   );
 
   const textedNumber = normalizePhoneNumber(params.To);
@@ -36,7 +46,7 @@ export async function action({ context, request }: Route.ActionArgs) {
   );
 
   if (schedules.length == 0) {
-    const phoneNumber = await context.db.query.phoneNumbersTable.findFirst({
+    const phoneNumber = await db.query.phoneNumbersTable.findFirst({
       where: (phoneNumbers, { eq }) => eq(phoneNumbers.phoneNumber, params.To),
     });
 
@@ -54,11 +64,8 @@ export async function action({ context, request }: Route.ActionArgs) {
         fromPhoneNumber: textedNumber,
         text: i18n.t("textResponses.unknownPhoneNumber", {
           phoneNumber: formatPhoneNumberForDisplay(
-            parsePhoneNumberFromString(
-              textedNumber,
-              context.defaultCountryCode
-            )!,
-            context.defaultCountryCode
+            parsePhoneNumberFromString(textedNumber, defaultCountryCode)!,
+            defaultCountryCode
           ),
         }),
       });
@@ -77,7 +84,7 @@ export async function action({ context, request }: Route.ActionArgs) {
   const parsedFromNumber = parsePhoneNumberFromString(params.From)!;
   const fromNumberForDisplay = formatPhoneNumberForDisplay(
     parsedFromNumber,
-    context.defaultCountryCode
+    defaultCountryCode
   );
 
   if (activeShift) {
@@ -98,7 +105,7 @@ export async function action({ context, request }: Route.ActionArgs) {
         responder,
       };
 
-      return context.mailTransport.sendMail({
+      return mailTransport.sendMail({
         from: activeSchedule.schedules.emailFrom,
         to: responder.email,
         subject: liquid.renderSync(emailSubjectTemplate, templateVars),

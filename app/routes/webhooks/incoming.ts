@@ -9,11 +9,12 @@ import {
   bestResponderForShift,
 } from "./schedules";
 import { normalizePhoneNumber } from "./normalizePhoneNumber";
+import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import { dbContext } from "~/contexts";
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const params = VoiceWebhookParams.parse(
-    await context.validateTwilioWebhook(request)
-  );
+  const db = context.get(dbContext);
+  const params = VoiceWebhookParams.parse(await validateTwilioWebhook(request));
 
   const calledNumber = normalizePhoneNumber(params.To);
   const now = new Date();
@@ -25,7 +26,7 @@ export async function action({ context, request }: Route.ActionArgs) {
   );
 
   if (schedules.length == 0) {
-    const phoneNumber = await context.db.query.phoneNumbersTable.findFirst({
+    const phoneNumber = await db.query.phoneNumbersTable.findFirst({
       where: (phoneNumbers, { eq }) => eq(phoneNumbers.phoneNumber, params.To),
     });
 

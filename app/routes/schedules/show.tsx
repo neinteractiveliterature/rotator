@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next";
 import sortBy from "lodash/sortBy";
 import dateTimeFormats from "~/dateTimeFormats";
 import { Link } from "react-router";
+import { dbContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
+  const db = context.get(dbContext);
   const schedule = assertFound(
-    await context.db.query.schedulesTable.findFirst({
+    await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
       with: {
         phoneNumbersSchedules: {
@@ -51,7 +53,7 @@ export default function SchedulePage({ loaderData }: Route.ComponentProps) {
       <section className="mb-2">
         <div className="d-flex">
           <div className="flex-grow-1">
-            <h2>Settings</h2>
+            <h2>{t("schedules.show.header")}</h2>
           </div>
           <div>
             <Link to="./edit" className="btn btn-primary">

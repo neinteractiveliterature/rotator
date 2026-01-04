@@ -1,9 +1,11 @@
 import { useTranslation } from "react-i18next";
 import type { Route } from "./+types/list";
 import { Link } from "react-router";
+import { dbContext } from "~/contexts";
 
 export async function loader({ context }: Route.LoaderArgs) {
-  const phoneNumbers = await context.db.query.phoneNumbersTable.findMany();
+  const db = context.get(dbContext);
+  const phoneNumbers = await db.query.phoneNumbersTable.findMany();
   return { phoneNumbers };
 }
 

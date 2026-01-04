@@ -1,12 +1,12 @@
 import {
   parsePhoneNumberFromString,
+  type CountryCode,
   type PhoneNumber,
 } from "libphonenumber-js";
 import React from "react";
-import type { AppLoadContext } from "react-router";
 
 export type RotatorGlobalContextValue = {
-  defaultCountryCode: AppLoadContext["defaultCountryCode"];
+  defaultCountryCode: CountryCode;
   parsePhoneNumber: (
     phoneNumber: string,
     options?: Omit<
@@ -19,7 +19,7 @@ export type RotatorGlobalContextValue = {
 export function buildRotatorGlobalContextValue({
   defaultCountryCode,
 }: {
-  defaultCountryCode: AppLoadContext["defaultCountryCode"];
+  defaultCountryCode: CountryCode;
 }): RotatorGlobalContextValue {
   return {
     defaultCountryCode,

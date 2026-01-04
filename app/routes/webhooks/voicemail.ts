@@ -9,6 +9,8 @@ import {
 import { Liquid } from "liquidjs";
 import type { InferSelectModel } from "drizzle-orm";
 import type { respondersTable } from "~/db/schema";
+import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import { mailTransportContext, twilioClientContext } from "~/contexts";
 
 export type VoicemailReceivedTemplateVariables = {
   from: string;
@@ -19,8 +21,11 @@ export type VoicemailReceivedTemplateVariables = {
 };
 
 export async function action({ context, request }: Route.ActionArgs) {
+  const mailTransport = context.get(mailTransportContext);
+  const twilioClient = context.get(twilioClientContext);
+
   const webhookParams = TwilioRecordResponseParams.parse(
-    await context.validateTwilioWebhook(request)
+    await validateTwilioWebhook(request)
   );
 
   const now = new Date();
@@ -65,7 +70,7 @@ export async function action({ context, request }: Route.ActionArgs) {
       responder,
     };
 
-    return context.mailTransport.sendMail({
+    return mailTransport.sendMail({
       from: activeSchedule.schedules.emailFrom,
       to: responder.email,
       subject: liquid.renderSync(emailSubjectTemplate, templateVars),
@@ -73,7 +78,7 @@ export async function action({ context, request }: Route.ActionArgs) {
     });
   });
 
-  const textPromise = context.twilioClient.messages.create({
+  const textPromise = twilioClient.messages.create({
     from: webhookParams.To,
     to: sortedResponders[0].phoneNumber,
     body: liquid.parseAndRenderSync(

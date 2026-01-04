@@ -1,7 +1,8 @@
 import type { UnwrapPromise } from "@neinteractiveliterature/litform";
 import { eq, and, sql, type InferSelectModel } from "drizzle-orm";
 import sortBy from "lodash/sortBy";
-import type { AppLoadContext } from "react-router";
+import type { RouterContextProvider } from "react-router";
+import { dbContext } from "~/contexts";
 import {
   schedulesTable,
   phoneNumbersSchedulesTable,
@@ -10,11 +11,12 @@ import {
 } from "~/db/schema";
 
 export async function activeSchedulesForPhoneNumber(
-  context: AppLoadContext,
+  context: Readonly<RouterContextProvider>,
   phoneNumber: string,
   at: Date
 ) {
-  return await context.db
+  const db = context.get(dbContext);
+  return await db
     .select()
     .from(schedulesTable)
     .innerJoin(
@@ -34,11 +36,12 @@ export async function activeSchedulesForPhoneNumber(
 }
 
 export async function activeShiftForSchedule(
-  context: AppLoadContext,
+  context: Readonly<RouterContextProvider>,
   scheduleId: number,
   at: Date
 ) {
-  return await context.db.query.shiftsTable.findFirst({
+  const db = context.get(dbContext);
+  return await db.query.shiftsTable.findFirst({
     where: (tbl, { sql, and, eq }) =>
       and(sql`timespan @> ${at}::timestamp`, eq(tbl.scheduleId, scheduleId)),
     with: {

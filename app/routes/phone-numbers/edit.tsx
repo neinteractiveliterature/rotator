@@ -11,10 +11,12 @@ import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 import PhoneNumberFormFields from "~/phone-numbers/form";
 import { use, useMemo } from "react";
 import { RotatorGlobalContext } from "~/global-context";
+import { dbContext, defaultCountryCodeContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
+  const db = context.get(dbContext);
   const phoneNumber = assertFound(
-    await context.db.query.phoneNumbersTable.findFirst({
+    await db.query.phoneNumbersTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.phoneNumberId)),
     })
   );
@@ -25,10 +27,8 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 export async function action({ context, request, params }: Route.ActionArgs) {
   const formData = await request.formData();
   const phoneNumber = formData.get("phoneNumber")?.toString() ?? "";
-  const parsed = parsePhoneNumberFromString(
-    phoneNumber,
-    context.defaultCountryCode
-  );
+  const defaultCountryCode = context.get(defaultCountryCodeContext);
+  const parsed = parsePhoneNumberFromString(phoneNumber, defaultCountryCode);
 
   if (!parsed) {
     return new Error(
@@ -36,7 +36,8 @@ export async function action({ context, request, params }: Route.ActionArgs) {
     );
   }
 
-  await context.db
+  const db = context.get(dbContext);
+  await db
     .update(phoneNumbersTable)
     .set({
       noActiveShiftMessage: formData.get("noActiveShiftMessage")?.toString(),

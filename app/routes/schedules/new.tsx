@@ -7,14 +7,14 @@ import ScheduleFormFields, {
   type ScheduleFormFieldsProps,
 } from "~/schedules/form";
 import { schedulesTable } from "~/db/schema";
+import { dbContext } from "~/contexts";
 
 export async function action({ context, request, params }: Route.ActionArgs) {
+  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
 
-    await context.db
-      .insert(schedulesTable)
-      .values(parseScheduleFormData(formData));
+    await db.insert(schedulesTable).values(parseScheduleFormData(formData));
 
     return redirect(`/schedules/${params.scheduleId}`);
   } catch (error) {

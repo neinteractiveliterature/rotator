@@ -4,16 +4,19 @@ import { Link } from "react-router";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 import { assertFound, coerceId } from "~/db/utils";
+import { dbContext, defaultCountryCodeContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
+  const db = context.get(dbContext);
+  const defaultCountryCode = context.get(defaultCountryCodeContext);
   const phoneNumber = assertFound(
-    await context.db.query.phoneNumbersTable.findFirst({
+    await db.query.phoneNumbersTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.phoneNumberId)),
       with: { phoneNumbersSchedules: { with: { schedule: true } } },
     })
   );
 
-  return { phoneNumber, defaultCountryCode: context.defaultCountryCode };
+  return { phoneNumber, defaultCountryCode };
 }
 
 export default function PhoneNumberPage({ loaderData }: Route.ComponentProps) {

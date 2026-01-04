@@ -18,6 +18,8 @@ import {
   buildRotatorGlobalContextValue,
   RotatorGlobalContext,
 } from "./global-context";
+import { defaultCountryCodeContext } from "./contexts";
+import { getCurrentUserMiddleware } from "./server/authMiddleware.server";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -41,10 +43,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+export const middleware = [getCurrentUserMiddleware];
+
 export function loader({ context }: Route.LoaderArgs) {
-  return {
-    defaultCountryCode: context.defaultCountryCode,
-  };
+  const defaultCountryCode = context.get(defaultCountryCodeContext);
+  return { defaultCountryCode };
 }
 
 export default function App({ loaderData }: Route.ComponentProps) {

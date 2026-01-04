@@ -9,14 +9,18 @@ import { TwilioDialResponseParams } from "./twimlWebhookParams";
 import { assertFound, coerceId } from "~/db/utils";
 import { Liquid } from "liquidjs";
 import { twimlHangupResponse } from "./twimlUtils";
+import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import { dbContext, twilioClientContext } from "~/contexts";
 
 export type PostCallTextTemplateVariables = {
   from: string;
 };
 
 export async function action({ context, request, params }: Route.ActionArgs) {
+  const db = context.get(dbContext);
+  const twilioClient = context.get(twilioClientContext);
   const webhookParams = TwilioDialResponseParams.parse(
-    await context.validateTwilioWebhook(request)
+    await validateTwilioWebhook(request)
   );
 
   const now = new Date();
@@ -35,14 +39,14 @@ export async function action({ context, request, params }: Route.ActionArgs) {
 
   if (webhookParams.DialCallStatus === "completed") {
     const responder = assertFound(
-      await context.db.query.respondersTable.findFirst({
+      await db.query.respondersTable.findFirst({
         where: (tbl, { eq }) => eq(tbl.id, coerceId(params.responderId)),
       })
     );
 
     const liquid = new Liquid();
 
-    context.twilioClient.messages.create({
+    twilioClient.messages.create({
       from: webhookParams.To,
       to: responder.phoneNumber,
       body: liquid.parseAndRenderSync(

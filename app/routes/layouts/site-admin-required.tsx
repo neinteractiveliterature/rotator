@@ -1,11 +1,9 @@
-import { getSession } from "~/sessions.server";
 import type { Route } from "./+types/site-admin-required";
 import { redirect } from "react-router";
+import { currentUserContext } from "~/contexts";
 
-export async function loader({ context, request }: Route.LoaderArgs) {
-  const currentUser = await context.getCurrentUser(
-    await getSession(request.headers.get("cookie"))
-  );
+export async function loader({ context }: Route.LoaderArgs) {
+  const currentUser = context.get(currentUserContext);
 
   if (currentUser?.site_admin) {
     return null;
