@@ -18,12 +18,8 @@ import {
   buildRotatorGlobalContextValue,
   RotatorGlobalContext,
 } from "./global-context";
-import {
-  currentUserContext,
-  dbContext,
-  defaultCountryCodeContext,
-} from "./contexts";
-import { getSession } from "./sessions.server";
+import { defaultCountryCodeContext } from "./contexts";
+import { getCurrentUserMiddleware } from "./server/authMiddleware.server";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -46,22 +42,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
     </I18nextProvider>
   );
 }
-
-export const getCurrentUserMiddleware: Route.MiddlewareFunction = async ({
-  request,
-  context,
-}) => {
-  const db = context.get(dbContext);
-  const session = await getSession(request.headers.get("cookie"));
-  const userId = session.get("userId");
-
-  if (userId) {
-    const currentUser = await db.query.usersTable.findFirst({
-      where: (tbl, { eq }) => eq(tbl.id, userId),
-    });
-    context.set(currentUserContext, currentUser);
-  }
-};
 
 export const middleware = [getCurrentUserMiddleware];
 

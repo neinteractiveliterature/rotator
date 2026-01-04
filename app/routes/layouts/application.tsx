@@ -4,26 +4,11 @@ import { Link, NavLink, Outlet, useRouteLoaderData } from "react-router";
 import RotateClockwiseSVG from "~/rotate-clockwise-2.svg";
 import classNames from "classnames";
 import type { Route } from "./+types/application";
-import { getSession } from "~/sessions.server";
-import { dbContext } from "~/contexts";
+import { currentUserContext } from "~/contexts";
 
-export async function loader({ context, request }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
-  const session = await getSession(request.headers.get("cookie"));
-
-  if (session) {
-    const userId = session.get("userId");
-
-    if (userId) {
-      const user = await db.query.usersTable.findFirst({
-        where: (tbl, { eq }) => eq(tbl.id, userId),
-      });
-
-      return { user };
-    }
-  }
-
-  return { user: undefined };
+export async function loader({ context }: Route.LoaderArgs) {
+  const currentUser = context.get(currentUserContext);
+  return { user: currentUser };
 }
 
 export function useCurrentUser() {

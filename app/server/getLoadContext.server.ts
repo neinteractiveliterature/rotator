@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { RouterContextProvider } from "react-router";
 import * as schema from "app/db/schema";
-import { setupOAuth2 } from "./oauth2.server";
+import { setupOAuth2 } from "./oauth2";
 import {
   authenticatorContext,
   dbContext,
@@ -12,7 +12,7 @@ import {
 } from "~/contexts";
 import type { CountryCode } from "libphonenumber-js";
 import { createTransport } from "nodemailer";
-import { Twilio } from "twilio";
+import Twilio from "twilio";
 
 export async function getLoadContext() {
   const provider = new RouterContextProvider();
@@ -40,7 +40,7 @@ export async function getLoadContext() {
   }
   provider.set(mailTransportContext, mailTransport);
   provider.set(oauth2StrategyContext, oauth2Strategy);
-  provider.set(twilioClientContext, new Twilio());
+  provider.set(twilioClientContext, new Twilio.Twilio());
 
   return provider;
 }
