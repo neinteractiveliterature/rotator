@@ -21,3 +21,6 @@
 /test/html_reports
 /test/reports
 /coverage
+
+# sst
+.sst

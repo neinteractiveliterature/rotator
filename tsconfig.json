@@ -25,5 +25,5 @@
     "strict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  }
+  },"exclude":["sst.config.ts","sst.config.ts","sst.config.ts"]
 }
