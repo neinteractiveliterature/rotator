@@ -3736,9 +3736,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/devtools-vite@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "@tanstack/devtools-vite@npm:0.4.0"
+"@tanstack/devtools-vite@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "@tanstack/devtools-vite@npm:0.4.1"
   dependencies:
     "@babel/core": "npm:^7.28.4"
     "@babel/generator": "npm:^7.28.3"
@@ -3752,13 +3752,13 @@ __metadata:
     picomatch: "npm:^4.0.3"
   peerDependencies:
     vite: ^6.0.0 || ^7.0.0
-  checksum: 10c0/3d59c27bf92d3abce908d62f6df6f1183bfb1fd13d9ea8888a0e5fe4c32ee1ea38e72228c8934f35d83487301c337d2504999ee519b4751a13204cd6c7d8161a
+  checksum: 10c0/699e787fa249bcbb9b4a04bddb105bbd3eb35b50231c6a859341f853a5a866505f617ccd75eb2f642a40821f46104d3789b12ab59c4686b91714d2b904d3a65e
   languageName: node
   linkType: hard
 
-"@tanstack/devtools@npm:0.10.1":
-  version: 0.10.1
-  resolution: "@tanstack/devtools@npm:0.10.1"
+"@tanstack/devtools@npm:0.10.2":
+  version: 0.10.2
+  resolution: "@tanstack/devtools@npm:0.10.2"
   dependencies:
     "@solid-primitives/event-listener": "npm:^2.4.3"
     "@solid-primitives/keyboard": "npm:^1.3.3"
@@ -3771,21 +3771,21 @@ __metadata:
     solid-js: "npm:^1.9.9"
   peerDependencies:
     solid-js: ">=1.9.7"
-  checksum: 10c0/f949d87a77149aed5248afa407af07fb850ee4ad0b2f3fc8f84c6215a4fb4a4ddec535050ed459df9676578b5ec8d900dcd1def1487d8461fcd01daa17199fff
+  checksum: 10c0/7e1b61ea4bdadf9dcd3304a7c1311d74de3b228ab7b1f51aa4e9cf2c40a8c039968a047c791effe0c91d2022dfa8ad697ae5c27824b55ff7a14e26ed1076bee4
   languageName: node
   linkType: hard
 
-"@tanstack/react-devtools@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "@tanstack/react-devtools@npm:0.9.0"
+"@tanstack/react-devtools@npm:^0.9.1":
+  version: 0.9.1
+  resolution: "@tanstack/react-devtools@npm:0.9.1"
   dependencies:
-    "@tanstack/devtools": "npm:0.10.1"
+    "@tanstack/devtools": "npm:0.10.2"
   peerDependencies:
     "@types/react": ">=16.8"
     "@types/react-dom": ">=16.8"
     react: ">=16.8"
     react-dom: ">=16.8"
-  checksum: 10c0/6a9fc5a0077fc5fda8374ed888150e397ec0b6aac1022e2d35b5ada9ab787d39e2c110d2f9057e4aa0acb33f5dad06a59c796ced18eedf2cb9dcb6bfaff7ec40
+  checksum: 10c0/1ebf3adafcc6240c4816983d450630434349db712dad522b44fb8f137ce1357eee978bf9c6511758046fdd77bf63e52153924d2c609c2bf4a18164a0aaacaab9
   languageName: node
   linkType: hard
 
@@ -8726,8 +8726,8 @@ __metadata:
   linkType: hard
 
 "react-router-devtools@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "react-router-devtools@npm:6.0.1"
+  version: 6.0.2
+  resolution: "react-router-devtools@npm:6.0.2"
   dependencies:
     "@babel/core": "npm:^7.28.5"
     "@babel/generator": "npm:^7.28.5"
@@ -8739,8 +8739,8 @@ __metadata:
     "@rollup/rollup-darwin-arm64": "npm:^4.53.2"
     "@rollup/rollup-linux-x64-gnu": "npm:^4.53.2"
     "@tanstack/devtools-event-client": "npm:^0.4.0"
-    "@tanstack/devtools-vite": "npm:^0.4.0"
-    "@tanstack/react-devtools": "npm:^0.9.0"
+    "@tanstack/devtools-vite": "npm:^0.4.1"
+    "@tanstack/react-devtools": "npm:^0.9.1"
     chalk: "npm:5.6.2"
     clsx: "npm:2.1.1"
     framer-motion: "npm:^12.23.24"
@@ -8762,7 +8762,7 @@ __metadata:
       optional: true
     "@rollup/rollup-linux-x64-gnu":
       optional: true
-  checksum: 10c0/5d57fa7b647fe29a56cbafea1570c976d0cb40a54b459d081ae7c98c7cbd3317bc70db55d5c8abbe5dd7ce9b7dfe4d78cc2f1dbd07396e5f423d159f0d727970
+  checksum: 10c0/b1f088eed6791bf5ef4f40bc5d62be8678639d1826ec0ae492f4d6aae23a47f5fa265c96ccf1de533aed3f52084107a25d110c053b62e04384c9436cd40f88a6
   languageName: node
   linkType: hard
 
