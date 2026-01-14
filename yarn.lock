@@ -3671,7 +3671,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/devtools-client@npm:0.0.5":
+"@tanstack/devtools-client@npm:0.0.5, @tanstack/devtools-client@npm:^0.0.5":
   version: 0.0.5
   resolution: "@tanstack/devtools-client@npm:0.0.5"
   dependencies:
@@ -8655,8 +8655,8 @@ __metadata:
   linkType: hard
 
 "react-router-devtools@npm:^6.0.1":
-  version: 6.1.0
-  resolution: "react-router-devtools@npm:6.1.0"
+  version: 6.2.0
+  resolution: "react-router-devtools@npm:6.2.0"
   dependencies:
     "@babel/core": "npm:^7.28.5"
     "@babel/generator": "npm:^7.28.5"
@@ -8667,6 +8667,7 @@ __metadata:
     "@radix-ui/react-accordion": "npm:^1.2.12"
     "@rollup/rollup-darwin-arm64": "npm:^4.53.2"
     "@rollup/rollup-linux-x64-gnu": "npm:^4.53.2"
+    "@tanstack/devtools-client": "npm:^0.0.5"
     "@tanstack/devtools-event-client": "npm:^0.4.0"
     "@tanstack/devtools-vite": "npm:^0.4.1"
     "@tanstack/react-devtools": "npm:^0.9.1"
@@ -8691,7 +8692,7 @@ __metadata:
       optional: true
     "@rollup/rollup-linux-x64-gnu":
       optional: true
-  checksum: 10c0/9be7df1e31719caa9d185a03a8f4147d44519a9cf205f9a442601ccc8f51bd2ef7a5fe1872731884a5ae4746628e4fd76edd1bdcc20b4e6f271b369d40091b6d
+  checksum: 10c0/aacdf877da05f9b1087c46fabb04a45ace1cf62588332683bb410f8d922e046335602edacdbfecd6c757dc66ca5863c25c0f241ea4b74ae02c4e7ee00c63f863
   languageName: node
   linkType: hard
 
