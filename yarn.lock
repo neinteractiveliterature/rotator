@@ -1838,8 +1838,8 @@ __metadata:
   linkType: hard
 
 "@hono/vite-dev-server@npm:^0.24.0":
-  version: 0.24.0
-  resolution: "@hono/vite-dev-server@npm:0.24.0"
+  version: 0.24.1
+  resolution: "@hono/vite-dev-server@npm:0.24.1"
   dependencies:
     "@hono/node-server": "npm:^1.14.2"
     minimatch: "npm:^9.0.3"
@@ -1854,7 +1854,7 @@ __metadata:
       optional: true
     wrangler:
       optional: true
-  checksum: 10c0/c6068b5f23cbeaaf4d34e56721bd5deb2ba4a2ef2731526b8284fc646d06405b37aea63a891bea0fdaa1bd2a30deddf7720f83b9d91ed59a2fa179899397fff6
+  checksum: 10c0/b670e72d539cc09e86dc59dbec3713cdc0e97496941716b415963d10b201faf8cb7fe7a76df7d67207df0549c022dd24792daf5d544cf3f5b648f0fb678a1651
   languageName: node
   linkType: hard
 
