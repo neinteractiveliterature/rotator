@@ -6717,7 +6717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.10.3, hono@npm:^4.7.2":
+"hono@npm:^4.11.4, hono@npm:^4.7.2":
   version: 4.11.4
   resolution: "hono@npm:4.11.4"
   checksum: 10c0/19b5ebf28f89ad8e8d9fc465e9e9073026a344e15e841b5b251831b0ae3843e50c29328c95e69a0d7e2681c5b35e475445f4faf59d3d51c6c32a834a0211099a
@@ -8697,14 +8697,14 @@ __metadata:
   linkType: hard
 
 "react-router-hono-server@npm:^2.22.0":
-  version: 2.22.0
-  resolution: "react-router-hono-server@npm:2.22.0"
+  version: 2.23.0
+  resolution: "react-router-hono-server@npm:2.23.0"
   dependencies:
     "@drizzle-team/brocli": "npm:^0.11.0"
     "@hono/node-server": "npm:^1.19.5"
     "@hono/node-ws": "npm:^1.2.0"
     "@hono/vite-dev-server": "npm:^0.23.0"
-    hono: "npm:^4.10.3"
+    hono: "npm:^4.11.4"
   peerDependencies:
     "@cloudflare/workers-types": ^4.20250317.0
     "@hono/node-server": ^1.19.0
@@ -8725,7 +8725,7 @@ __metadata:
       optional: true
   bin:
     react-router-hono-server: dist/cli.js
-  checksum: 10c0/b750fefda9d664d0cdd1f4c9b1d07f6bf8bf746b102e7837ff00c169277569458b42f6aaa2e36465933b0364bebf3c5830ea38704d1d53e305b22dc8471a1555
+  checksum: 10c0/26882500fc28c1eb609e8fcd33da0fc777f29ba25111b34ec4ebb7aae0704c545c6d47f2c81551c4d2e97af93883a30ebe1621ab01df431fe5f6397cde329af0
   languageName: node
   linkType: hard
 
