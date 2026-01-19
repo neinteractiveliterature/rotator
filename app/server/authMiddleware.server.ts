@@ -6,6 +6,11 @@ export const getCurrentUserMiddleware: MiddlewareFunction = async ({
   request,
   context,
 }) => {
+  // Only run on the server
+  if (!import.meta.env.SSR) {
+    return;
+  }
+
   const db = context.get(dbContext);
   const session = await getSession(request.headers.get("cookie"));
   const userId = session.get("userId");

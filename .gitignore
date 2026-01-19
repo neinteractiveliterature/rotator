@@ -5,6 +5,9 @@
 /.react-router/
 /build/
 
+# Typescript
+*.tsbuildinfo
+
 # Yarn
 .pnp.*
 .yarn/*
