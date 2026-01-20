@@ -57,13 +57,15 @@ export default $config({
     const TWILIO_AUTH_TOKEN = new sst.Secret("TWILIO_AUTH_TOKEN");
     const TWILIO_SID = new sst.Secret("TWILIO_SID");
 
-    const { migratorInvocation } = buildAndRunMigrator(
-      DATABASE_URL.value ?? ""
-    );
+    const { migratorInvocation } = buildAndRunMigrator(DATABASE_URL.value);
 
     new sst.aws.React(
       "Rotator",
       {
+        domain: {
+          name: "rotator.interactiveliterature.org",
+          dns: sst.cloudflare.dns(),
+        },
         environment: {
           APP_URL_BASE: APP_URL_BASE.value,
           DATABASE_URL: DATABASE_URL.value,
@@ -79,8 +81,14 @@ export default $config({
         server: {
           runtime: "nodejs22.x",
         },
+        transform: {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          server(args, _opts, _name) {
+            args.copyFiles = [...(args.copyFiles ?? []), ...COPY_FILES];
+          },
+        },
       },
-      { dependsOn: [migratorInvocation] }
+      { dependsOn: [migratorInvocation] },
     );
   },
 });
