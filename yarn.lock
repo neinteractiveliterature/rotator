@@ -1225,13 +1225,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@drizzle-team/brocli@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "@drizzle-team/brocli@npm:0.11.0"
-  checksum: 10c0/de300fbd0ee995e340a6c5990c2c48c31d3a611a32afab89bb632edbdba0509e981f60652842ec6508084358ca398641693c07dcf8a27b88bd8db0b5c8e74009
-  languageName: node
-  linkType: hard
-
 "@edgefirst-dev/data@npm:^0.0.4":
   version: 0.0.4
   resolution: "@edgefirst-dev/data@npm:0.0.4"
@@ -1921,48 +1914,6 @@ __metadata:
   bin:
     proto-loader-gen-types: build/bin/proto-loader-gen-types.js
   checksum: 10c0/a27da3b85d5d17bab956d536786c717287eae46ca264ea9ec774db90ff571955bae2705809f431b4622fbf3be9951d7c7bbb1360b2015ee88abe1587cf3d6fe0
-  languageName: node
-  linkType: hard
-
-"@hono/node-server@npm:^1.14.2, @hono/node-server@npm:^1.19.5":
-  version: 1.19.7
-  resolution: "@hono/node-server@npm:1.19.7"
-  peerDependencies:
-    hono: ^4
-  checksum: 10c0/293818e02a9100122a9319fba7032a3bae86d5f98f55d1a0ff4843c2b729eb6b471978ea15e29f4fb680c6a0be23a6e5a2132f3790ab31e88fb0b6b6fcc6829e
-  languageName: node
-  linkType: hard
-
-"@hono/node-ws@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@hono/node-ws@npm:1.2.0"
-  dependencies:
-    ws: "npm:^8.17.0"
-  peerDependencies:
-    "@hono/node-server": ^1.11.1
-    hono: ^4.6.0
-  checksum: 10c0/4a59e8bd5d1a50e12cd2b971458164670b89f339add3ba64444de3d316df7d26c5735db4245565dd8e0495276ba19b79520b137336467e863a84f8e76d75e5e3
-  languageName: node
-  linkType: hard
-
-"@hono/vite-dev-server@npm:^0.23.0":
-  version: 0.23.0
-  resolution: "@hono/vite-dev-server@npm:0.23.0"
-  dependencies:
-    "@hono/node-server": "npm:^1.14.2"
-    minimatch: "npm:^9.0.3"
-  peerDependencies:
-    hono: "*"
-    miniflare: "*"
-    wrangler: "*"
-  peerDependenciesMeta:
-    hono:
-      optional: false
-    miniflare:
-      optional: true
-    wrangler:
-      optional: true
-  checksum: 10c0/85666c1a1ca630b659e7594c029eb99311e632a255084575693101bc9debf764da79c6ae4f74c149a02d4a4c3c5cc894b95c508d419a3fe703e8d6dd20f3ff75
   languageName: node
   linkType: hard
 
@@ -8375,20 +8326,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hono@npm:^4.11.4":
-  version: 4.11.4
-  resolution: "hono@npm:4.11.4"
-  checksum: 10c0/19b5ebf28f89ad8e8d9fc465e9e9073026a344e15e841b5b251831b0ae3843e50c29328c95e69a0d7e2681c5b35e475445f4faf59d3d51c6c32a834a0211099a
-  languageName: node
-  linkType: hard
-
-"hono@npm:^4.7.2":
-  version: 4.10.6
-  resolution: "hono@npm:4.10.6"
-  checksum: 10c0/a4df5a44378df640464a468cfa6364cc90fbf0a0d89c1bc8fa704c8450855b17baf7a5837655b1c00d6cf8dcecffc2ee702bf3f2c66dda243fe845b75b4b7f4b
-  languageName: node
-  linkType: hard
-
 "hosted-git-info@npm:^7.0.0, hosted-git-info@npm:^7.0.2":
   version: 7.0.2
   resolution: "hosted-git-info@npm:7.0.2"
@@ -9763,7 +9700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^9.0.0, minimatch@npm:^9.0.3, minimatch@npm:^9.0.4, minimatch@npm:^9.0.5":
+"minimatch@npm:^9.0.0, minimatch@npm:^9.0.4, minimatch@npm:^9.0.5":
   version: 9.0.5
   resolution: "minimatch@npm:9.0.5"
   dependencies:
@@ -11148,39 +11085,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-hono-server@npm:^2.22.0":
-  version: 2.23.0
-  resolution: "react-router-hono-server@npm:2.23.0"
-  dependencies:
-    "@drizzle-team/brocli": "npm:^0.11.0"
-    "@hono/node-server": "npm:^1.19.5"
-    "@hono/node-ws": "npm:^1.2.0"
-    "@hono/vite-dev-server": "npm:^0.23.0"
-    hono: "npm:^4.11.4"
-  peerDependencies:
-    "@cloudflare/workers-types": ^4.20250317.0
-    "@hono/node-server": ^1.19.0
-    "@react-router/dev": ^7.9.0
-    "@types/react": ^19.0.0
-    miniflare: ^3.20241205.0
-    react-router: ^7.9.0
-    vite: ^7.0.0
-    wrangler: ^4.2.0
-  peerDependenciesMeta:
-    "@cloudflare/workers-types":
-      optional: true
-    "@hono/node-server":
-      optional: false
-    miniflare:
-      optional: true
-    wrangler:
-      optional: true
-  bin:
-    react-router-hono-server: dist/cli.js
-  checksum: 10c0/26882500fc28c1eb609e8fcd33da0fc777f29ba25111b34ec4ebb7aae0704c545c6d47f2c81551c4d2e97af93883a30ebe1621ab01df431fe5f6397cde329af0
-  languageName: node
-  linkType: hard
-
 "react-router@npm:^7.12.0":
   version: 7.12.0
   resolution: "react-router@npm:7.12.0"
@@ -11613,7 +11517,6 @@ __metadata:
     "@eslint/eslintrc": "npm:^3.3.0"
     "@eslint/js": "npm:^9.21.0"
     "@flydotio/dockerfile": "npm:^0.7.8"
-    "@hono/vite-dev-server": "npm:^0.23.0"
     "@lezer/common": "npm:^1.2.3"
     "@lezer/highlight": "npm:^1.2.1"
     "@lezer/lr": "npm:^1.4.2"
@@ -11660,7 +11563,6 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^7.0.0"
     express: "npm:^5.2.1"
     graphql: "npm:^16.10.0"
-    hono: "npm:^4.7.2"
     i18next: "npm:^25.0.0"
     isbot: "npm:^5.1.23"
     jose: "npm:^6.0.8"
@@ -11677,7 +11579,6 @@ __metadata:
     react-i18next: "npm:^15.4.1"
     react-router: "npm:^7.12.0"
     react-router-devtools: "npm:^6.2.0"
-    react-router-hono-server: "npm:^2.22.0"
     remix-auth: "npm:^4.2.0"
     remix-auth-oauth2: "npm:^3.4.1"
     rollup: "npm:^4.55.2"
@@ -13852,7 +13753,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.17.0, ws@npm:^8.18.2, ws@npm:^8.18.3":
+"ws@npm:^8.18.2, ws@npm:^8.18.3":
   version: 8.18.3
   resolution: "ws@npm:8.18.3"
   peerDependencies:
