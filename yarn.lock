@@ -7188,7 +7188,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.27.0, esbuild@npm:~0.27.0":
+"esbuild@npm:^0.27.0, esbuild@npm:^0.27.2, esbuild@npm:~0.27.0":
   version: 0.27.2
   resolution: "esbuild@npm:0.27.2"
   dependencies:
@@ -11556,6 +11556,7 @@ __metadata:
     dotenv: "npm:^16.4.7"
     drizzle-kit: "npm:^0.31.0"
     drizzle-orm: "npm:^0.45.0"
+    esbuild: "npm:^0.27.2"
     eslint: "npm:^9.21.0"
     eslint-plugin-drizzle: "npm:^0.2.3"
     eslint-plugin-i18next: "npm:^6.1.1"

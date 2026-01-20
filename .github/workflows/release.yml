@@ -3,6 +3,8 @@ name: Release
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs: {}
 
 permissions:
   id-token: write # needed for configure-aws-credentials
