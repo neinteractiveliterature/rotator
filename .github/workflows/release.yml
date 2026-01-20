@@ -19,13 +19,18 @@ jobs:
         run: docker tag ghcr.io/neinteractiveliterature/rotator:${{ github.sha }} ghcr.io/neinteractiveliterature/rotator:latest
       - name: Push to registry
         run: docker push ghcr.io/neinteractiveliterature/rotator:latest && docker push ghcr.io/neinteractiveliterature/rotator:${{ github.event.release.name }}
-  fly-release:
+  sst-release:
     runs-on: ubuntu-latest
-    needs:
-      - docker-release
     steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
       - uses: actions/checkout@v4
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only -a rotator
+      - uses: actions/setup-node@v4
+        with:
+          cache: yarn
+      - run: yarn install
+      - run: yarn run sst deploy --stage=production
         env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
