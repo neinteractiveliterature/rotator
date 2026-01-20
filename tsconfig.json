@@ -24,6 +24,8 @@
     "skipLibCheck": true,
     "strict": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  }
+    "emitDecoratorMetadata": true,
+    "incremental": true
+  },
+  "exclude": ["sst.config.ts", "sst.config.ts", "sst.config.ts"]
 }

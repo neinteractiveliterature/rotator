@@ -1,18 +1,11 @@
 import { reactRouter } from "@react-router/dev/vite";
 import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
-import { reactRouterHonoServer } from "react-router-hono-server/dev";
-import { defaultOptions } from "@hono/vite-dev-server";
 
 const config = defineConfig({
   plugins: [
-    reactRouterHonoServer({
-      dev: {
-        exclude: [/^\/.yarn/, ...defaultOptions.exclude],
-      },
-    }),
     ...(process.env.VITEST ? [] : [reactRouter()]),
-    tsconfigPaths(),
+    tsconfigPaths({ ignoreConfigErrors: true }),
   ],
   css: {
     modules: {

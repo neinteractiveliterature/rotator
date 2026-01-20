@@ -5,6 +5,9 @@
 /.react-router/
 /build/
 
+# Typescript
+*.tsbuildinfo
+
 # Yarn
 .pnp.*
 .yarn/*
@@ -21,3 +24,6 @@
 /test/html_reports
 /test/reports
 /coverage
+
+# sst
+.sst
