@@ -7,13 +7,16 @@ import ResponderFormFields, {
 } from "~/components/forms/responder";
 import { respondersTable } from "~/db/schema";
 import { Form, redirect } from "react-router";
+import { dbContext } from "~/contexts";
 
 export async function action({ context, request }: Route.ActionArgs) {
+  const db = context.get(dbContext);
+
   try {
     const formData = await request.formData();
 
     const responder = (
-      await context.db
+      await db
         .insert(respondersTable)
         .values(parseResponderFormData(formData))
         .returning()

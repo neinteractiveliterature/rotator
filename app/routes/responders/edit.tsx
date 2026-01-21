@@ -8,12 +8,14 @@ import ResponderFormFields, {
 import { respondersTable } from "~/db/schema";
 import { eq } from "drizzle-orm";
 import { Form, redirect } from "react-router";
+import { dbContext } from "~/contexts";
 
 export async function action({ context, request, params }: Route.ActionArgs) {
+  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
 
-    await context.db
+    await db
       .update(respondersTable)
       .set(parseResponderFormData(formData))
       .where(eq(respondersTable.id, coerceId(params.responderId)));
@@ -25,10 +27,11 @@ export async function action({ context, request, params }: Route.ActionArgs) {
 }
 
 export async function loader({ context, params }: Route.LoaderArgs) {
+  const db = context.get(dbContext);
   const responder = assertFound(
-    await context.db.query.respondersTable.findFirst({
+    await db.query.respondersTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.responderId)),
-    })
+    }),
   );
 
   return { responder };

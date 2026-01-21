@@ -4,9 +4,12 @@ import { Link } from "react-router";
 import dateTimeFormats from "~/dateTimeFormats";
 import { coerceId } from "~/db/utils";
 import type { Route } from "./+types/shifts";
+import { dbContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const shifts = await context.db.query.shiftsTable.findMany({
+  const db = context.get(dbContext);
+
+  const shifts = await db.query.shiftsTable.findMany({
     where: (tbl, { eq }) => eq(tbl.scheduleId, coerceId(params.scheduleId)),
     columns: { id: true, timespan: true },
     with: {
@@ -54,7 +57,7 @@ export default function ScheduleShiftsPage({
               <td>
                 {sortBy(
                   shift.shiftAssignments,
-                  (shiftAssignment) => shiftAssignment.position
+                  (shiftAssignment) => shiftAssignment.position,
                 ).map(({ responder }, index) => (
                   <>
                     {index > 0 && ", "}
