@@ -9,14 +9,17 @@ import {
   shiftsTable,
 } from "~/db/schema";
 import { and, eq, sql } from "drizzle-orm";
+import { dbContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
+  const db = context.get(dbContext);
+
   const responder = assertFound(
-    await context.db.query.respondersTable.findFirst({
+    await db.query.respondersTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.responderId)),
-    })
+    }),
   );
-  const upcomingShiftAssignmentsResults = await context.db
+  const upcomingShiftAssignmentsResults = await db
     .select()
     .from(shiftAssignmentsTable)
     .innerJoin(shiftsTable, eq(shiftsTable.id, shiftAssignmentsTable.shiftId))
@@ -24,8 +27,8 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     .where(
       and(
         eq(shiftAssignmentsTable.responderId, coerceId(params.responderId)),
-        sql`shifts.timespan && tsrange(now()::timestamp, null)`
-      )
+        sql`shifts.timespan && tsrange(now()::timestamp, null)`,
+      ),
     )
     .orderBy(shiftsTable.timespan);
 

@@ -1,9 +1,11 @@
 import { Link } from "react-router";
 import type { Route } from "./+types/list";
 import { useTranslation } from "react-i18next";
+import { dbContext } from "~/contexts";
 
 export async function loader({ context }: Route.LoaderArgs) {
-  const responders = await context.db.query.respondersTable.findMany();
+  const db = context.get(dbContext);
+  const responders = await db.query.respondersTable.findMany();
   return { responders };
 }
 

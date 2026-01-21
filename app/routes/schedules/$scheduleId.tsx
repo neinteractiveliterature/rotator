@@ -2,12 +2,14 @@ import { assertFound, coerceId } from "~/db/utils";
 import type { Route } from "./+types/$scheduleId";
 import { NavLink, Outlet, useRouteLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
+import { dbContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
+  const db = context.get(dbContext);
   const schedule = assertFound(
-    await context.db.query.schedulesTable.findFirst({
+    await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
-    })
+    }),
   );
 
   return { schedule };
@@ -15,7 +17,7 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 
 export function useSchedule() {
   const loaderData = useRouteLoaderData(
-    "routes/schedules/$scheduleId"
+    "routes/schedules/$scheduleId",
   ) as Route.ComponentProps["loaderData"];
   return loaderData.schedule;
 }

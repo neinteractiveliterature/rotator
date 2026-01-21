@@ -1,38 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
-import { dbContext } from "~/contexts";
 import HighlightedText from "~/components/highlighted-text";
-
-export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
-  const schedule = assertFound(
-    await db.query.schedulesTable.findFirst({
-      where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
-      with: {
-        phoneNumbersSchedules: {
-          columns: {},
-          with: {
-            phoneNumber: { columns: { phoneNumber: true } },
-          },
-        },
-        shifts: {
-          columns: { id: true, timespan: true },
-          with: {
-            shiftAssignments: {
-              columns: { responderId: true, position: true },
-              with: {
-                responder: {
-                  columns: { id: true, name: true },
-                },
-              },
-            },
-          },
-        },
-      },
-    }),
-  );
-}
-
 import { useSchedule } from "./$scheduleId";
 import { Suspense, useMemo } from "react";
 import { LoadingIndicator } from "@neinteractiveliterature/litform";
@@ -155,7 +123,7 @@ export default function SchedulePage() {
       nodes: [...phoneFlow.nodes, ...textFlow.nodes],
       edges: [...phoneFlow.edges, ...textFlow.edges],
     }),
-    [phoneFlow, textFlow]
+    [phoneFlow, textFlow],
   );
 
   return (
