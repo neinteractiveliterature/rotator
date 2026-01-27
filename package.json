@@ -47,7 +47,7 @@
     "react": "^19.0.0",
     "react-bootstrap4-modal": "^3.0.10",
     "react-dom": "^19.0.0",
-    "react-i18next": "^15.4.1",
+    "react-i18next": "^16.0.0",
     "react-router": "^7.12.0",
     "remix-auth": "^4.2.0",
     "remix-auth-oauth2": "^3.4.1",
