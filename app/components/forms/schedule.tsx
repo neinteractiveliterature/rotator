@@ -6,51 +6,77 @@ import { Temporal, toTemporalInstant } from "temporal-polyfill";
 import type { schedulesTable } from "~/db/schema";
 import { LiquidInput } from "~/LiquidInput";
 
-export function parseScheduleFormData(
-  formData: FormData
-): InferInsertModel<typeof schedulesTable> {
-  const timeZone = formData.get("timeZone")?.toString() ?? "";
+function parseIntOrUndefined(input: string | undefined) {
+  if (input == null) {
+    return undefined;
+  }
+
+  const parsed = Number.parseInt(input);
+  if (Number.isNaN(parsed)) {
+    return undefined;
+  } else {
+    return parsed;
+  }
+}
+
+function parseDateTime(input: string, timeZone: string) {
+  return new Date(
+    Temporal.PlainDateTime.from(input).toZonedDateTime(timeZone)
+      .epochMilliseconds,
+  );
+}
+
+function parseTimespanOrUndefined(
+  start: string | undefined,
+  finish: string | undefined,
+  timeZone: string,
+) {
+  if (start == null || finish == null) {
+    return undefined;
+  }
 
   return {
-    name: formData.get("name")?.toString() ?? "",
-    emailFrom: formData.get("emailFrom")?.toString() ?? "",
-    timeZone,
-    timespan: {
-      start: new Date(
-        Temporal.PlainDateTime.from(
-          formData.get("timespan.start")?.toString() ?? ""
-        ).toZonedDateTime(timeZone).epochMilliseconds
-      ),
-      finish: new Date(
-        Temporal.PlainDateTime.from(
-          formData.get("timespan.finish")?.toString() ?? ""
-        ).toZonedDateTime(timeZone).epochMilliseconds
-      ),
-      includeStart: true,
-      includeFinish: false,
-    },
-    callTimeout: parseInt(formData.get("callTimeout")?.toString() ?? ""),
-    noActiveShiftTextMessage:
-      formData.get("noActiveShiftTextMessage")?.toString() ?? "",
-    postCallTextTemplate:
-      formData.get("postCallTextTemplate")?.toString() ?? "",
-    textEmailBodyTemplate:
-      formData.get("textEmailBodyTemplate")?.toString() ?? "",
-    textEmailSubjectTemplate:
-      formData.get("textEmailSubjectTemplate")?.toString() ?? "",
-    textResponderTemplate:
-      formData.get("textResponderTemplate")?.toString() ?? "",
-    voicemailEmailBodyTemplate:
-      formData.get("voicemailEmailBodyTemplate")?.toString() ?? "",
-    voicemailEmailSubjectTemplate:
-      formData.get("voicemailEmailSubjectTemplate")?.toString() ?? "",
-    voicemailMessage: formData.get("voicemailMessage")?.toString() ?? "",
-    voicemailSilenceTimeout: parseInt(
-      formData.get("voicemailSilenceTimeout")?.toString() ?? ""
+    start: parseDateTime(start, timeZone),
+    finish: parseDateTime(finish, timeZone),
+    includeStart: true,
+    includeFinish: false,
+  };
+}
+
+export function parseScheduleFormData(
+  formData: FormData,
+): Partial<InferInsertModel<typeof schedulesTable>> {
+  return {
+    name: formData.get("name")?.toString(),
+    emailFrom: formData.get("emailFrom")?.toString(),
+    timeZone: formData.get("timeZone")?.toString(),
+    timespan: parseTimespanOrUndefined(
+      formData.get("timespan.start")?.toString(),
+      formData.get("timespan.finish")?.toString(),
+      formData.get("timeZone")?.toString() ?? "",
     ),
-    voicemailTextTemplate:
-      formData.get("voicemailTextTemplate")?.toString() ?? "",
-    welcomeMessage: formData.get("welcomeMessage")?.toString() ?? "",
+    callTimeout: parseIntOrUndefined(formData.get("callTimeout")?.toString()),
+    noActiveShiftTextMessage: formData
+      .get("noActiveShiftTextMessage")
+      ?.toString(),
+    postCallTextTemplate: formData.get("postCallTextTemplate")?.toString(),
+    textEmailBodyTemplate: formData.get("textEmailBodyTemplate")?.toString(),
+    textEmailSubjectTemplate: formData
+      .get("textEmailSubjectTemplate")
+      ?.toString(),
+    textResponderTemplate: formData.get("textResponderTemplate")?.toString(),
+    voicemailEmailBodyTemplate: formData
+      .get("voicemailEmailBodyTemplate")
+      ?.toString(),
+    voicemailEmailSubjectTemplate: formData
+      .get("voicemailEmailSubjectTemplate")
+      ?.toString(),
+    voicemailMessage: formData.get("voicemailMessage")?.toString(),
+    voicemailSilenceTimeout: parseIntOrUndefined(
+      formData.get("voicemailSilenceTimeout")?.toString(),
+    ),
+    voicemailTextTemplate: formData.get("voicemailTextTemplate")?.toString(),
+    welcomeMessage: formData.get("welcomeMessage")?.toString(),
   };
 }
 
@@ -82,30 +108,30 @@ export default function ScheduleFormFields({
   const { t } = useTranslation();
 
   const [postCallTextTemplate, setPostCallTextTemplate] = useState(
-    schedule.postCallTextTemplate
+    schedule.postCallTextTemplate,
   );
   const [voicemailMessage, setVoicemailMessage] = useState(
-    schedule.voicemailMessage
+    schedule.voicemailMessage,
   );
   const [voicemailEmailSubjectTemplate, setVoicemailEmailSubjectTemplate] =
     useState(schedule.voicemailEmailSubjectTemplate);
   const [voicemailEmailBodyTemplate, setVoicemailEmailBodyTemplate] = useState(
-    schedule.voicemailEmailBodyTemplate
+    schedule.voicemailEmailBodyTemplate,
   );
   const [voicemailTextTemplate, setVoicemailTextTemplate] = useState(
-    schedule.voicemailTextTemplate
+    schedule.voicemailTextTemplate,
   );
   const [noActiveShiftTextMessage, setNoActiveShiftTextMessage] = useState(
-    schedule.noActiveShiftTextMessage
+    schedule.noActiveShiftTextMessage,
   );
   const [textEmailSubjectTemplate, setTextEmailSubjectTemplate] = useState(
-    schedule.textEmailSubjectTemplate
+    schedule.textEmailSubjectTemplate,
   );
   const [textEmailBodyTemplate, setTextEmailBodyTemplate] = useState(
-    schedule.textEmailBodyTemplate
+    schedule.textEmailBodyTemplate,
   );
   const [textResponderTemplate, setTextResponderTemplate] = useState(
-    schedule.textResponderTemplate
+    schedule.textResponderTemplate,
   );
 
   return (

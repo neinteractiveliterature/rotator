@@ -1,11 +1,15 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
+import { Link, redirect } from "react-router";
 import HighlightedText from "~/components/highlighted-text";
 import { useSchedule } from "./$scheduleId";
 import { Suspense, useMemo } from "react";
 import { LoadingIndicator } from "@neinteractiveliterature/litform";
 import LayoutFlow from "~/components/flowcharts/layout-flow";
 import { buildGraph } from "~/components/flowcharts/build-graph";
+
+// export async function loader() {
+//   return redirect("./phone-flow");
+// }
 
 export default function SchedulePage() {
   const schedule = useSchedule();

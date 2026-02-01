@@ -16,7 +16,7 @@ function useHydrated() {
   return useSyncExternalStore(
     subscribe,
     () => true,
-    () => false
+    () => false,
   );
 }
 
@@ -43,14 +43,24 @@ function LiquidInputControl({
   return <CodeInput editorRef={editorRef} value={value} />;
 }
 
-export function LiquidInput(props: LiquidInputProps) {
+export function LiquidInputControlIfHydrated(
+  props: Parameters<typeof LiquidInputControl>[0],
+) {
   const hydrated = useHydrated();
 
+  if (hydrated) {
+    return <LiquidInputControl {...props} />;
+  } else {
+    return null;
+  }
+}
+
+export function LiquidInput(props: LiquidInputProps) {
   return (
     <FormGroupWithLabel label={props.label} helpText={props.helpText}>
       {() => (
         <>
-          {hydrated ? <LiquidInputControl {...props} /> : null}
+          <LiquidInputControlIfHydrated {...props} />
           <input type="hidden" name={props.name} value={props.value} />
         </>
       )}

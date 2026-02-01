@@ -9,24 +9,6 @@ import ScheduleFormFields, {
 import { schedulesTable } from "~/db/schema";
 import { dbContext } from "~/contexts";
 
-export async function action({ context, request }: Route.ActionArgs) {
-  const db = context.get(dbContext);
-  try {
-    const formData = await request.formData();
-
-    const schedule = (
-      await db
-        .insert(schedulesTable)
-        .values(parseScheduleFormData(formData))
-        .returning()
-    )[0];
-
-    return redirect(`/schedules/${schedule.id}`);
-  } catch (error) {
-    return error;
-  }
-}
-
 const blankSchedule: ScheduleFormFieldsProps["schedule"] = {
   callTimeout: 10,
   emailFrom: "",
@@ -50,6 +32,27 @@ const blankSchedule: ScheduleFormFieldsProps["schedule"] = {
   voicemailTextTemplate: "",
   welcomeMessage: "",
 };
+
+export async function action({ context, request }: Route.ActionArgs) {
+  const db = context.get(dbContext);
+  try {
+    const formData = await request.formData();
+
+    const schedule = (
+      await db
+        .insert(schedulesTable)
+        .values({
+          ...blankSchedule,
+          ...parseScheduleFormData(formData),
+        })
+        .returning()
+    )[0];
+
+    return redirect(`/schedules/${schedule.id}`);
+  } catch (error) {
+    return error;
+  }
+}
 
 export default function NewSchedule({ actionData }: Route.ComponentProps) {
   const { t } = useTranslation();

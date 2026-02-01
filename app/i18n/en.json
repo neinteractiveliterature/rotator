@@ -6,6 +6,7 @@
       "logoutLink": "Log out {{ name }}"
     },
     "buttons": {
+      "cancel": "Cancel",
       "edit": "Edit",
       "save": "Save"
     },
@@ -64,7 +65,9 @@
     },
     "schedules": {
       "callTimeout": {
-        "label": "Call timeout"
+        "label": "Call timeout",
+        "value_one": "1 second",
+        "value_other": "{{ count }} seconds"
       },
       "editPage": {
         "title": "Editing settings for {{ name }}"
@@ -107,6 +110,21 @@
       "noActiveShiftTextMessage": {
         "label": "“No active shift” text message"
       },
+      "phoneFlow": {
+        "title": "Phone call flow",
+        "voiceCall": "Voice call comes in",
+        "welcomeMessage": "Read welcome message",
+        "callPrimaryResponder": "Call primary responder",
+        "checkForMoreResponders": "Check for more responders",
+        "ifNoActiveShift": "If no active shift",
+        "ifCallAnsweredConnectCall": "If call answered, connect call",
+        "ifCallNotAnsweredCheckForMoreResponders": "If call not answered, check for more responders",
+        "ifMoreRespondersCallNextResponder": "If there are more responders, call next responder",
+        "ifNoMoreRespondersRecordVoicemail": "If there are no more responders, record voicemail",
+        "whenCallComplete": "When call complete",
+        "voicemail": "Record voicemail",
+        "postCallText": "Post-call text message to primary responder"
+      },
       "postCallTextTemplate": {
         "label": "Post-call text message template"
       },
@@ -126,6 +144,9 @@
       },
       "textEmailBodyTemplate": {
         "label": "Email body template"
+      },
+      "textFlow": {
+        "title": "Text message flow"
       },
       "textResponderTemplate": {
         "label": "Text message template"
@@ -157,7 +178,9 @@
         "title": "Voicemail received notification"
       },
       "voicemailSilenceTimeout": {
-        "label": "Voicemail silence timeout"
+        "label": "Voicemail silence timeout",
+        "value_one": "1 second",
+        "value_other": "{{ count }} seconds"
       },
       "welcomeMessage": {
         "label": "Welcome message"
@@ -168,6 +191,9 @@
       "unknownPhoneNumber": "{{ phoneNumber }} is not set up to receive texts yet. If you are the administrator, please add this phone number to the Rotator configuration."
     },
     "timespan": "{{ timespan.start, datetime }} to {{ timespan.finish, datetime }}",
+    "units": {
+      "seconds": "seconds"
+    },
     "voiceResponses": {
       "defaultNoActiveShiftMessage": "No active shift for this phone number.",
       "unknownPhoneNumber": "The phone number you have dialed {{ phoneNumber }} is not set up. If you are the administrator, please add this phone number to the Rotator configuration."
