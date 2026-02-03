@@ -3,7 +3,9 @@ import type { Route } from "./+types/edit";
 import { assertFound, coerceId } from "~/db/utils";
 import { Form, redirect } from "react-router";
 import { ErrorDisplay } from "@neinteractiveliterature/litform";
-import ScheduleFormFields, { parseScheduleFormData } from "~/schedules/form";
+import ScheduleFormFields, {
+  parseScheduleFormData,
+} from "~/components/forms/schedule";
 import { schedulesTable } from "~/db/schema";
 import { eq } from "drizzle-orm";
 import { dbContext } from "~/contexts";
@@ -13,7 +15,7 @@ export async function loader({ context, params }: Route.LoaderArgs) {
   const schedule = assertFound(
     await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
-    })
+    }),
   );
 
   return { schedule };

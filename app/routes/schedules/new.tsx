@@ -1,28 +1,24 @@
 import { useTranslation } from "react-i18next";
-import type { Route } from "./+types/edit";
+import type { Route } from "./+types/new";
 import { Form, redirect } from "react-router";
 import { ErrorDisplay } from "@neinteractiveliterature/litform";
 import ScheduleFormFields, {
   parseScheduleFormData,
   type ScheduleFormFieldsProps,
-} from "~/schedules/form";
+} from "~/components/forms/schedule";
 import { schedulesTable } from "~/db/schema";
 import { dbContext } from "~/contexts";
+import { DrizzleQueryError, type InferInsertModel } from "drizzle-orm";
+import type { TimestampRange } from "~/db/tsRange";
 
-export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
-  try {
-    const formData = await request.formData();
+const blankTimespan: TimestampRange = {
+  start: new Date("1970-01-01T00:00:00Z"),
+  finish: new Date("2100-01-01T00:00:00Z"),
+  includeFinish: false,
+  includeStart: true,
+};
 
-    await db.insert(schedulesTable).values(parseScheduleFormData(formData));
-
-    return redirect(`/schedules/${params.scheduleId}`);
-  } catch (error) {
-    return error;
-  }
-}
-
-const blankSchedule: ScheduleFormFieldsProps["schedule"] = {
+const blankSchedule: InferInsertModel<typeof schedulesTable> = {
   callTimeout: 10,
   emailFrom: "",
   name: "",
@@ -32,12 +28,7 @@ const blankSchedule: ScheduleFormFieldsProps["schedule"] = {
   textEmailSubjectTemplate: "",
   textResponderTemplate: "",
   timeZone: "America/New_York",
-  timespan: {
-    start: new Date("1970-01-01T00:00:00Z"),
-    finish: new Date("2100-01-01T00:00:00Z"),
-    includeFinish: false,
-    includeStart: true,
-  },
+  timespan: blankTimespan,
   voicemailEmailBodyTemplate: "",
   voicemailEmailSubjectTemplate: "",
   voicemailMessage: "",
@@ -45,6 +36,40 @@ const blankSchedule: ScheduleFormFieldsProps["schedule"] = {
   voicemailTextTemplate: "",
   welcomeMessage: "",
 };
+
+const blankFormFields: ScheduleFormFieldsProps["schedule"] = {
+  emailFrom: blankSchedule.emailFrom,
+  name: blankSchedule.name,
+  timespan: blankTimespan,
+  timeZone: blankSchedule.timeZone,
+};
+
+export async function action({ context, request }: Route.ActionArgs) {
+  const db = context.get(dbContext);
+  try {
+    const formData = await request.formData();
+    const values = {
+      ...blankSchedule,
+      ...Object.fromEntries(
+        Object.entries(parseScheduleFormData(formData)).filter(
+          ([, value]) => typeof value !== "undefined",
+        ),
+      ),
+    };
+
+    const schedule = (
+      await db.insert(schedulesTable).values(values).returning()
+    )[0];
+
+    return redirect(`/schedules/${schedule.id}`);
+  } catch (error) {
+    if (error instanceof DrizzleQueryError && error.cause) {
+      return error.cause;
+    } else {
+      return error;
+    }
+  }
+}
 
 export default function NewSchedule({ actionData }: Route.ComponentProps) {
   const { t } = useTranslation();
@@ -56,7 +81,7 @@ export default function NewSchedule({ actionData }: Route.ComponentProps) {
       </header>
 
       <Form method="POST">
-        <ScheduleFormFields schedule={blankSchedule} />
+        <ScheduleFormFields schedule={blankFormFields} />
 
         <ErrorDisplay graphQLError={actionData} />
 

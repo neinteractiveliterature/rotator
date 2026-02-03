@@ -7,6 +7,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "~/styles/application.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import RotateClockwisePNG from "./rotate-clockwise-2.png";
 import RotateClockwiseSVG from "./rotate-clockwise-2.svg";
 

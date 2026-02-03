@@ -20,10 +20,21 @@ export default [
         route(":phoneNumberId", "routes/phone-numbers/show.tsx"),
         route(":phoneNumberId/edit", "routes/phone-numbers/edit.tsx"),
       ]),
+      ...prefix("responders", [
+        index("routes/responders/list.tsx"),
+        route(":responderId", "routes/responders/show.tsx"),
+        route(":responderId/edit", "routes/responders/edit.tsx"),
+        route("new", "routes/responders/new.tsx"),
+      ]),
       ...prefix("schedules", [
         index("routes/schedules/list.tsx"),
-        route(":scheduleId", "routes/schedules/show.tsx"),
-        route(":scheduleId/edit", "routes/schedules/edit.tsx"),
+        route(":scheduleId", "routes/schedules/$scheduleId.tsx", [
+          index("routes/schedules/indexRoute.tsx"),
+          route("phone-flow", "routes/schedules/phone-flow.tsx"),
+          route("text-flow", "routes/schedules/text-flow.tsx"),
+          route("edit", "routes/schedules/edit.tsx"),
+          route("shifts", "routes/schedules/shifts.tsx"),
+        ]),
         route("new", "routes/schedules/new.tsx"),
       ]),
     ]),
