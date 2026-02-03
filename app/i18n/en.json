@@ -75,32 +75,6 @@
       "emailFrom": {
         "label": "Email from"
       },
-      "flowChart": {
-        "nodes": {
-          "voiceCall": "Inbound voice call",
-          "welcomeMessage": "Welcome message",
-          "callPrimaryResponder": "Call primary responder",
-          "checkForMoreResponders": "Check for more responders",
-          "callNextResponder": "Call next responder",
-          "connectCall": "Connect call",
-          "textMessage": "Inbound text message",
-          "noActiveShiftTextMessage": "No active shift text message",
-          "outboundText": "Outbound text to primary responder",
-          "outboundEmail": "Outbound email to all responders",
-          "voicemail": "Voicemail",
-          "voicemailReceivedText": "Voicemail received text message to primary responder",
-          "voicemailReceivedEmail": "Voicemail received email to all responders",
-          "postCallText": "Post-call text message to primary responder"
-        },
-        "edges": {
-          "ifNoActiveShift": "If no active shift",
-          "ifCallAnswered": "If call answered",
-          "ifCallNotAnswered": "If call not answered",
-          "ifMoreResponders": "If there are more responders",
-          "ifNoMoreResponders": "If there are no more responders",
-          "whenCallComplete": "When call complete"
-        }
-      },
       "name": {
         "label": "Name"
       },
