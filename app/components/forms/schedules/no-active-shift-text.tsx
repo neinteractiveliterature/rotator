@@ -8,23 +8,23 @@ import {
 import { LiquidInputControlIfHydrated } from "~/LiquidInput";
 import { useSchedule } from "~/routes/schedules/$scheduleId";
 
-export type WelcomeMessageData = Pick<
+export type NoActiveShiftTextData = Pick<
   ReturnType<typeof useSchedule>,
-  "welcomeMessage"
+  "noActiveShiftTextMessage"
 >;
 
-export type WelcomeMessageProps = {
-  save: (data: WelcomeMessageData) => Promise<unknown>;
+export type NoActiveShiftTextProps = {
+  save: (data: NoActiveShiftTextData) => Promise<unknown>;
 };
 
-export default function WelcomeMessage({ save }: WelcomeMessageProps) {
+export default function NoActiveShiftText({ save }: NoActiveShiftTextProps) {
   const schedule = useSchedule();
   const { t } = useTranslation();
 
   return (
-    <EditableWorkflowStep<WelcomeMessageData>
-      iconName="chat-quote-fill"
-      title={t("schedules.phoneFlow.welcomeMessage")}
+    <EditableWorkflowStep<NoActiveShiftTextData>
+      iconName="person-x"
+      title={t("schedules.textFlow.ifNoActiveShift")}
       data={schedule}
       save={save}
       prepareEditingData={(data) => data}
@@ -32,19 +32,21 @@ export default function WelcomeMessage({ save }: WelcomeMessageProps) {
     >
       {({ data, editingData, setEditingData }) => (
         <WorkflowStepFormBody>
-          <WorkflowStepFormRow label={t("schedules.welcomeMessage.label")}>
+          <WorkflowStepFormRow
+            label={t("schedules.noActiveShiftTextMessage.label")}
+          >
             {editingData ? (
               <LiquidInputControlIfHydrated
-                value={editingData.welcomeMessage}
+                value={editingData.noActiveShiftTextMessage}
                 onChange={(value) =>
                   setEditingData((prevEditingData) => ({
                     ...prevEditingData,
-                    welcomeMessage: value,
+                    noActiveShiftTextMessage: value,
                   }))
                 }
               />
             ) : (
-              <HighlightedText text={data.welcomeMessage} />
+              <HighlightedText text={data.noActiveShiftTextMessage} />
             )}
           </WorkflowStepFormRow>
         </WorkflowStepFormBody>

@@ -1,10 +1,21 @@
-import { BootstrapFormInput } from "@neinteractiveliterature/litform";
+import {
+  BootstrapFormInput,
+  BootstrapFormSelect,
+} from "@neinteractiveliterature/litform";
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Temporal, toTemporalInstant } from "temporal-polyfill";
 import type { schedulesTable } from "~/db/schema";
-import { LiquidInput } from "~/LiquidInput";
+import { getTimeZones } from "@vvo/tzdb";
+
+const zones = getTimeZones({ includeUtc: true });
+
+function formatOffset(offsetMinutes: number) {
+  const hours = Math.floor(Math.abs(offsetMinutes) / 60);
+  const minutes = Math.abs(offsetMinutes) % 60;
+  const sign = offsetMinutes < 0 ? "-" : "+";
+  return `UTC${sign}${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
+}
 
 function parseIntOrUndefined(input: string | undefined) {
   if (input == null) {
@@ -83,22 +94,7 @@ export function parseScheduleFormData(
 export type ScheduleFormFieldsProps = {
   schedule: Pick<
     InferSelectModel<typeof schedulesTable>,
-    | "emailFrom"
-    | "name"
-    | "timespan"
-    | "welcomeMessage"
-    | "postCallTextTemplate"
-    | "callTimeout"
-    | "voicemailMessage"
-    | "voicemailSilenceTimeout"
-    | "voicemailEmailBodyTemplate"
-    | "voicemailEmailSubjectTemplate"
-    | "voicemailTextTemplate"
-    | "noActiveShiftTextMessage"
-    | "textEmailBodyTemplate"
-    | "textEmailSubjectTemplate"
-    | "textResponderTemplate"
-    | "timeZone"
+    "emailFrom" | "name" | "timespan" | "timeZone"
   >;
 };
 
@@ -106,33 +102,6 @@ export default function ScheduleFormFields({
   schedule,
 }: ScheduleFormFieldsProps) {
   const { t } = useTranslation();
-
-  const [postCallTextTemplate, setPostCallTextTemplate] = useState(
-    schedule.postCallTextTemplate,
-  );
-  const [voicemailMessage, setVoicemailMessage] = useState(
-    schedule.voicemailMessage,
-  );
-  const [voicemailEmailSubjectTemplate, setVoicemailEmailSubjectTemplate] =
-    useState(schedule.voicemailEmailSubjectTemplate);
-  const [voicemailEmailBodyTemplate, setVoicemailEmailBodyTemplate] = useState(
-    schedule.voicemailEmailBodyTemplate,
-  );
-  const [voicemailTextTemplate, setVoicemailTextTemplate] = useState(
-    schedule.voicemailTextTemplate,
-  );
-  const [noActiveShiftTextMessage, setNoActiveShiftTextMessage] = useState(
-    schedule.noActiveShiftTextMessage,
-  );
-  const [textEmailSubjectTemplate, setTextEmailSubjectTemplate] = useState(
-    schedule.textEmailSubjectTemplate,
-  );
-  const [textEmailBodyTemplate, setTextEmailBodyTemplate] = useState(
-    schedule.textEmailBodyTemplate,
-  );
-  const [textResponderTemplate, setTextResponderTemplate] = useState(
-    schedule.textResponderTemplate,
-  );
 
   return (
     <>
@@ -148,11 +117,19 @@ export default function ScheduleFormFields({
         defaultValue={schedule.emailFrom}
       />
 
-      <BootstrapFormInput
+      <BootstrapFormSelect
         label={t("schedules.timeZone.label")}
         name="timeZone"
         defaultValue={schedule.timeZone}
-      />
+      >
+        <option />
+        {zones.map((zone) => (
+          <option key={zone.name} value={zone.name}>
+            [{formatOffset(zone.currentTimeOffsetInMinutes)}] {zone.name} (
+            {zone.abbreviation})
+          </option>
+        ))}
+      </BootstrapFormSelect>
 
       <div className="d-flex">
         <div className="col-md-6 me-2">
@@ -162,7 +139,7 @@ export default function ScheduleFormFields({
             type="datetime-local"
             defaultValue={toTemporalInstant
               .apply(schedule.timespan.start)
-              .toZonedDateTimeISO(schedule.timeZone)
+              .toZonedDateTimeISO(schedule.timeZone || "Etc/UTC")
               .withCalendar("iso8601")
               .toPlainDateTime()
               .toString()}
@@ -175,105 +152,10 @@ export default function ScheduleFormFields({
             type="datetime-local"
             defaultValue={toTemporalInstant
               .apply(schedule.timespan.finish)
-              .toZonedDateTimeISO(schedule.timeZone)
+              .toZonedDateTimeISO(schedule.timeZone || "Etc/UTC")
               .withCalendar("iso8601")
               .toPlainDateTime()
               .toString()}
-          />
-        </div>
-      </div>
-
-      <BootstrapFormInput
-        label={t("schedules.welcomeMessage.label")}
-        name="welcomeMessage"
-        defaultValue={schedule.welcomeMessage}
-      />
-
-      <LiquidInput
-        name="postCallTextTemplate"
-        label={t("schedules.postCallTextTemplate.label")}
-        value={postCallTextTemplate}
-        onChange={setPostCallTextTemplate}
-      />
-
-      <BootstrapFormInput
-        label={t("schedules.callTimeout.label")}
-        name="callTimeout"
-        defaultValue={schedule.callTimeout}
-      />
-
-      <LiquidInput
-        name="voicemailMessage"
-        label={t("schedules.voicemailMessage.label")}
-        value={voicemailMessage}
-        onChange={setVoicemailMessage}
-      />
-
-      <BootstrapFormInput
-        label={t("schedules.voicemailSilenceTimeout.label")}
-        name="voicemailSilenceTimeout"
-        defaultValue={schedule.voicemailSilenceTimeout}
-      />
-
-      <div className="card bg-light mb-3">
-        <div className="card-header">
-          {t("schedules.voicemailNotification.title")}
-        </div>
-        <div className="card-body">
-          <LiquidInput
-            name="voicemailEmailSubjectTemplate"
-            label={t("schedules.voicemailEmailSubjectTemplate.label")}
-            value={voicemailEmailSubjectTemplate}
-            onChange={setVoicemailEmailSubjectTemplate}
-          />
-
-          <LiquidInput
-            name="voicemailEmailBodyTemplate"
-            label={t("schedules.voicemailEmailBodyTemplate.label")}
-            value={voicemailEmailBodyTemplate}
-            onChange={setVoicemailEmailBodyTemplate}
-          />
-
-          <LiquidInput
-            name="voicemailTextTemplate"
-            label={t("schedules.voicemailTextTemplate.label")}
-            value={voicemailTextTemplate}
-            onChange={setVoicemailTextTemplate}
-          />
-        </div>
-      </div>
-
-      <LiquidInput
-        name="noActiveShiftTextMessage"
-        label={t("schedules.noActiveShiftTextMessage.label")}
-        value={noActiveShiftTextMessage}
-        onChange={setNoActiveShiftTextMessage}
-      />
-
-      <div className="card bg-light mb-3">
-        <div className="card-header">
-          {t("schedules.textReceivedNotification.title")}
-        </div>
-        <div className="card-body">
-          <LiquidInput
-            name="textEmailSubjectTemplate"
-            label={t("schedules.textEmailSubjectTemplate.label")}
-            value={textEmailSubjectTemplate}
-            onChange={setTextEmailSubjectTemplate}
-          />
-
-          <LiquidInput
-            name="textEmailBodyTemplate"
-            label={t("schedules.textEmailBodyTemplate.label")}
-            value={textEmailBodyTemplate}
-            onChange={setTextEmailBodyTemplate}
-          />
-
-          <LiquidInput
-            name="textResponderTemplate"
-            label={t("schedules.textResponderTemplate.label")}
-            value={textResponderTemplate}
-            onChange={setTextResponderTemplate}
           />
         </div>
       </div>

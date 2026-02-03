@@ -116,20 +116,24 @@
         "welcomeMessage": "Read welcome message",
         "callPrimaryResponder": "Call primary responder",
         "checkForMoreResponders": "Check for more responders",
-        "ifNoActiveShift": "If no active shift",
+        "ifNoActiveShift": "If there is no active shift",
+        "ifActiveShift": "If there is an active shift",
         "ifCallAnsweredConnectCall": "If call answered, connect call",
         "ifCallNotAnsweredCheckForMoreResponders": "If call not answered, check for more responders",
         "ifMoreRespondersCallNextResponder": "If there are more responders, call next responder",
         "ifNoMoreRespondersRecordVoicemail": "If there are no more responders, record voicemail",
         "whenCallComplete": "When call complete",
         "voicemail": "Record voicemail",
-        "postCallText": "Post-call text message to primary responder"
+        "postCallText": "Post-call text message to primary responder",
+        "voicemailReceivedText": "Voicemail received text message to primary responder",
+        "voicemailReceivedEmail": "Voicemail received email to all responders",
+        "seeVoicemailSettings": "See voicemail settings above"
       },
       "postCallTextTemplate": {
         "label": "Post-call text message template"
       },
       "settings": {
-        "title": "Settings"
+        "title": "General settings"
       },
       "shifts": {
         "title": "Shifts",
@@ -146,7 +150,13 @@
         "label": "Email body template"
       },
       "textFlow": {
-        "title": "Text message flow"
+        "title": "Text message flow",
+        "textMessage": "Inbound text message",
+        "ifNoActiveShift": "If there is no active shift",
+        "ifActiveShift": "If there is an active shift",
+        "noActiveShiftTextMessage": "No active shift text message",
+        "outboundText": "Outbound text to primary responder",
+        "outboundEmail": "Outbound email to all responders"
       },
       "textResponderTemplate": {
         "label": "Text message template"

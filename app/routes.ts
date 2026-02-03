@@ -29,7 +29,7 @@ export default [
       ...prefix("schedules", [
         index("routes/schedules/list.tsx"),
         route(":scheduleId", "routes/schedules/$scheduleId.tsx", [
-          index("routes/schedules/show.tsx"),
+          index("routes/schedules/indexRoute.tsx"),
           route("phone-flow", "routes/schedules/phone-flow.tsx"),
           route("text-flow", "routes/schedules/text-flow.tsx"),
           route("edit", "routes/schedules/edit.tsx"),

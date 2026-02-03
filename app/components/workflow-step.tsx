@@ -121,3 +121,28 @@ export function EditableWorkflowStep<Data, EditingData = Data>({
     </WorkflowStep>
   );
 }
+
+export function WorkflowStepFormBody({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <ul className="list-group list-group-flush">{children}</ul>;
+}
+
+export function WorkflowStepFormRow({
+  label,
+  children,
+}: {
+  label: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <li className="list-group-item">
+      <div className="row">
+        <div className="col-3">{label}</div>
+        <div className="col-9">{children}</div>
+      </div>
+    </li>
+  );
+}

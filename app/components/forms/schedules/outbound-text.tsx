@@ -1,54 +1,54 @@
 import { useTranslation } from "react-i18next";
-import HighlightedText from "~/components/highlighted-text";
 import {
   EditableWorkflowStep,
   WorkflowStepFormBody,
   WorkflowStepFormRow,
 } from "~/components/workflow-step";
-import { LiquidInputControlIfHydrated } from "~/LiquidInput";
 import { useSchedule } from "~/routes/schedules/$scheduleId";
+import HighlightedText from "~/components/highlighted-text";
+import { LiquidInputControlIfHydrated } from "~/LiquidInput";
 
-export type PostCallTextMessageData = Pick<
+export type OutboundTextData = Pick<
   ReturnType<typeof useSchedule>,
-  "postCallTextTemplate"
+  "textResponderTemplate"
 >;
 
-export type PostCallTextMessageProps = {
-  save: (data: PostCallTextMessageData) => Promise<unknown>;
+export type OutboundTextFormProps = {
+  save: (data: OutboundTextData) => Promise<unknown>;
 };
 
-export default function PostCallTextMessage({
-  save,
-}: PostCallTextMessageProps) {
+export function OutboundTextForm({ save }: OutboundTextFormProps) {
   const schedule = useSchedule();
   const { t } = useTranslation();
 
   return (
-    <EditableWorkflowStep<PostCallTextMessageData>
-      iconName="chat-right-text-fill"
-      title={t("schedules.phoneFlow.postCallText")}
-      data={schedule}
+    <EditableWorkflowStep<OutboundTextData>
+      title={t("schedules.textFlow.outboundText")}
+      iconName="chat-right-fill"
       save={save}
-      prepareEditingData={(data) => data}
-      finishEditingData={(data) => data}
+      data={schedule}
+      prepareEditingData={(data) => ({
+        textResponderTemplate: data.textResponderTemplate,
+      })}
+      finishEditingData={(editingData) => editingData}
     >
       {({ data, editingData, setEditingData }) => (
         <WorkflowStepFormBody>
           <WorkflowStepFormRow
-            label={t("schedules.postCallTextTemplate.label")}
+            label={t("schedules.voicemailTextTemplate.label")}
           >
             {editingData ? (
               <LiquidInputControlIfHydrated
-                value={editingData.postCallTextTemplate}
+                value={editingData.textResponderTemplate}
                 onChange={(value) =>
                   setEditingData((prevEditingData) => ({
                     ...prevEditingData,
-                    postCallTextTemplate: value,
+                    textResponderTemplate: value,
                   }))
                 }
               />
             ) : (
-              <HighlightedText text={data.postCallTextTemplate} />
+              <HighlightedText text={data.textResponderTemplate} />
             )}
           </WorkflowStepFormRow>
         </WorkflowStepFormBody>

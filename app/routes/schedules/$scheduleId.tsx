@@ -53,6 +53,14 @@ export default function ScheduleLayout({ loaderData }: Route.ComponentProps) {
         <h2>{loaderData.schedule.name}</h2>
         <ul className="nav flex-column nav-pills">
           <li className="nav-item">
+            <li className="nav-item">
+              <NavLink
+                to={`/schedules/${loaderData.schedule.id}/edit`}
+                className="nav-link"
+              >
+                {t("schedules.settings.title")}
+              </NavLink>
+            </li>
             <NavLink
               to={`/schedules/${loaderData.schedule.id}/phone-flow`}
               end
@@ -68,14 +76,6 @@ export default function ScheduleLayout({ loaderData }: Route.ComponentProps) {
               className="nav-link"
             >
               {t("schedules.textFlow.title")}
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink
-              to={`/schedules/${loaderData.schedule.id}/edit`}
-              className="nav-link"
-            >
-              {t("schedules.settings.title")}
             </NavLink>
           </li>
           <li className="nav-item">

@@ -1,8 +1,13 @@
 import { useTranslation } from "react-i18next";
 import HighlightedText from "~/components/highlighted-text";
-import { EditableWorkflowStep } from "~/components/workflow-step";
+import {
+  EditableWorkflowStep,
+  WorkflowStepFormBody,
+  WorkflowStepFormRow,
+} from "~/components/workflow-step";
 import { LiquidInputControlIfHydrated } from "~/LiquidInput";
 import { useSchedule } from "~/routes/schedules/$scheduleId";
+import { SecondsInput } from "../seconds-input";
 
 export type VoicemailData = Pick<
   ReturnType<typeof useSchedule>,
@@ -38,61 +43,42 @@ export function VoicemailForm({ save }: VoicemailFormProps) {
       })}
     >
       {({ data, editingData, setEditingData }) => (
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <div className="row">
-              <div className="col-3">
-                {t("schedules.voicemailMessage.label")}
-              </div>
-              <div className="col-9">
-                {editingData ? (
-                  <LiquidInputControlIfHydrated
-                    value={editingData.voicemailMessage}
-                    onChange={(value) =>
-                      setEditingData((prevEditingData) => ({
-                        ...prevEditingData,
-                        postCallTextTemplate: value,
-                      }))
-                    }
-                  />
-                ) : (
-                  <HighlightedText text={data.voicemailMessage} />
-                )}
-              </div>
-            </div>
-          </li>
-          <li className="list-group-item">
-            <div className="row">
-              <div className="col-3">
-                {t("schedules.voicemailSilenceTimeout.label")}
-              </div>
-              <div className="col-9">
-                {editingData ? (
-                  <div className="input-group">
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={editingData.voicemailSilenceTimeout}
-                      onChange={(event) =>
-                        setEditingData((prevEditingData) => ({
-                          ...prevEditingData,
-                          voicemailSilenceTimeout: event.target.value,
-                        }))
-                      }
-                    />
-                    <span className="input-group-text">
-                      {t("units.seconds")}
-                    </span>
-                  </div>
-                ) : (
-                  t("schedules.voicemailSilenceTimeout.value", {
-                    count: data.voicemailSilenceTimeout,
-                  })
-                )}
-              </div>
-            </div>
-          </li>
-        </ul>
+        <WorkflowStepFormBody>
+          <WorkflowStepFormRow label={t("schedules.voicemailMessage.label")}>
+            {editingData ? (
+              <LiquidInputControlIfHydrated
+                value={editingData.voicemailMessage}
+                onChange={(value) =>
+                  setEditingData((prevEditingData) => ({
+                    ...prevEditingData,
+                    postCallTextTemplate: value,
+                  }))
+                }
+              />
+            ) : (
+              <HighlightedText text={data.voicemailMessage} />
+            )}
+          </WorkflowStepFormRow>
+          <WorkflowStepFormRow
+            label={t("schedules.voicemailSilenceTimeout.label")}
+          >
+            {editingData ? (
+              <SecondsInput
+                value={editingData.voicemailSilenceTimeout}
+                onChange={(event) =>
+                  setEditingData((prevEditingData) => ({
+                    ...prevEditingData,
+                    voicemailSilenceTimeout: event.target.value,
+                  }))
+                }
+              />
+            ) : (
+              t("schedules.voicemailSilenceTimeout.value", {
+                count: data.voicemailSilenceTimeout,
+              })
+            )}
+          </WorkflowStepFormRow>
+        </WorkflowStepFormBody>
       )}
     </EditableWorkflowStep>
   );

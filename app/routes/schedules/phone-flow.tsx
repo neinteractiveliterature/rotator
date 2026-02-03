@@ -7,6 +7,9 @@ import { useFetcher, type SubmitTarget } from "react-router";
 import WelcomeMessage from "~/components/forms/schedules/welcome-message";
 import PostCallTextMessage from "~/components/forms/schedules/post-call-text-message";
 import { VoicemailForm } from "~/components/forms/schedules/voicemail";
+import { PostVoicemailTextForm } from "~/components/forms/schedules/post-voicemail-text";
+import { PostVoicemailEmailForm } from "~/components/forms/schedules/post-voicemail-email";
+import BootstrapIcon from "~/components/bootstrap-icon";
 
 export default function PhoneFlow() {
   const schedule = useSchedule();
@@ -39,33 +42,89 @@ export default function PhoneFlow() {
                   title={t("schedules.phoneFlow.voiceCall")}
                 />
               ),
-            },
-            {
-              content: <WelcomeMessage save={save} />,
-            },
-            {
-              content: (
-                <CallTimeoutForm
-                  iconName="telephone-outbound-fill"
-                  title={t("schedules.phoneFlow.callPrimaryResponder")}
-                  save={save}
-                />
-              ),
               branches: [
                 {
                   items: [
                     {
                       content: (
                         <WorkflowStep
-                          title={t(
-                            "schedules.phoneFlow.ifCallAnsweredConnectCall",
-                          )}
-                          iconName="telephone-forward-fill"
+                          iconName="person-check-fill"
+                          title={t("schedules.phoneFlow.ifActiveShift")}
                         />
                       ),
                     },
+                    { content: <WelcomeMessage save={save} /> },
                     {
-                      content: <PostCallTextMessage save={save} />,
+                      content: (
+                        <CallTimeoutForm
+                          iconName="telephone-outbound-fill"
+                          title={t("schedules.phoneFlow.callPrimaryResponder")}
+                          save={save}
+                        />
+                      ),
+                      branches: [
+                        {
+                          items: [
+                            {
+                              content: (
+                                <WorkflowStep
+                                  title={t(
+                                    "schedules.phoneFlow.ifCallAnsweredConnectCall",
+                                  )}
+                                  iconName="telephone-forward-fill"
+                                />
+                              ),
+                            },
+                            { content: <PostCallTextMessage save={save} /> },
+                          ],
+                        },
+                        {
+                          items: [
+                            {
+                              content: (
+                                <WorkflowStep
+                                  title={t(
+                                    "schedules.phoneFlow.ifCallNotAnsweredCheckForMoreResponders",
+                                  )}
+                                  iconName="people"
+                                />
+                              ),
+                              branches: [
+                                {
+                                  items: [
+                                    {
+                                      content: (
+                                        <CallTimeoutForm
+                                          title={t(
+                                            "schedules.phoneFlow.ifMoreRespondersCallNextResponder",
+                                          )}
+                                          iconName="telephone-forward-fill"
+                                          save={save}
+                                        />
+                                      ),
+                                    },
+                                  ],
+                                },
+                                {
+                                  items: [
+                                    { content: <VoicemailForm save={save} /> },
+                                    {
+                                      content: (
+                                        <PostVoicemailTextForm save={save} />
+                                      ),
+                                    },
+                                    {
+                                      content: (
+                                        <PostVoicemailEmailForm save={save} />
+                                      ),
+                                    },
+                                  ],
+                                },
+                              ],
+                            },
+                          ],
+                        },
+                      ],
                     },
                   ],
                 },
@@ -74,36 +133,23 @@ export default function PhoneFlow() {
                     {
                       content: (
                         <WorkflowStep
-                          title={t(
-                            "schedules.phoneFlow.ifCallNotAnsweredCheckForMoreResponders",
-                          )}
-                          iconName="people"
+                          iconName="person-x"
+                          title={t("schedules.phoneFlow.ifNoActiveShift")}
                         />
                       ),
-                      branches: [
-                        {
-                          items: [
-                            {
-                              content: (
-                                <CallTimeoutForm
-                                  title={t(
-                                    "schedules.phoneFlow.ifMoreRespondersCallNextResponder",
-                                  )}
-                                  iconName="telephone-forward-fill"
-                                  save={save}
-                                />
-                              ),
-                            },
-                          ],
-                        },
-                        {
-                          items: [
-                            {
-                              content: <VoicemailForm save={save} />,
-                            },
-                          ],
-                        },
-                      ],
+                    },
+                    {
+                      content: (
+                        <WorkflowStep
+                          iconName="voicemail"
+                          title={t("schedules.phoneFlow.voicemail")}
+                        >
+                          <div className="card-body">
+                            <BootstrapIcon name="arrow-up-right-circle" />{" "}
+                            {t("schedules.phoneFlow.seeVoicemailSettings")}
+                          </div>
+                        </WorkflowStep>
+                      ),
                     },
                   ],
                 },

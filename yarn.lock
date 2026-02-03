@@ -5142,6 +5142,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vvo/tzdb@npm:^6.198.0":
+  version: 6.198.0
+  resolution: "@vvo/tzdb@npm:6.198.0"
+  checksum: 10c0/f1425eba7bb3875ad7198322fd9b3aa3324af36261f63611c024fcc5e1129cf49688427215b7bb08c83ca15387f207f4b57878263c6adcc95da888430e22341d
+  languageName: node
+  linkType: hard
+
 "@xyflow/react@npm:^12.6.0":
   version: 12.6.0
   resolution: "@xyflow/react@npm:12.6.0"
@@ -11371,6 +11378,7 @@ __metadata:
     "@types/react-dom": "npm:^19.0.4"
     "@vitest/coverage-v8": "npm:^4.0.16"
     "@vitest/ui": "npm:4.0.17"
+    "@vvo/tzdb": "npm:^6.198.0"
     "@xyflow/react": "npm:^12.6.0"
     bootstrap: "npm:^5.3.3"
     bootstrap-icons: "npm:^1.11.4"

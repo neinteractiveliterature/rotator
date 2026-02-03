@@ -13,7 +13,7 @@ export async function loader({ context }: Route.LoaderArgs) {
 
 export function useCurrentUser() {
   const loaderData = useRouteLoaderData(
-    "routes/layouts/application"
+    "routes/layouts/application",
   ) as Route.ComponentProps["loaderData"];
   return loaderData.user;
 }
@@ -85,7 +85,7 @@ export default function ApplicationLayout({
           </div>
         </div>
       </nav>
-      <main className="container">
+      <main className="container pb-4">
         <Outlet />
       </main>
     </>

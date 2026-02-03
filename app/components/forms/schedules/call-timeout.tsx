@@ -1,7 +1,12 @@
 import { useTranslation } from "react-i18next";
 import type { BootstrapIconProps } from "~/components/bootstrap-icon";
-import { EditableWorkflowStep } from "~/components/workflow-step";
+import {
+  EditableWorkflowStep,
+  WorkflowStepFormBody,
+  WorkflowStepFormRow,
+} from "~/components/workflow-step";
 import { useSchedule } from "~/routes/schedules/$scheduleId";
+import { SecondsInput } from "../seconds-input";
 
 export type CallTimeoutData = Pick<
   ReturnType<typeof useSchedule>,
@@ -36,37 +41,25 @@ export function CallTimeoutForm({
       })}
     >
       {({ data, editingData, setEditingData }) => (
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <div className="row">
-              <div className="col-3">{t("schedules.callTimeout.label")}</div>
-              <div className="col-9">
-                {editingData ? (
-                  <div className="input-group">
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={editingData.callTimeout}
-                      onChange={(event) =>
-                        setEditingData((prevEditingData) => ({
-                          ...prevEditingData,
-                          callTimeout: event.target.value,
-                        }))
-                      }
-                    />
-                    <span className="input-group-text">
-                      {t("units.seconds")}
-                    </span>
-                  </div>
-                ) : (
-                  t("schedules.callTimeout.value", {
-                    count: data.callTimeout,
-                  })
-                )}
-              </div>
-            </div>
-          </li>
-        </ul>
+        <WorkflowStepFormBody>
+          <WorkflowStepFormRow label={t("schedules.callTimeout.label")}>
+            {editingData ? (
+              <SecondsInput
+                value={editingData.callTimeout}
+                onChange={(event) =>
+                  setEditingData((prevEditingData) => ({
+                    ...prevEditingData,
+                    callTimeout: event.target.value,
+                  }))
+                }
+              />
+            ) : (
+              t("schedules.callTimeout.value", {
+                count: data.callTimeout,
+              })
+            )}
+          </WorkflowStepFormRow>
+        </WorkflowStepFormBody>
       )}
     </EditableWorkflowStep>
   );

@@ -15,7 +15,7 @@ export async function loader({ context, params }: Route.LoaderArgs) {
   const schedule = assertFound(
     await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
-    })
+    }),
   );
 
   return { schedule };
