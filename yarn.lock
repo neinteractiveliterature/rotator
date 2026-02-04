@@ -2206,11 +2206,11 @@ __metadata:
   linkType: hard
 
 "@lezer/lr@npm:^1.0.0, @lezer/lr@npm:^1.3.0, @lezer/lr@npm:^1.4.2":
-  version: 1.4.7
-  resolution: "@lezer/lr@npm:1.4.7"
+  version: 1.4.8
+  resolution: "@lezer/lr@npm:1.4.8"
   dependencies:
     "@lezer/common": "npm:^1.0.0"
-  checksum: 10c0/543c2e1aae12231d8ccab61315fb3a6d0427c30c12c04dbe148abfc2834863db51a6a279a7957ba94dbf48112d49e53054c53368e27229365a6bdd11c17e3000
+  checksum: 10c0/8bd2228a316a5ef8da01908e3e22aca95fa9695211ffe56f3e8be756b37d0810d5aa91fbbdd274b198a343051d8637e130e26f51161161f089244af242b653c9
   languageName: node
   linkType: hard
 
