@@ -1,13 +1,19 @@
-import sortBy from "lodash/sortBy";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
-import dateTimeFormats from "~/dateTimeFormats";
 import { coerceId } from "~/db/utils";
 import type { Route } from "./+types/shifts";
 import { dbContext } from "~/contexts";
+import { ShiftScheduleTable } from "~/components/shift-scheduling";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
   const db = context.get(dbContext);
+
+  const schedule = await db.query.schedulesTable.findFirst({
+    where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
+  });
+
+  if (!schedule) {
+    return new Response(null, { status: 404 });
+  }
 
   const shifts = await db.query.shiftsTable.findMany({
     where: (tbl, { eq }) => eq(tbl.scheduleId, coerceId(params.scheduleId)),
@@ -24,53 +30,20 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     },
   });
 
-  return { shifts };
+  return { shifts, schedule };
 }
 
 export default function ScheduleShiftsPage({
   loaderData,
 }: Route.ComponentProps) {
-  const { shifts } = loaderData;
+  const { shifts, schedule } = loaderData;
   const { t } = useTranslation();
 
   return (
     <>
       <h2>{t("schedules.shifts.title")}</h2>
 
-      <table className="table table-striped">
-        <thead>
-          <th>{t("schedules.shifts.timespan")}</th>
-          <th>{t("schedules.shifts.responders")}</th>
-        </thead>
-        <tbody>
-          {shifts.map((shift) => (
-            <tr key={shift.id}>
-              <td>
-                {t("timespan", {
-                  timespan: shift.timespan,
-                  formatParams: {
-                    "timespan.start": dateTimeFormats.short,
-                    "timespan.finish": dateTimeFormats.short,
-                  },
-                })}
-              </td>
-              <td>
-                {sortBy(
-                  shift.shiftAssignments,
-                  (shiftAssignment) => shiftAssignment.position,
-                ).map(({ responder }, index) => (
-                  <>
-                    {index > 0 && ", "}
-                    <Link to={`/responders/${responder.id}`}>
-                      {responder.name}
-                    </Link>
-                  </>
-                ))}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ShiftScheduleTable schedule={schedule} shifts={shifts} />
     </>
   );
 }
