@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import type { Route } from "./+types/list";
 import { Link } from "react-router";
 import { dbContext } from "~/contexts";
+import BootstrapIcon from "~/components/bootstrap-icon";
 
 export async function loader({ context }: Route.LoaderArgs) {
   const db = context.get(dbContext);
@@ -30,10 +31,22 @@ export default function SchedulesList({ loaderData }: Route.ComponentProps) {
               <td>
                 <Link to={`./${schedule.id}`}>{schedule.name}</Link>
               </td>
+              <td className="text-end">
+                <Link
+                  to={`./${schedule.id}/duplicate`}
+                  className="btn btn-sm btn-outline-secondary"
+                >
+                  <BootstrapIcon name="copy" /> {t("buttons.duplicate")}
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      <Link className="btn btn-secondary" to="./new">
+        <BootstrapIcon name="plus" /> {t("schedules.newButton")}
+      </Link>
     </>
   );
 }

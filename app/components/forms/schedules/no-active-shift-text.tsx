@@ -27,7 +27,9 @@ export default function NoActiveShiftText({ save }: NoActiveShiftTextProps) {
       title={t("schedules.textFlow.ifNoActiveShift")}
       data={schedule}
       save={save}
-      prepareEditingData={(data) => data}
+      prepareEditingData={(data) => ({
+        noActiveShiftTextMessage: data.noActiveShiftTextMessage,
+      })}
       finishEditingData={(data) => data}
     >
       {({ data, editingData, setEditingData }) => (

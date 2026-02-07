@@ -22,25 +22,31 @@ import {
 import { defaultCountryCodeContext } from "./contexts";
 import { initializeContextMiddleware } from "./server/initializeContext.server";
 import { getCurrentUserMiddleware } from "./server/authMiddleware.server";
+import { Confirm } from "@neinteractiveliterature/litform";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <I18nextProvider i18n={i18n}>
-      <html lang="en">
-        <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" type="image/png" href={RotateClockwisePNG} />
-          <link rel="icon" type="image/svg+xml" href={RotateClockwiseSVG} />
-          <Meta />
-          <Links />
-        </head>
-        <body>
-          {children}
-          <ScrollRestoration />
-          <Scripts />
-        </body>
-      </html>
+      <Confirm>
+        <html lang="en">
+          <head>
+            <meta charSet="utf-8" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1"
+            />
+            <link rel="icon" type="image/png" href={RotateClockwisePNG} />
+            <link rel="icon" type="image/svg+xml" href={RotateClockwiseSVG} />
+            <Meta />
+            <Links />
+          </head>
+          <body>
+            {children}
+            <ScrollRestoration />
+            <Scripts />
+          </body>
+        </html>
+      </Confirm>
     </I18nextProvider>
   );
 }
@@ -61,7 +67,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
       buildRotatorGlobalContextValue({
         defaultCountryCode: loaderData.defaultCountryCode,
       }),
-    [loaderData.defaultCountryCode]
+    [loaderData.defaultCountryCode],
   );
 
   return (

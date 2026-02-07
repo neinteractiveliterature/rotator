@@ -109,12 +109,12 @@ export function EditableWorkflowStep<Data, EditingData = Data>({
         setEditingData: (setStateAction) => {
           if (isFunctionalSetStateAction(setStateAction)) {
             if (editingData) {
-              return setStateAction(editingData);
+              return setEditingData(setStateAction(editingData));
             } else {
-              return editingData;
+              return setEditingData(editingData);
             }
           } else {
-            return setStateAction;
+            return setEditingData(setStateAction);
           }
         },
       })}

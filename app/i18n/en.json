@@ -7,8 +7,15 @@
     },
     "buttons": {
       "cancel": "Cancel",
+      "dragToReorder": "Drag to reorder",
+      "duplicate": "Duplicate",
       "edit": "Edit",
+      "ok": "OK",
       "save": "Save"
+    },
+    "errors": {
+      "unknown": "Unknown error",
+      "cause": "Caused by: {{ cause }}"
     },
     "phoneNumbers": {
       "title": "Phone numbers",
@@ -69,6 +76,9 @@
         "value_one": "1 second",
         "value_other": "{{ count }} seconds"
       },
+      "duplicatePage": {
+        "title": "Duplicate schedule"
+      },
       "editPage": {
         "title": "Editing settings for {{ name }}"
       },
@@ -78,6 +88,7 @@
       "name": {
         "label": "Name"
       },
+      "newButton": "New schedule",
       "newPage": {
         "title": "New schedule"
       },
@@ -168,6 +179,22 @@
       },
       "welcomeMessage": {
         "label": "Welcome message"
+      }
+    },
+    "shifts": {
+      "buttons": {
+        "edit": "Edit shift",
+        "new": "Add shift",
+        "delete": "Remove shift"
+      },
+      "respondersTable": {
+        "header": "Responders",
+        "addResponderButton": "Add responder",
+        "addResponderSelect": "Add responder"
+      },
+      "timespan": {
+        "startLabel": "Starts at",
+        "finishLabel": "Ends at"
       }
     },
     "textResponses": {

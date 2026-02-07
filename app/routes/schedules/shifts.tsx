@@ -1,20 +1,33 @@
-import sortBy from "lodash/sortBy";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router";
-import dateTimeFormats from "~/dateTimeFormats";
 import { coerceId } from "~/db/utils";
 import type { Route } from "./+types/shifts";
 import { dbContext } from "~/contexts";
+import {
+  SerializedShift,
+  ShiftScheduleTable,
+} from "~/components/shift-scheduling";
+import { shiftAssignmentsTable, shiftsTable } from "~/db/schema";
+import type { TimestampRange } from "~/db/tsRange";
+import { serializeError } from "~/components/error-display";
+import i18n from "~/i18n";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
   const db = context.get(dbContext);
+
+  const schedule = await db.query.schedulesTable.findFirst({
+    where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
+  });
+
+  if (!schedule) {
+    return new Response(null, { status: 404 });
+  }
 
   const shifts = await db.query.shiftsTable.findMany({
     where: (tbl, { eq }) => eq(tbl.scheduleId, coerceId(params.scheduleId)),
     columns: { id: true, timespan: true },
     with: {
       shiftAssignments: {
-        columns: { responderId: true, position: true },
+        columns: { id: true, responderId: true, position: true },
         with: {
           responder: {
             columns: { id: true, name: true },
@@ -24,53 +37,62 @@ export async function loader({ context, params }: Route.LoaderArgs) {
     },
   });
 
-  return { shifts };
+  const responders = await db.query.respondersTable.findMany();
+
+  return { shifts, schedule, responders };
+}
+
+export async function action({ request, params, context }: Route.ActionArgs) {
+  if (request.method !== "POST") {
+    return new Response(null, { status: 404 });
+  }
+
+  const data = SerializedShift.parse(await request.json());
+  const db = context.get(dbContext);
+
+  try {
+    await db.transaction(async (tx) => {
+      const [{ id: shiftId }] = await tx
+        .insert(shiftsTable)
+        .values({
+          scheduleId: Number.parseInt(params.scheduleId),
+          timespan: {
+            start: new Date(data.timespan.start),
+            finish: new Date(data.timespan.finish),
+            includeStart: true,
+            includeFinish: false,
+          } satisfies TimestampRange,
+        })
+        .returning({ id: shiftsTable.id });
+
+      await tx.insert(shiftAssignmentsTable).values(
+        data.shiftAssignments.map((shiftAssignment, index) => ({
+          position: index + 1,
+          responderId: shiftAssignment.responderId,
+          shiftId,
+        })),
+      );
+    });
+  } catch (err) {
+    return serializeError(err, i18n.t);
+  }
 }
 
 export default function ScheduleShiftsPage({
   loaderData,
 }: Route.ComponentProps) {
-  const { shifts } = loaderData;
+  const { shifts, schedule, responders } = loaderData;
   const { t } = useTranslation();
 
   return (
     <>
       <h2>{t("schedules.shifts.title")}</h2>
 
-      <table className="table table-striped">
-        <thead>
-          <th>{t("schedules.shifts.timespan")}</th>
-          <th>{t("schedules.shifts.responders")}</th>
-        </thead>
-        <tbody>
-          {shifts.map((shift) => (
-            <tr key={shift.id}>
-              <td>
-                {t("timespan", {
-                  timespan: shift.timespan,
-                  formatParams: {
-                    "timespan.start": dateTimeFormats.short,
-                    "timespan.finish": dateTimeFormats.short,
-                  },
-                })}
-              </td>
-              <td>
-                {sortBy(
-                  shift.shiftAssignments,
-                  (shiftAssignment) => shiftAssignment.position,
-                ).map(({ responder }, index) => (
-                  <>
-                    {index > 0 && ", "}
-                    <Link to={`/responders/${responder.id}`}>
-                      {responder.name}
-                    </Link>
-                  </>
-                ))}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ShiftScheduleTable
+        schedule={schedule}
+        shifts={shifts}
+        responders={responders}
+      />
     </>
   );
 }

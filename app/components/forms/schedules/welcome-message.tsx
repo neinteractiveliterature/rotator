@@ -27,7 +27,7 @@ export default function WelcomeMessage({ save }: WelcomeMessageProps) {
       title={t("schedules.phoneFlow.welcomeMessage")}
       data={schedule}
       save={save}
-      prepareEditingData={(data) => data}
+      prepareEditingData={(data) => ({ welcomeMessage: data.welcomeMessage })}
       finishEditingData={(data) => data}
     >
       {({ data, editingData, setEditingData }) => (
