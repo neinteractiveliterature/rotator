@@ -35,7 +35,7 @@
     "bootstrap-icons": "^1.11.4",
     "classnames": "^2.5.1",
     "codemirror": "^6.0.1",
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.0.0",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.45.0",
     "express": "^5.2.1",
