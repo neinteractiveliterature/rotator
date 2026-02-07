@@ -29,7 +29,9 @@ export default function PostCallTextMessage({
       title={t("schedules.phoneFlow.postCallText")}
       data={schedule}
       save={save}
-      prepareEditingData={(data) => data}
+      prepareEditingData={(data) => ({
+        postCallTextTemplate: data.postCallTextTemplate,
+      })}
       finishEditingData={(data) => data}
     >
       {({ data, editingData, setEditingData }) => (

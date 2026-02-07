@@ -50,13 +50,15 @@ export function calculateHourByHourShiftSchedule({
 
   const start = new Date(
     Math.min(
-      shifts[0].timespan.start.getTime(),
+      ...(shifts.length > 0 ? [shifts[0].timespan.start.getTime()] : []),
       schedule.timespan.start.getTime(),
     ),
   );
   const finish = new Date(
     Math.max(
-      shifts[shifts.length - 1].timespan.finish.getTime(),
+      ...(shifts.length > 0
+        ? [shifts[shifts.length - 1].timespan.finish.getTime()]
+        : []),
       schedule.timespan.finish.getTime(),
     ),
   );

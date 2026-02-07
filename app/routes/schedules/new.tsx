@@ -1,15 +1,16 @@
 import { useTranslation } from "react-i18next";
 import type { Route } from "./+types/new";
 import { Form, redirect } from "react-router";
-import { ErrorDisplay } from "@neinteractiveliterature/litform";
 import ScheduleFormFields, {
   parseScheduleFormData,
   type ScheduleFormFieldsProps,
 } from "~/components/forms/schedule";
 import { schedulesTable } from "~/db/schema";
 import { dbContext } from "~/contexts";
-import { DrizzleQueryError, type InferInsertModel } from "drizzle-orm";
+import { type InferInsertModel } from "drizzle-orm";
 import type { TimestampRange } from "~/db/tsRange";
+import { ErrorDisplay, serializeError } from "~/components/error-display";
+import i18n from "~/i18n";
 
 const blankTimespan: TimestampRange = {
   start: new Date("1970-01-01T00:00:00Z"),
@@ -63,11 +64,7 @@ export async function action({ context, request }: Route.ActionArgs) {
 
     return redirect(`/schedules/${schedule.id}`);
   } catch (error) {
-    if (error instanceof DrizzleQueryError && error.cause) {
-      return error.cause;
-    } else {
-      return error;
-    }
+    return serializeError(error, i18n.t);
   }
 }
 
@@ -83,7 +80,7 @@ export default function NewSchedule({ actionData }: Route.ComponentProps) {
       <Form method="POST">
         <ScheduleFormFields schedule={blankFormFields} />
 
-        <ErrorDisplay graphQLError={actionData} />
+        <ErrorDisplay error={actionData} />
 
         <input
           type="submit"
