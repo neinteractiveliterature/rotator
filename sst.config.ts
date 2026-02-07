@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="./.sst/platform/config.d.ts" />
 
+import type { Output } from "@pulumi/pulumi";
+
 const COPY_FILES = [
   {
     from: "drizzle",
@@ -12,7 +14,7 @@ const COPY_FILES = [
   },
 ];
 
-export function buildAndRunMigrator(databaseUrl: string) {
+export function buildAndRunMigrator(databaseUrl: string | Output<string>) {
   const migrator = new sst.aws.Function("MigratorFn", {
     handler: "drizzle/migrate.handler",
     copyFiles: COPY_FILES,
@@ -84,7 +86,11 @@ export default $config({
         transform: {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           server(args, _opts, _name) {
-            args.copyFiles = [...(args.copyFiles ?? []), ...COPY_FILES];
+            if (args.copyFiles && Array.isArray(args.copyFiles)) {
+              args.copyFiles.concat(COPY_FILES);
+            } else {
+              args.copyFiles = COPY_FILES;
+            }
           },
         },
       },
