@@ -25,7 +25,7 @@ export const phoneNumbersRelations = relations(
     phoneNumbersSchedules: many(phoneNumbersSchedulesTable, {
       relationName: "phoneNumber",
     }),
-  })
+  }),
 );
 
 export const respondersTable = pgTable("responders", {
@@ -76,7 +76,7 @@ export const phoneNumbersSchedulesTable = pgTable(
       .notNull()
       .references(() => schedulesTable.id),
   },
-  (t) => [primaryKey({ columns: [t.phoneNumberId, t.scheduleId] })]
+  (t) => [primaryKey({ columns: [t.phoneNumberId, t.scheduleId] })],
 );
 
 export const phoneNumbersSchedulesRelations = relations(
@@ -92,7 +92,7 @@ export const phoneNumbersSchedulesRelations = relations(
       references: [schedulesTable.id],
       relationName: "schedule",
     }),
-  })
+  }),
 );
 
 export const shiftsTable = pgTable(
@@ -104,7 +104,7 @@ export const shiftsTable = pgTable(
       .references(() => schedulesTable.id),
     timespan: tsRange().notNull(),
   },
-  (t) => [index().using("gist", t.timespan), index().on(t.scheduleId)]
+  (t) => [index().using("gist", t.timespan), index().on(t.scheduleId)],
 );
 
 export const shiftsRelations = relations(shiftsTable, ({ one, many }) => ({
@@ -132,7 +132,7 @@ export const shiftAssignmentsTable = pgTable(
     index().on(t.shiftId),
     index().on(t.responderId),
     uniqueIndex().on(t.shiftId, t.responderId, t.position),
-  ]
+  ],
 );
 
 export const shiftAssignmentsRelations = relations(
@@ -148,7 +148,7 @@ export const shiftAssignmentsRelations = relations(
       references: [respondersTable.id],
       relationName: "responder",
     }),
-  })
+  }),
 );
 
 export const usersTable = pgTable(
@@ -161,7 +161,7 @@ export const usersTable = pgTable(
     name: text().notNull(),
     site_admin: boolean().notNull().default(false),
   },
-  (t) => [uniqueIndex().on(t.provider, t.uid)]
+  (t) => [uniqueIndex().on(t.provider, t.uid)],
 );
 
 export const oauth2ProvidersTable = pgTable(
@@ -174,5 +174,5 @@ export const oauth2ProvidersTable = pgTable(
     codeChallengeMethod: integer(),
     tokenRevocationEndpoint: text(),
   },
-  (t) => [uniqueIndex().on(t.url)]
+  (t) => [uniqueIndex().on(t.url)],
 );

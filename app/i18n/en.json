@@ -7,8 +7,13 @@
     },
     "buttons": {
       "cancel": "Cancel",
+      "dragToReorder": "Drag to reorder",
       "edit": "Edit",
       "save": "Save"
+    },
+    "errors": {
+      "unknown": "Unknown error",
+      "cause": "Caused by: {{ cause }}"
     },
     "phoneNumbers": {
       "title": "Phone numbers",
@@ -168,6 +173,22 @@
       },
       "welcomeMessage": {
         "label": "Welcome message"
+      }
+    },
+    "shifts": {
+      "buttons": {
+        "edit": "Edit shift",
+        "new": "Add shift",
+        "delete": "Remove shift"
+      },
+      "respondersTable": {
+        "header": "Responders",
+        "addResponderButton": "Add responder",
+        "addResponderSelect": "Add responder"
+      },
+      "timespan": {
+        "startLabel": "Starts at",
+        "finishLabel": "Ends at"
       }
     },
     "textResponses": {
