@@ -1,4 +1,4 @@
-import "./instrument.server";
+import "../instrument.server";
 import * as Sentry from "@sentry/react-router";
 import { PassThrough } from "node:stream";
 
