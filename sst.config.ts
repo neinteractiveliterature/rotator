@@ -84,6 +84,9 @@ export default $config({
         },
         server: {
           runtime: "nodejs22.x",
+          loader: {
+            ".node": "copy",
+          },
         },
         transform: {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
