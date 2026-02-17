@@ -1,3 +1,5 @@
+import "./instrument.server";
+import * as Sentry from "@sentry/react-router";
 import { PassThrough } from "node:stream";
 
 import type { EntryContext } from "react-router";
@@ -7,14 +9,18 @@ import { isbot } from "isbot";
 import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
 
+export const handleError = Sentry.createSentryHandleError({
+  logErrors: false,
+});
+
 export const streamTimeout = 5_000;
 
-export default function handleRequest(
+function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  routerContext: EntryContext
   // loadContext: AppLoadContext
+  routerContext: EntryContext,
 ) {
   return new Promise((resolve, reject) => {
     let shellRendered = false;
@@ -41,10 +47,10 @@ export default function handleRequest(
             new Response(stream, {
               headers: responseHeaders,
               status: responseStatusCode,
-            })
+            }),
           );
 
-          pipe(body);
+          pipe(Sentry.getMetaTagTransformer(body));
         },
         onShellError(error: unknown) {
           reject(error);
@@ -58,7 +64,7 @@ export default function handleRequest(
             console.error(error);
           }
         },
-      }
+      },
     );
 
     // Abort the rendering stream after the `streamTimeout` so it has time to
@@ -66,3 +72,5 @@ export default function handleRequest(
     setTimeout(abort, streamTimeout + 1000);
   });
 }
+
+export default Sentry.wrapSentryHandleRequest(handleRequest);

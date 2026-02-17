@@ -55,6 +55,7 @@ export default $config({
     const OAUTH2_CLIENT_ID = new sst.Secret("OAUTH2_CLIENT_ID");
     const OAUTH2_CLIENT_SECRET = new sst.Secret("OAUTH2_CLIENT_SECRET");
     const SECRET_KEY_BASE = new sst.Secret("SECRET_KEY_BASE");
+    const SENTRY_DSN = new sst.Secret("SENTRY_DSN");
     const SMTP_URL = new sst.Secret("SMTP_URL");
     const TWILIO_AUTH_TOKEN = new sst.Secret("TWILIO_AUTH_TOKEN");
     const TWILIO_SID = new sst.Secret("TWILIO_SID");
@@ -76,6 +77,7 @@ export default $config({
           OAUTH2_CLIENT_ID: OAUTH2_CLIENT_ID.value,
           OAUTH2_CLIENT_SECRET: OAUTH2_CLIENT_SECRET.value,
           SECRET_KEY_BASE: SECRET_KEY_BASE.value,
+          SENTRY_DSN: SENTRY_DSN.value,
           SMTP_URL: SMTP_URL.value,
           TWILIO_AUTH_TOKEN: TWILIO_AUTH_TOKEN.value,
           TWILIO_SID: TWILIO_SID.value,

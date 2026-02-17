@@ -30,3 +30,6 @@
 
 # Local database dumps
 /*.sql
+
+# Sentry Config File
+.env.sentry-build-plugin

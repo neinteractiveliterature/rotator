@@ -30,6 +30,8 @@
     "@react-router/express": "^7.12.0",
     "@react-router/node": "^7.12.0",
     "@react-router/serve": "^7.12.0",
+    "@sentry/profiling-node": "^10.39.0",
+    "@sentry/react-router": "^10.39.0",
     "@vvo/tzdb": "^6.198.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.4",
