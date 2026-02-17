@@ -11,21 +11,6 @@ permissions:
   contents: read
 
 jobs:
-  docker-release:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.release.name != null }}
-    steps:
-      - uses: actions/checkout@v6
-      - name: Log in to registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-      - name: Pull built image
-        run: docker pull ghcr.io/neinteractiveliterature/rotator:${{ github.sha }}
-      - name: Tag image with version Tag
-        run: docker tag ghcr.io/neinteractiveliterature/rotator:${{ github.sha }} ghcr.io/neinteractiveliterature/rotator:${{ github.event.release.name }}
-      - name: Tag image as latest
-        run: docker tag ghcr.io/neinteractiveliterature/rotator:${{ github.sha }} ghcr.io/neinteractiveliterature/rotator:latest
-      - name: Push to registry
-        run: docker push ghcr.io/neinteractiveliterature/rotator:latest && docker push ghcr.io/neinteractiveliterature/rotator:${{ github.event.release.name }}
   sst-release:
     runs-on: ubuntu-latest
     steps:
