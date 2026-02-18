@@ -25,6 +25,7 @@ export function buildAndRunMigrator(databaseUrl: string | Output<string>) {
     runtime: "nodejs22.x",
     nodejs: {
       loader: {
+        ".node": "file",
         ".pem": "text",
       },
     },
@@ -85,7 +86,7 @@ export default $config({
         server: {
           runtime: "nodejs22.x",
           loader: {
-            ".node": "copy",
+            ".node": "file",
           },
         },
         transform: {
