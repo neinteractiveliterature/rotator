@@ -42,6 +42,10 @@ declare module "sst" {
       "type": "sst.sst.Secret"
       "value": string
     }
+    "SENTRY_DSN": {
+      "type": "sst.sst.Secret"
+      "value": string
+    }
     "SMTP_URL": {
       "type": "sst.sst.Secret"
       "value": string

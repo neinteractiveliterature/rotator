@@ -1,10 +1,19 @@
 import { reactRouter } from "@react-router/dev/vite";
+import { sentryReactRouter } from "@sentry/react-router";
 import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-const config = defineConfig({
+const config = defineConfig((config) => ({
   plugins: [
     ...(process.env.VITEST ? [] : [reactRouter()]),
+    sentryReactRouter(
+      {
+        org: process.env.SENTRY_ORG,
+        project: process.env.SENTRY_PROJECT,
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+      },
+      config,
+    ),
     tsconfigPaths({ ignoreConfigErrors: true }),
   ],
   css: {
@@ -49,6 +58,6 @@ const config = defineConfig({
       },
     },
   },
-});
+}));
 
 export default config;
