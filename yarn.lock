@@ -11220,7 +11220,7 @@ __metadata:
     remix-auth-oauth2: "npm:^3.4.1"
     rollup: "npm:^4.55.2"
     sass-embedded: "npm:^1.85.0"
-    sst: "npm:3.19.0"
+    sst: "npm:3.19.3"
     style-mod: "npm:^4.1.2"
     temporal-polyfill: "npm:^0.3.0"
     tslib: "npm:^2.8.1"
@@ -11991,79 +11991,79 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sst-darwin-arm64@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-darwin-arm64@npm:3.19.0"
+"sst-darwin-arm64@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-darwin-arm64@npm:3.19.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-darwin-x64@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-darwin-x64@npm:3.19.0"
+"sst-darwin-x64@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-darwin-x64@npm:3.19.3"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-linux-arm64@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-linux-arm64@npm:3.19.0"
+"sst-linux-arm64@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-linux-arm64@npm:3.19.3"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-linux-x64@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-linux-x64@npm:3.19.0"
+"sst-linux-x64@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-linux-x64@npm:3.19.3"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-linux-x86@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-linux-x86@npm:3.19.0"
+"sst-linux-x86@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-linux-x86@npm:3.19.3"
   conditions: os=linux & cpu=x86
   languageName: node
   linkType: hard
 
-"sst-win32-arm64@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-win32-arm64@npm:3.19.0"
+"sst-win32-arm64@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-win32-arm64@npm:3.19.3"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-win32-x64@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-win32-x64@npm:3.19.0"
+"sst-win32-x64@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-win32-x64@npm:3.19.3"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-win32-x86@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst-win32-x86@npm:3.19.0"
+"sst-win32-x86@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst-win32-x86@npm:3.19.3"
   conditions: os=win32 & cpu=x86
   languageName: node
   linkType: hard
 
-"sst@npm:3.19.0":
-  version: 3.19.0
-  resolution: "sst@npm:3.19.0"
+"sst@npm:3.19.3":
+  version: 3.19.3
+  resolution: "sst@npm:3.19.3"
   dependencies:
     aws-sdk: "npm:2.1692.0"
     aws4fetch: "npm:1.0.18"
     jose: "npm:5.2.3"
     opencontrol: "npm:0.0.6"
     openid-client: "npm:5.6.4"
-    sst-darwin-arm64: "npm:3.19.0"
-    sst-darwin-x64: "npm:3.19.0"
-    sst-linux-arm64: "npm:3.19.0"
-    sst-linux-x64: "npm:3.19.0"
-    sst-linux-x86: "npm:3.19.0"
-    sst-win32-arm64: "npm:3.19.0"
-    sst-win32-x64: "npm:3.19.0"
-    sst-win32-x86: "npm:3.19.0"
+    sst-darwin-arm64: "npm:3.19.3"
+    sst-darwin-x64: "npm:3.19.3"
+    sst-linux-arm64: "npm:3.19.3"
+    sst-linux-x64: "npm:3.19.3"
+    sst-linux-x86: "npm:3.19.3"
+    sst-win32-arm64: "npm:3.19.3"
+    sst-win32-x64: "npm:3.19.3"
+    sst-win32-x86: "npm:3.19.3"
   dependenciesMeta:
     sst-darwin-arm64:
       optional: true
@@ -12083,7 +12083,7 @@ __metadata:
       optional: true
   bin:
     sst: bin/sst.mjs
-  checksum: 10c0/329b9a2b0c852028b6ded7753ef6705c325b0aa334cb666d7be7f42a7579af427548e99869d3711eede19c3878194998aeb0ab6e79fb07817148815c20411c8f
+  checksum: 10c0/a4fadac22e592cba26f5a7194625ef2464edffbf8a5cf31956d37b33867ef56b4009ecee59e91389c299e38b69a5876dd2797bc52d9bac5489f2237d46546b44
   languageName: node
   linkType: hard
 
