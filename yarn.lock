@@ -3003,11 +3003,11 @@ __metadata:
   linkType: hard
 
 "@pulumi/command@npm:^1.1.3":
-  version: 1.2.0
-  resolution: "@pulumi/command@npm:1.2.0"
+  version: 1.2.1
+  resolution: "@pulumi/command@npm:1.2.1"
   dependencies:
     "@pulumi/pulumi": "npm:^3.142.0"
-  checksum: 10c0/78ac69cf7900d80c9744d52583b0cd103bea066ff4361edc8f7a0e6c1f2d561afc31c6d8a9f44dff228c45fae6228a70fb9c1c2f63ea88d56775dac65ff97110
+  checksum: 10c0/4aee9f029c5feda517a5af7b0f4832c8ee094c5c98405bab73812b29760fa3d43e4511f84348def5702bf718f31188a59fd30a41f1afeeee5b0457d912ee41d7
   languageName: node
   linkType: hard
 
