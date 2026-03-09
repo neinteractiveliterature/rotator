@@ -8846,9 +8846,9 @@ __metadata:
   linkType: hard
 
 "jose@npm:^6.0.8":
-  version: 6.2.0
-  resolution: "jose@npm:6.2.0"
-  checksum: 10c0/cbbdfc335caf6255e55fc08f5a92e336dd865b5838255943f73b281908cba4e6183f96cdfd7dff2a27a86add2ec507b5d4a571f90cd2cde30e741f6cdff8e796
+  version: 6.2.1
+  resolution: "jose@npm:6.2.1"
+  checksum: 10c0/456822e00a2ee6b1470fabadd694b237af64b9977aa8a47844aae2841298daefd79bb04ff328cbc3aa3c886761aa72b33bc5c1ad797b31b8368e77a89d09b779
   languageName: node
   linkType: hard
 
