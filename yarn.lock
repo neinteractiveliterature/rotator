@@ -12395,18 +12395,18 @@ __metadata:
   linkType: hard
 
 "temporal-polyfill@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "temporal-polyfill@npm:0.3.0"
+  version: 0.3.1
+  resolution: "temporal-polyfill@npm:0.3.1"
   dependencies:
-    temporal-spec: "npm:0.3.0"
-  checksum: 10c0/ea6a495fac64c19b194ec3536c2a5916a754c2bf7f645fac5c149fe6a43f266fe4493c6fd6a6b6dfa3e9813505bc48346cf0514c1631a401b354f4c6568b908d
+    temporal-spec: "npm:0.3.1"
+  checksum: 10c0/1ea4a462216450ea49ff3d5cf82753872d892363ffcd08e69bb83ffe62d071f5f052087816aa12d47284dfc7ffd4e324990ddbd6d49dc5258e35862655d86e10
   languageName: node
   linkType: hard
 
-"temporal-spec@npm:0.3.0":
-  version: 0.3.0
-  resolution: "temporal-spec@npm:0.3.0"
-  checksum: 10c0/2f7c8530f10e628ff755618490352f6c45b9a20833518286a3c10a8301012696fe6f0bcaa795d5f6f20038777595f2a73dc3390ddea743803405173ff233f482
+"temporal-spec@npm:0.3.1":
+  version: 0.3.1
+  resolution: "temporal-spec@npm:0.3.1"
+  checksum: 10c0/e38eae391bd59ae675f1925a65c8ef302933cf9ce98efedaf2e69269e8c36f2b5d486cd3084367f04a6c1ea0289b925690c0df20a73f0c4629b531775924e850
   languageName: node
   linkType: hard
 
