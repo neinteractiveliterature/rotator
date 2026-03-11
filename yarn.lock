@@ -12395,11 +12395,11 @@ __metadata:
   linkType: hard
 
 "temporal-polyfill@npm:^0.3.0":
-  version: 0.3.1
-  resolution: "temporal-polyfill@npm:0.3.1"
+  version: 0.3.2
+  resolution: "temporal-polyfill@npm:0.3.2"
   dependencies:
     temporal-spec: "npm:0.3.1"
-  checksum: 10c0/1ea4a462216450ea49ff3d5cf82753872d892363ffcd08e69bb83ffe62d071f5f052087816aa12d47284dfc7ffd4e324990ddbd6d49dc5258e35862655d86e10
+  checksum: 10c0/762795c94e1b6cb0574541d0b09f805ff23b0a2c9d0356ab3fc0205e390a3bce73e047de2fdc54c7d149d6e6d781aa1d95aa62afa5de4c83cb79c129b0e502da
   languageName: node
   linkType: hard
 
