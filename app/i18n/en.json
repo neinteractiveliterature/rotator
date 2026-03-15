@@ -33,7 +33,11 @@
         "label": "Phone number"
       },
       "schedules": {
-        "title": "Schedules"
+        "title": "Schedules",
+        "none": "No schedules associated",
+        "addLabel": "Add schedule",
+        "associate": "Associate",
+        "disassociate": "Remove"
       }
     },
     "responders": {
@@ -119,6 +123,13 @@
       },
       "settings": {
         "title": "General settings"
+      },
+      "phoneNumbers": {
+        "title": "Phone numbers",
+        "none": "No phone numbers associated",
+        "addLabel": "Add phone number",
+        "associate": "Associate",
+        "disassociate": "Remove"
       },
       "shifts": {
         "title": "Shifts",

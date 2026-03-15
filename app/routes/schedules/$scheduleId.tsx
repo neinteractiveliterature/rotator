@@ -86,6 +86,14 @@ export default function ScheduleLayout({ loaderData }: Route.ComponentProps) {
               {t("schedules.shifts.title")}
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink
+              to={`/schedules/${loaderData.schedule.id}/phone-numbers`}
+              className="nav-link"
+            >
+              {t("schedules.phoneNumbers.title")}
+            </NavLink>
+          </li>
         </ul>
       </aside>
       <main className="col-md-9">

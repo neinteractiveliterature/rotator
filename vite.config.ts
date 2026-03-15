@@ -36,6 +36,9 @@ const config = defineConfig((config) => ({
     host: "0.0.0.0",
   },
   test: {
+    env: {
+      OAUTH2_SERVER_BASE: "http://localhost",
+    },
     coverage: {
       enabled: process.env["COVERAGE"] ? true : false,
       include: ["app/**/*.{js,jsx,ts,tsx}"],

@@ -37,6 +37,7 @@ export default [
             route(":shiftId", "routes/schedules/$shiftId.tsx"),
           ]),
           route("duplicate", "routes/schedules/duplicate.tsx"),
+          route("phone-numbers", "routes/schedules/phone-numbers.tsx"),
         ]),
         route("new", "routes/schedules/new.tsx"),
       ]),
