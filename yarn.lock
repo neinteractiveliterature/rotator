@@ -3148,7 +3148,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pulumi/aws@npm:^7.19.0":
+"@pulumi/aws@npm:^7.23.0":
   version: 7.23.0
   resolution: "@pulumi/aws@npm:7.23.0"
   dependencies:
@@ -3158,7 +3158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pulumi/command@npm:^1.1.3":
+"@pulumi/command@npm:^1.2.1":
   version: 1.2.1
   resolution: "@pulumi/command@npm:1.2.1"
   dependencies:
@@ -3176,7 +3176,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pulumi/pulumi@npm:^3.142.0, @pulumi/pulumi@npm:^3.219.0":
+"@pulumi/pulumi@npm:^3.142.0, @pulumi/pulumi@npm:^3.226.0":
   version: 3.226.0
   resolution: "@pulumi/pulumi@npm:3.226.0"
   dependencies:
@@ -4576,6 +4576,13 @@ __metadata:
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
   checksum: 10c0/75fea130a52bf320d35d46ed54f3eec77e71a56911b8b69a3fe29497b0b9947b2dc80d30f04054ad4ce7f577856ae3e5397ea7dff0ef14944d3909784c7a93fe
+  languageName: node
+  linkType: hard
+
+"@tsconfig/node18@npm:^18.2.6":
+  version: 18.2.6
+  resolution: "@tsconfig/node18@npm:18.2.6"
+  checksum: 10c0/52fc3fadd9d60225c30983f1236f9d16a83f942d27accf3a71d71aee7c76e705307aefb89baa5b3df631c93fe41b47a25ede4f14c6816019000233f1e4df3302
   languageName: node
   linkType: hard
 
@@ -11418,10 +11425,10 @@ __metadata:
     "@lezer/lr": "npm:^1.4.2"
     "@neinteractiveliterature/litform": "npm:^0.35.0"
     "@popperjs/core": "npm:^2.11.8"
-    "@pulumi/aws": "npm:^7.19.0"
-    "@pulumi/command": "npm:^1.1.3"
+    "@pulumi/aws": "npm:^7.23.0"
+    "@pulumi/command": "npm:^1.2.1"
     "@pulumi/docker-build": "npm:^0.0.15"
-    "@pulumi/pulumi": "npm:^3.219.0"
+    "@pulumi/pulumi": "npm:^3.226.0"
     "@pulumi/random": "npm:^4.19.1"
     "@pulumi/tls": "npm:^5.3.0"
     "@react-router/dev": "npm:^7.12.0"
@@ -11436,6 +11443,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.2.0"
     "@testing-library/user-event": "npm:^14.6.1"
+    "@tsconfig/node18": "npm:^18.2.6"
     "@types/archiver": "npm:^7"
     "@types/babel__core": "npm:^7"
     "@types/bootstrap": "npm:^5"
@@ -11486,7 +11494,7 @@ __metadata:
     remix-auth-oauth2: "npm:^3.4.1"
     rollup: "npm:^4.55.2"
     sass-embedded: "npm:^1.85.0"
-    sst: "npm:4.1.2"
+    sst: "npm:4.3.2"
     style-mod: "npm:^4.1.2"
     temporal-polyfill: "npm:^0.3.0"
     tslib: "npm:^2.8.1"
@@ -12243,77 +12251,77 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sst-darwin-arm64@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-darwin-arm64@npm:4.1.2"
+"sst-darwin-arm64@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-darwin-arm64@npm:4.3.2"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-darwin-x64@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-darwin-x64@npm:4.1.2"
+"sst-darwin-x64@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-darwin-x64@npm:4.3.2"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-linux-arm64@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-linux-arm64@npm:4.1.2"
+"sst-linux-arm64@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-linux-arm64@npm:4.3.2"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-linux-x64@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-linux-x64@npm:4.1.2"
+"sst-linux-x64@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-linux-x64@npm:4.3.2"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-linux-x86@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-linux-x86@npm:4.1.2"
+"sst-linux-x86@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-linux-x86@npm:4.3.2"
   conditions: os=linux & cpu=x86
   languageName: node
   linkType: hard
 
-"sst-win32-arm64@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-win32-arm64@npm:4.1.2"
+"sst-win32-arm64@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-win32-arm64@npm:4.3.2"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-win32-x64@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-win32-x64@npm:4.1.2"
+"sst-win32-x64@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-win32-x64@npm:4.3.2"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-win32-x86@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst-win32-x86@npm:4.1.2"
+"sst-win32-x86@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst-win32-x86@npm:4.3.2"
   conditions: os=win32 & cpu=x86
   languageName: node
   linkType: hard
 
-"sst@npm:4.1.2":
-  version: 4.1.2
-  resolution: "sst@npm:4.1.2"
+"sst@npm:4.3.2":
+  version: 4.3.2
+  resolution: "sst@npm:4.3.2"
   dependencies:
     aws4fetch: "npm:1.0.18"
     jose: "npm:5.2.3"
     openid-client: "npm:5.6.4"
-    sst-darwin-arm64: "npm:4.1.2"
-    sst-darwin-x64: "npm:4.1.2"
-    sst-linux-arm64: "npm:4.1.2"
-    sst-linux-x64: "npm:4.1.2"
-    sst-linux-x86: "npm:4.1.2"
-    sst-win32-arm64: "npm:4.1.2"
-    sst-win32-x64: "npm:4.1.2"
-    sst-win32-x86: "npm:4.1.2"
+    sst-darwin-arm64: "npm:4.3.2"
+    sst-darwin-x64: "npm:4.3.2"
+    sst-linux-arm64: "npm:4.3.2"
+    sst-linux-x64: "npm:4.3.2"
+    sst-linux-x86: "npm:4.3.2"
+    sst-win32-arm64: "npm:4.3.2"
+    sst-win32-x64: "npm:4.3.2"
+    sst-win32-x86: "npm:4.3.2"
   dependenciesMeta:
     sst-darwin-arm64:
       optional: true
@@ -12333,7 +12341,7 @@ __metadata:
       optional: true
   bin:
     sst: bin/sst.mjs
-  checksum: 10c0/a5170bc4a65fb854f51c6eb6aa875f2a73f8b971e9dfdbc9a7366e9f3d611aa9d56a1e154406d368be9e5b44b0351275355e953ade38fac3e29456da67235675
+  checksum: 10c0/e9e56ce2b4e58b3c8a26604fe756433ffd2e1ebb857ce1134c35d3b7fc1bed64d37587888d1ecd8d18d21417abaa09f6006cc1140e8151006028f3250ca96625
   languageName: node
   linkType: hard
 
