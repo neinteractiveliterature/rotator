@@ -323,10 +323,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.28.4, @babel/runtime@npm:^7.28.6":
-  version: 7.28.6
-  resolution: "@babel/runtime@npm:7.28.6"
-  checksum: 10c0/358cf2429992ac1c466df1a21c1601d595c46930a13c1d4662fde908d44ee78ec3c183aaff513ecb01ef8c55c3624afe0309eeeb34715672dbfadb7feedb2c0d
+"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.28.4, @babel/runtime@npm:^7.29.2":
+  version: 7.29.2
+  resolution: "@babel/runtime@npm:7.29.2"
+  checksum: 10c0/30b80a0140d16467792e1bbeb06f655b0dab70407da38dfac7fedae9c859f9ae9d846ef14ad77bd3814c064295fe9b1bc551f1541ea14646ae9f22b71a8bc17a
   languageName: node
   linkType: hard
 
@@ -8267,16 +8267,16 @@ __metadata:
   linkType: hard
 
 "i18next@npm:^25.0.0":
-  version: 25.9.0
-  resolution: "i18next@npm:25.9.0"
+  version: 25.10.2
+  resolution: "i18next@npm:25.10.2"
   dependencies:
-    "@babel/runtime": "npm:^7.28.6"
+    "@babel/runtime": "npm:^7.29.2"
   peerDependencies:
     typescript: ^5
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/63ab0be4d07aea0064062a3ab6e683c858e11d6dff3d3ee7921b8868fbc2386933afc9d4e217e232d5ac6d2bd644500629d0f01c7d9bc83509cc38179d8b14e2
+  checksum: 10c0/b94955c6db75cb91f9352adb3b5f0385b331d8af43f37840e97d95e420dcedf0c410d184fbb1d210645475a08ffadd0302ecb81801541c7c983156a3748f72bb
   languageName: node
   linkType: hard
 
