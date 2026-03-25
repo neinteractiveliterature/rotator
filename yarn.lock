@@ -11445,7 +11445,7 @@ __metadata:
     remix-auth-oauth2: "npm:^3.4.1"
     rollup: "npm:^4.55.2"
     sass-embedded: "npm:^1.85.0"
-    sst: "npm:4.5.5"
+    sst: "npm:4.5.8"
     style-mod: "npm:^4.1.2"
     temporal-polyfill: "npm:^0.3.0"
     tslib: "npm:^2.8.1"
@@ -12195,77 +12195,77 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sst-darwin-arm64@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-darwin-arm64@npm:4.5.5"
+"sst-darwin-arm64@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-darwin-arm64@npm:4.5.8"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-darwin-x64@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-darwin-x64@npm:4.5.5"
+"sst-darwin-x64@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-darwin-x64@npm:4.5.8"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-linux-arm64@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-linux-arm64@npm:4.5.5"
+"sst-linux-arm64@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-linux-arm64@npm:4.5.8"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-linux-x64@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-linux-x64@npm:4.5.5"
+"sst-linux-x64@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-linux-x64@npm:4.5.8"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-linux-x86@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-linux-x86@npm:4.5.5"
+"sst-linux-x86@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-linux-x86@npm:4.5.8"
   conditions: os=linux & cpu=x86
   languageName: node
   linkType: hard
 
-"sst-win32-arm64@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-win32-arm64@npm:4.5.5"
+"sst-win32-arm64@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-win32-arm64@npm:4.5.8"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"sst-win32-x64@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-win32-x64@npm:4.5.5"
+"sst-win32-x64@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-win32-x64@npm:4.5.8"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"sst-win32-x86@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst-win32-x86@npm:4.5.5"
+"sst-win32-x86@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst-win32-x86@npm:4.5.8"
   conditions: os=win32 & cpu=x86
   languageName: node
   linkType: hard
 
-"sst@npm:4.5.5":
-  version: 4.5.5
-  resolution: "sst@npm:4.5.5"
+"sst@npm:4.5.8":
+  version: 4.5.8
+  resolution: "sst@npm:4.5.8"
   dependencies:
     aws4fetch: "npm:1.0.18"
     jose: "npm:5.2.3"
     openid-client: "npm:5.6.4"
-    sst-darwin-arm64: "npm:4.5.5"
-    sst-darwin-x64: "npm:4.5.5"
-    sst-linux-arm64: "npm:4.5.5"
-    sst-linux-x64: "npm:4.5.5"
-    sst-linux-x86: "npm:4.5.5"
-    sst-win32-arm64: "npm:4.5.5"
-    sst-win32-x64: "npm:4.5.5"
-    sst-win32-x86: "npm:4.5.5"
+    sst-darwin-arm64: "npm:4.5.8"
+    sst-darwin-x64: "npm:4.5.8"
+    sst-linux-arm64: "npm:4.5.8"
+    sst-linux-x64: "npm:4.5.8"
+    sst-linux-x86: "npm:4.5.8"
+    sst-win32-arm64: "npm:4.5.8"
+    sst-win32-x64: "npm:4.5.8"
+    sst-win32-x86: "npm:4.5.8"
   dependenciesMeta:
     sst-darwin-arm64:
       optional: true
@@ -12285,7 +12285,7 @@ __metadata:
       optional: true
   bin:
     sst: bin/sst.mjs
-  checksum: 10c0/50d99a8ce0175046e23d2f8ea74986d662f6af95560902334a01f9fa8dda364d723ce51ac7dd8e651794ba0ff4b50784a895e852566e35e108fe16fb200b4dd9
+  checksum: 10c0/1063a34d24f59b15f1f3783fce8dad292f308cce908ec2874368959e47184a80addfbd351838f5d9c5e14103b0a80d256bbbca27a2b74c7913bd177ccd98848a
   languageName: node
   linkType: hard
 
