@@ -3897,21 +3897,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry-internal/browser-utils@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry-internal/browser-utils@npm:10.45.0"
+"@sentry-internal/browser-utils@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry-internal/browser-utils@npm:10.46.0"
   dependencies:
-    "@sentry/core": "npm:10.45.0"
-  checksum: 10c0/911ebcb570bc9ed47959ee225edf5d76472c422d86ec22273f55222b8a391c320da1e9cfddb5786423f85682c7ca7c970107b825eb885947d6940b9bd993304d
+    "@sentry/core": "npm:10.46.0"
+  checksum: 10c0/942ab5d0102c233ab857e04b7434462d4a9e416dcff9a37b5da655d67674a5bb530f40657a186479944e102f3313136b006f815ebae67919062f5c2931a8534e
   languageName: node
   linkType: hard
 
-"@sentry-internal/feedback@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry-internal/feedback@npm:10.45.0"
+"@sentry-internal/feedback@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry-internal/feedback@npm:10.46.0"
   dependencies:
-    "@sentry/core": "npm:10.45.0"
-  checksum: 10c0/d50d6ac5fad8f13a1e31e9173365dc56bc6777485d49e8b0d634b3b889574c2489b24b2e0d5194950dcbcbe25bca9f0474373722a6a4b0a70f19dc23021ebdb4
+    "@sentry/core": "npm:10.46.0"
+  checksum: 10c0/b9a5bd8558620fd48232a21e0cef7364387a938c2b2b0ef81f7d62e31812695744debe56d6ae2e60bbb917b847c6048cd7859832df8f3edfd4b0ba1ecc72c57b
   languageName: node
   linkType: hard
 
@@ -3926,23 +3926,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay-canvas@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry-internal/replay-canvas@npm:10.45.0"
+"@sentry-internal/replay-canvas@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry-internal/replay-canvas@npm:10.46.0"
   dependencies:
-    "@sentry-internal/replay": "npm:10.45.0"
-    "@sentry/core": "npm:10.45.0"
-  checksum: 10c0/8ecd11be0f1eb113d6b79a352ebc9e7cf204f847c8bac4b61fe09b24cfb7c1219bd2a52345a69ce0a16e5876a64543cd0b7a85c7f851195a69d959c61278c153
+    "@sentry-internal/replay": "npm:10.46.0"
+    "@sentry/core": "npm:10.46.0"
+  checksum: 10c0/0b22e24028610f7657a7cdf368ae29daba03e4b19825556320f0677fc9c05313c051ff36f811f7653cd2ddb97c7f4cc27b2173be3287ac45269002f824a218b1
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry-internal/replay@npm:10.45.0"
+"@sentry-internal/replay@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry-internal/replay@npm:10.46.0"
   dependencies:
-    "@sentry-internal/browser-utils": "npm:10.45.0"
-    "@sentry/core": "npm:10.45.0"
-  checksum: 10c0/da1a251fd51b14b1d6061e3080e4933728d3b1b7e9f1745202abac42e80661272f54b7f8011fbab2d2df414a342bd4b0dbb889b3dce8e33069a50aff36bf9413
+    "@sentry-internal/browser-utils": "npm:10.46.0"
+    "@sentry/core": "npm:10.46.0"
+  checksum: 10c0/df97bab89fe0965c12a4d4e29a5356ea43f729a83f6405b723b9715dabc317d7300956848b8e5780ad701324b19f649cccfd4dfb31e785cdc75765d4e1868fd6
   languageName: node
   linkType: hard
 
@@ -3953,16 +3953,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry/browser@npm:10.45.0"
+"@sentry/browser@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry/browser@npm:10.46.0"
   dependencies:
-    "@sentry-internal/browser-utils": "npm:10.45.0"
-    "@sentry-internal/feedback": "npm:10.45.0"
-    "@sentry-internal/replay": "npm:10.45.0"
-    "@sentry-internal/replay-canvas": "npm:10.45.0"
-    "@sentry/core": "npm:10.45.0"
-  checksum: 10c0/1014dae3e036983eb4f8f7ae29ffe998cbc1f22f0ae6bf8d170718efe1dbe3a78bfcd839fe02f7e63063b237886d569ba85baa3d4a433a05123489475a7c371c
+    "@sentry-internal/browser-utils": "npm:10.46.0"
+    "@sentry-internal/feedback": "npm:10.46.0"
+    "@sentry-internal/replay": "npm:10.46.0"
+    "@sentry-internal/replay-canvas": "npm:10.46.0"
+    "@sentry/core": "npm:10.46.0"
+  checksum: 10c0/4ef1ae59152057fc85b19511d2abb6d3c85e4fc60b2c4ac764cbc075809720b2293ec032e5b840aef75d02bd17e4556978d13af341fa6de390d270a2697e7499
   languageName: node
   linkType: hard
 
@@ -4077,19 +4077,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry/core@npm:10.45.0"
-  checksum: 10c0/ee84882df0615857fc716a5d126b93293d0171fc215bd5a8180263fe096b4f375af53e274597db9016ba36edb2e5b519c7b046809fdc9c36f27677381e08fe5f
+"@sentry/core@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry/core@npm:10.46.0"
+  checksum: 10c0/5f241f8eac0910181dd3b2073ea2ccaddc709b1837bfc05af28f040f492c565cdf867eb896684452c44a37ed1dc4c1ecfaf8c725abf6989d450a35473e8ab0f2
   languageName: node
   linkType: hard
 
-"@sentry/node-core@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry/node-core@npm:10.45.0"
+"@sentry/node-core@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry/node-core@npm:10.46.0"
   dependencies:
-    "@sentry/core": "npm:10.45.0"
-    "@sentry/opentelemetry": "npm:10.45.0"
+    "@sentry/core": "npm:10.46.0"
+    "@sentry/opentelemetry": "npm:10.46.0"
     import-in-the-middle: "npm:^3.0.0"
   peerDependencies:
     "@opentelemetry/api": ^1.9.0
@@ -4114,13 +4114,13 @@ __metadata:
       optional: true
     "@opentelemetry/semantic-conventions":
       optional: true
-  checksum: 10c0/003b263eec84402ea7823eeeb3e938019e3853cd90d2cee21643d02447168bd674f38ec96017d0e4e438b9d3a48ab154b62c1a91968a8ae302a00fb7dc11701a
+  checksum: 10c0/b6ce564d48079392fcc92715d80a2f4b7f7ff505b296c04504896e52bd3165a6c02719b06c70d9cbbfe4fba55cf5e23eecc8750251c741d2696803cbe9a311e6
   languageName: node
   linkType: hard
 
-"@sentry/node@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry/node@npm:10.45.0"
+"@sentry/node@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry/node@npm:10.46.0"
   dependencies:
     "@fastify/otel": "npm:0.17.1"
     "@opentelemetry/api": "npm:^1.9.0"
@@ -4153,74 +4153,74 @@ __metadata:
     "@opentelemetry/sdk-trace-base": "npm:^2.6.0"
     "@opentelemetry/semantic-conventions": "npm:^1.40.0"
     "@prisma/instrumentation": "npm:7.4.2"
-    "@sentry/core": "npm:10.45.0"
-    "@sentry/node-core": "npm:10.45.0"
-    "@sentry/opentelemetry": "npm:10.45.0"
+    "@sentry/core": "npm:10.46.0"
+    "@sentry/node-core": "npm:10.46.0"
+    "@sentry/opentelemetry": "npm:10.46.0"
     import-in-the-middle: "npm:^3.0.0"
-  checksum: 10c0/b3cfb6667bd7644abf6b6ce5e244b9d8bc2a1028e80461ec85453b26fb4f3e8a344c72111be775abced45f376fae00d7b3eb23dbb1398e0de0029a4fedb4c838
+  checksum: 10c0/130ce5da834adeafc75214f3e41febe9162c3c5de5b2d5fc14f16fb78477c9247296c964de766ecb43748cfa9bdd2efa0448798c25806527f9c0eb7b55d318d5
   languageName: node
   linkType: hard
 
-"@sentry/opentelemetry@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry/opentelemetry@npm:10.45.0"
+"@sentry/opentelemetry@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry/opentelemetry@npm:10.46.0"
   dependencies:
-    "@sentry/core": "npm:10.45.0"
+    "@sentry/core": "npm:10.46.0"
   peerDependencies:
     "@opentelemetry/api": ^1.9.0
     "@opentelemetry/context-async-hooks": ^1.30.1 || ^2.1.0
     "@opentelemetry/core": ^1.30.1 || ^2.1.0
     "@opentelemetry/sdk-trace-base": ^1.30.1 || ^2.1.0
     "@opentelemetry/semantic-conventions": ^1.39.0
-  checksum: 10c0/8c700a3f15304c92dc2ac69604932c3af5b16df870a361b52c88b3644388b993c5b01ad63917e03e10067da899a25b7c1d12fddf4ba5d74c19fcfe670968738c
+  checksum: 10c0/2b846cb51f2dc0863a2f0cd92370c30e2ae6548dea7e429c7e38d8039bcacb65ac59036006f063f803d75e2fc217cb838b4048cb374766aa4a08c5929796021a
   languageName: node
   linkType: hard
 
 "@sentry/profiling-node@npm:^10.39.0":
-  version: 10.45.0
-  resolution: "@sentry/profiling-node@npm:10.45.0"
+  version: 10.46.0
+  resolution: "@sentry/profiling-node@npm:10.46.0"
   dependencies:
     "@sentry-internal/node-cpu-profiler": "npm:^2.2.0"
-    "@sentry/core": "npm:10.45.0"
-    "@sentry/node": "npm:10.45.0"
+    "@sentry/core": "npm:10.46.0"
+    "@sentry/node": "npm:10.46.0"
   bin:
     sentry-prune-profiler-binaries: scripts/prune-profiler-binaries.js
-  checksum: 10c0/b6e442645a6157f849572872ac7598f4267c41c66745fb5f85cddbd94dbf8c80bdb5ec3eb7a34eaffc22bcc931d5ef0c560cd75ad23d19245713bc876f678fab
+  checksum: 10c0/c40dd174d614233eb920c7d00e34d406ddf21a8db13192e32dc724872e1d2000c414ed34941cbb189bd7f072b41a94a488fdc5c6ce5a377140aa0358671e4491
   languageName: node
   linkType: hard
 
 "@sentry/react-router@npm:^10.39.0":
-  version: 10.45.0
-  resolution: "@sentry/react-router@npm:10.45.0"
+  version: 10.46.0
+  resolution: "@sentry/react-router@npm:10.46.0"
   dependencies:
     "@opentelemetry/api": "npm:^1.9.0"
     "@opentelemetry/core": "npm:^2.6.0"
     "@opentelemetry/instrumentation": "npm:^0.213.0"
     "@opentelemetry/semantic-conventions": "npm:^1.40.0"
-    "@sentry/browser": "npm:10.45.0"
+    "@sentry/browser": "npm:10.46.0"
     "@sentry/cli": "npm:^2.58.5"
-    "@sentry/core": "npm:10.45.0"
-    "@sentry/node": "npm:10.45.0"
-    "@sentry/react": "npm:10.45.0"
+    "@sentry/core": "npm:10.46.0"
+    "@sentry/node": "npm:10.46.0"
+    "@sentry/react": "npm:10.46.0"
     "@sentry/vite-plugin": "npm:^5.1.0"
     glob: "npm:^13.0.6"
   peerDependencies:
     "@react-router/node": 7.x
     react: ">=18"
     react-router: 7.x
-  checksum: 10c0/3d18f368393e6eca4e2da88bac0ea4a23449fbc55fcd8c006f04a63891b738041ceff2dc24574074309842f5176cb9e6ce6315445d95fa0c08348dcc04fe6541
+  checksum: 10c0/d743fe8ee1d376601ebc9494e7d634e93696bf998a0fbef7b9cf6cf6d0c7af25a3c4d41d0c734d094ef7b1eb818df9c777c6b8b11629afaea8222c567e145143
   languageName: node
   linkType: hard
 
-"@sentry/react@npm:10.45.0":
-  version: 10.45.0
-  resolution: "@sentry/react@npm:10.45.0"
+"@sentry/react@npm:10.46.0":
+  version: 10.46.0
+  resolution: "@sentry/react@npm:10.46.0"
   dependencies:
-    "@sentry/browser": "npm:10.45.0"
-    "@sentry/core": "npm:10.45.0"
+    "@sentry/browser": "npm:10.46.0"
+    "@sentry/core": "npm:10.46.0"
   peerDependencies:
     react: ^16.14.0 || 17.x || 18.x || 19.x
-  checksum: 10c0/732735f9cb14ada5af094ec5809ac39e8019ffebe91dc28412af6098819b4032cca6a21d166816c4f6b3d885b6e3a25d2f85f026d1ab170861c45ccb5543d6ca
+  checksum: 10c0/ec3a9f3665498d1e36f41dff0712cc8d8c1b1d5c25595e12eb3531da305eaa9d5ab3e5e7ff2a47213c7e98222d84e2d20342c6781016214cbb4a56a4fc434f58
   languageName: node
   linkType: hard
 
