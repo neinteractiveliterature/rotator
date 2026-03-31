@@ -3198,11 +3198,11 @@ __metadata:
   linkType: hard
 
 "@pulumi/tls@npm:^5.3.0":
-  version: 5.3.0
-  resolution: "@pulumi/tls@npm:5.3.0"
+  version: 5.3.1
+  resolution: "@pulumi/tls@npm:5.3.1"
   dependencies:
     "@pulumi/pulumi": "npm:^3.142.0"
-  checksum: 10c0/da152aa946c9047f5b48574aba72c19b33bfe9fd47ca5f44792f8eb5bbff529852ed879bc7df6aaac3522f0094106e97e336aa5eb7681f99eb42932ba312f885
+  checksum: 10c0/0114b10ddfbf928f93dc57855e968e5f588e1d72ac2413c37032a8f21c4c06e5aa7d3347b245cee8a9ecd49ed6126a241f9c3477db7066d91f2384e17dcdd6fd
   languageName: node
   linkType: hard
 
