@@ -3144,8 +3144,8 @@ __metadata:
   linkType: hard
 
 "@pulumi/pulumi@npm:^3.142.0, @pulumi/pulumi@npm:^3.226.0":
-  version: 3.228.0
-  resolution: "@pulumi/pulumi@npm:3.228.0"
+  version: 3.229.0
+  resolution: "@pulumi/pulumi@npm:3.229.0"
   dependencies:
     "@grpc/grpc-js": "npm:^1.10.1"
     "@logdna/tail-file": "npm:^2.0.6"
@@ -3170,7 +3170,7 @@ __metadata:
     minimist: "npm:^1.2.6"
     normalize-package-data: "npm:^6.0.0"
     package-directory: "npm:^8.1.0"
-    picomatch: "npm:^3.0.1"
+    picomatch: "npm:^4.0.0"
     require-from-string: "npm:^2.0.1"
     semver: "npm:^7.5.2"
     source-map-support: "npm:^0.5.6"
@@ -3178,13 +3178,13 @@ __metadata:
     upath: "npm:^1.1.0"
   peerDependencies:
     ts-node: ">= 7.0.1 < 12"
-    typescript: ">= 3.8.3 < 6"
+    typescript: ">= 3.8.3 < 7"
   peerDependenciesMeta:
     ts-node:
       optional: true
     typescript:
       optional: true
-  checksum: 10c0/363fa9ba818330dd63cbc516b67865b031e7e4bf20e153b54ef9f464b6afc6bfb47f404d8d6751118be2101df09b9703548a34590a735efc9d355c8f848f1a0b
+  checksum: 10c0/9c4ec3e9b1a1584e6e29a7ee12ecc77c9bf6deff668ef2d51aa64f33073b60ed2e54b71291c05be1eea402da240d87c977ab7ffaf73aad2e28ea1dcda4fcd49c
   languageName: node
   linkType: hard
 
@@ -10510,14 +10510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "picomatch@npm:3.0.1"
-  checksum: 10c0/70ec738569f1864658378b7abdab8939d15dae0718c1df994eae3346fd33daf6a3c1ff4e0c1a0cd1e2c0319130985b63a2cff34d192f2f2acbb78aca76111736
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^4.0.2, picomatch@npm:^4.0.3, picomatch@npm:^4.0.4":
+"picomatch@npm:^4.0.0, picomatch@npm:^4.0.2, picomatch@npm:^4.0.3, picomatch@npm:^4.0.4":
   version: 4.0.4
   resolution: "picomatch@npm:4.0.4"
   checksum: 10c0/e2c6023372cc7b5764719a5ffb9da0f8e781212fa7ca4bd0562db929df8e117460f00dff3cb7509dacfc06b86de924b247f504d0ce1806a37fac4633081466b0
