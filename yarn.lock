@@ -8541,9 +8541,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.0.0":
-  version: 25.10.10
-  resolution: "i18next@npm:25.10.10"
+"i18next@npm:^26.0.0":
+  version: 26.0.4
+  resolution: "i18next@npm:26.0.4"
   dependencies:
     "@babel/runtime": "npm:^7.29.2"
   peerDependencies:
@@ -8551,7 +8551,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/6ff601b52363c9c974ef293af4a6de04d9f76b4bf2ad9a56c8546235aaf19ff1a7c2109ddba3a73922d418e208ec5b688e5afb323eba6e27c75d629e93827ae1
+  checksum: 10c0/987046f1eb5670824a25f665ca963633434005e0d93b1da9f7b4cf310771c43d08359a6faa1971c4ee8eff1cdfd36cc833a0d5376f04f75c50d31fc49fbaad91
   languageName: node
   linkType: hard
 
@@ -11693,7 +11693,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^7.0.0"
     express: "npm:^5.2.1"
     graphql: "npm:^16.10.0"
-    i18next: "npm:^25.0.0"
+    i18next: "npm:^26.0.0"
     isbot: "npm:^5.1.23"
     jose: "npm:^6.0.8"
     jsdom: "npm:^29.0.0"
