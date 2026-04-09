@@ -3325,8 +3325,8 @@ __metadata:
   linkType: hard
 
 "@pulumi/pulumi@npm:^3.142.0, @pulumi/pulumi@npm:^3.226.0":
-  version: 3.229.0
-  resolution: "@pulumi/pulumi@npm:3.229.0"
+  version: 3.230.0
+  resolution: "@pulumi/pulumi@npm:3.230.0"
   dependencies:
     "@grpc/grpc-js": "npm:^1.10.1"
     "@logdna/tail-file": "npm:^2.0.6"
@@ -3365,7 +3365,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10c0/9c4ec3e9b1a1584e6e29a7ee12ecc77c9bf6deff668ef2d51aa64f33073b60ed2e54b71291c05be1eea402da240d87c977ab7ffaf73aad2e28ea1dcda4fcd49c
+  checksum: 10c0/a1cda59ca469c5b2d510206e09d6ccb26f28882c098a8d8e24655f9046f89500743b465f94310004fba66d829e9346eac86d7703c487f07af04c297f1f2477b7
   languageName: node
   linkType: hard
 
