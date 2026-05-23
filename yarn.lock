@@ -3789,11 +3789,11 @@ __metadata:
   linkType: hard
 
 "@pulumi/random@npm:^4.19.1":
-  version: 4.20.0
-  resolution: "@pulumi/random@npm:4.20.0"
+  version: 4.21.0
+  resolution: "@pulumi/random@npm:4.21.0"
   dependencies:
     "@pulumi/pulumi": "npm:^3.142.0"
-  checksum: 10c0/1975298398581a656027fa718f6f04283a14f8146af5c594193e5675973f85637a979184df6196b83da67367976e13f20374db59725ce0cf034828fd06909716
+  checksum: 10c0/dcf9806806590641db006c59bd8f832ad42653ea8e5f9288fd983faacc70b88bb65087386f755fed84b37d3cb19da7c62cc788fa456052b6f50f6d8e86d8c66f
   languageName: node
   linkType: hard
 
