@@ -3429,12 +3429,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pulumi/docker-build@npm:^0.0.17":
-  version: 0.0.17
-  resolution: "@pulumi/docker-build@npm:0.0.17"
+"@pulumi/docker-build@npm:^0.0.18":
+  version: 0.0.18
+  resolution: "@pulumi/docker-build@npm:0.0.18"
   dependencies:
     "@pulumi/pulumi": "npm:^3.142.0"
-  checksum: 10c0/57bc164b9cfa9ad7ba593707f4c4235654638f9df30babebd27a5c02f7d2003f74d277879b43d2c8ae4dfd3add6e726c1e4e0cec37f7ff69c4ea4a4626e322a3
+  checksum: 10c0/4942c96f8f0dba385a1b43390ba258ff9e9f88e989044760bebffe6b2dbca1242a08e833025ed0b307f5aa5b746549116986939f812dfd04f0685327ddead439
   languageName: node
   linkType: hard
 
@@ -12028,7 +12028,7 @@ __metadata:
     "@popperjs/core": "npm:^2.11.8"
     "@pulumi/aws": "npm:^7.23.0"
     "@pulumi/command": "npm:^1.2.1"
-    "@pulumi/docker-build": "npm:^0.0.17"
+    "@pulumi/docker-build": "npm:^0.0.18"
     "@pulumi/pulumi": "npm:^3.226.0"
     "@pulumi/random": "npm:^4.19.1"
     "@pulumi/tls": "npm:^5.3.0"
