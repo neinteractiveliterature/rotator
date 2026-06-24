@@ -9221,6 +9221,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql@npm:^17.0.0":
+  version: 17.0.1
+  resolution: "graphql@npm:17.0.1"
+  checksum: 10c0/95e4766eefa97bbc37cb4452527d24e12068f170e03c564611a3911f30a77361dfcfbdbfeea00f643c82585c02312c1f41ba6a6263049996d279c49951454980
+  languageName: node
+  linkType: hard
+
 "has-bigints@npm:^1.0.2":
   version: 1.1.0
   resolution: "has-bigints@npm:1.1.0"
@@ -12488,7 +12495,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.37.4"
     eslint-plugin-react-hooks: "npm:^7.0.0"
     express: "npm:^5.2.1"
-    graphql: "npm:^16.10.0"
+    graphql: "npm:^17.0.0"
     i18next: "npm:^25.0.0"
     isbot: "npm:^5.1.23"
     jose: "npm:^6.0.8"
