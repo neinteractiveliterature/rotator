@@ -3810,11 +3810,11 @@ __metadata:
   linkType: hard
 
 "@pulumi/tls@npm:^5.3.0":
-  version: 5.5.0
-  resolution: "@pulumi/tls@npm:5.5.0"
+  version: 5.6.0
+  resolution: "@pulumi/tls@npm:5.6.0"
   dependencies:
     "@pulumi/pulumi": "npm:^3.142.0"
-  checksum: 10c0/a202b1c2d8bb1da36b1ca06fc8ab00bd5e5fa3ff7eaa1bc85f305680d3d848a04b963a794010aa3a0d0ed51f73447eb04e7be51fbee4311370fcbf43dd5ccb61
+  checksum: 10c0/34806e7d1f4e3d252d7f55611fdc04d45877e9f961b2539c9ce4513e28afcfef86123aa0f97d47b08e37f1123cd97db48e4e7629a924974464ff991beefe1dde
   languageName: node
   linkType: hard
 
