@@ -1,21 +1,21 @@
-FROM node:22-alpine AS development-dependencies-env
+FROM node:24-alpine AS development-dependencies-env
 COPY . /app
 WORKDIR /app
 RUN corepack enable && yarn install
 
-FROM node:22-alpine AS production-dependencies-env
+FROM node:24-alpine AS production-dependencies-env
 COPY ./package.json yarn.lock /app/
 WORKDIR /app
 RUN corepack enable && yarn install
 
-FROM node:22-alpine AS build-env
+FROM node:24-alpine AS build-env
 COPY . /app/
 COPY --from=development-dependencies-env /app/.yarn /app/.yarn
 WORKDIR /app
 RUN corepack enable && yarn install
 RUN yarn run build
 
-FROM node:22-alpine
+FROM node:24-alpine
 COPY ./package.json yarn.lock drizzle.config.ts rds-global-bundle.pem /app/
 COPY ./drizzle /app/drizzle
 COPY --from=production-dependencies-env /app/.yarn /app/.yarn
