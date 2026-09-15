@@ -12194,7 +12194,7 @@ __metadata:
     sass-embedded: "npm:^1.85.0"
     sst: "npm:4.17.1"
     style-mod: "npm:^4.1.2"
-    temporal-polyfill: "npm:^0.3.0"
+    temporal-polyfill: "npm:^1.0.0"
     tslib: "npm:^2.8.1"
     tsx: "npm:^4.21.0"
     twilio: "npm:^5.4.5"
@@ -13274,10 +13274,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"temporal-polyfill@npm:^1.0.0":
+  version: 1.0.5
+  resolution: "temporal-polyfill@npm:1.0.5"
+  dependencies:
+    temporal-spec: "npm:1.0.1"
+    temporal-utils: "npm:1.0.3"
+  checksum: 10c0/88928e40e60d0da0c998af2b8da09768ee2c8784fec7526317fde83f55eb69926209a6bbc4360792cac7ace7371949718bc1f12edac1df0fe42eba5d55a43451
+  languageName: node
+  linkType: hard
+
 "temporal-spec@npm:0.3.1":
   version: 0.3.1
   resolution: "temporal-spec@npm:0.3.1"
   checksum: 10c0/e38eae391bd59ae675f1925a65c8ef302933cf9ce98efedaf2e69269e8c36f2b5d486cd3084367f04a6c1ea0289b925690c0df20a73f0c4629b531775924e850
+  languageName: node
+  linkType: hard
+
+"temporal-spec@npm:1.0.1":
+  version: 1.0.1
+  resolution: "temporal-spec@npm:1.0.1"
+  checksum: 10c0/99f6bfe4a8e59cd0664d0e97706798a1e10d42b1b682da9b60778a4cb9a23362da01ea3d83a674ef426ed743bbab835e2e3d1acea5d2d4a9eabe33863237b014
+  languageName: node
+  linkType: hard
+
+"temporal-utils@npm:1.0.3":
+  version: 1.0.3
+  resolution: "temporal-utils@npm:1.0.3"
+  checksum: 10c0/185928a75aba0496ebbbdecbbbbd55cc817756bc39e099424e86477da01042a84ed27482bfc2168b6802fed2f01f004739f174f907e2e125b2fa060a978024b6
   languageName: node
   linkType: hard
 
