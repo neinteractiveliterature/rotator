@@ -3646,11 +3646,11 @@ __metadata:
   linkType: hard
 
 "@pulumi/tls@npm:^5.3.0":
-  version: 5.6.0
-  resolution: "@pulumi/tls@npm:5.6.0"
+  version: 5.6.1
+  resolution: "@pulumi/tls@npm:5.6.1"
   dependencies:
     "@pulumi/pulumi": "npm:^3.142.0"
-  checksum: 10c0/34806e7d1f4e3d252d7f55611fdc04d45877e9f961b2539c9ce4513e28afcfef86123aa0f97d47b08e37f1123cd97db48e4e7629a924974464ff991beefe1dde
+  checksum: 10c0/e3de86be97d566580808fd3a8a2a168592e9ed18e5f61ad1759346c58254e39035b8b83f828e4d502a83d3f60c0628dd94a733e2f786e767f84e57671f940ec0
   languageName: node
   linkType: hard
 
