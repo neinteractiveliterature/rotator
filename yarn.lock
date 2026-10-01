@@ -12207,7 +12207,7 @@ __metadata:
     temporal-polyfill: "npm:^0.3.0"
     tslib: "npm:^2.8.1"
     tsx: "npm:^4.21.0"
-    twilio: "npm:^5.4.5"
+    twilio: "npm:^6.0.0"
     typescript: "npm:^5.7.3"
     typescript-eslint: "npm:^8.25.0"
     vite: "npm:^8.0.0"
@@ -13467,9 +13467,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"twilio@npm:^5.4.5":
-  version: 5.13.1
-  resolution: "twilio@npm:5.13.1"
+"twilio@npm:^6.0.0":
+  version: 6.1.2
+  resolution: "twilio@npm:6.1.2"
   dependencies:
     axios: "npm:^1.13.5"
     dayjs: "npm:^1.11.9"
@@ -13478,7 +13478,7 @@ __metadata:
     qs: "npm:^6.14.1"
     scmp: "npm:^2.1.0"
     xmlbuilder: "npm:^13.0.2"
-  checksum: 10c0/bf1223bd2de62b098539bbee853708b74250304fcc4f19e5f146917ddbfcee5833e381ceb7512ead855af3e591bef8ab67c0bb127085b785a970fe0fffb9f790
+  checksum: 10c0/7860e4f0b90839c545bfa391d62c63e56ef65f83138244ce98beaf3a3e7190650d59bf9e69bb52e452bdc6546c2b02f1e600ffdf92ad14e96bbc464014ff0fd7
   languageName: node
   linkType: hard
 
