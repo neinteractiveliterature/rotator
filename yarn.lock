@@ -3596,8 +3596,8 @@ __metadata:
   linkType: hard
 
 "@pulumi/pulumi@npm:^3.142.0, @pulumi/pulumi@npm:^3.226.0":
-  version: 3.262.0
-  resolution: "@pulumi/pulumi@npm:3.262.0"
+  version: 3.267.0
+  resolution: "@pulumi/pulumi@npm:3.267.0"
   dependencies:
     "@grpc/grpc-js": "npm:^1.10.1"
     "@logdna/tail-file": "npm:^2.0.6"
@@ -3617,7 +3617,7 @@ __metadata:
     execa: "npm:^5.1.0"
     google-protobuf: "npm:^3.21.4"
     ini: "npm:^2.0.0"
-    js-yaml: "npm:^4.0.0"
+    js-yaml: "npm:^4.3.2"
     minimist: "npm:^1.2.6"
     normalize-package-data: "npm:^6.0.0"
     require-from-string: "npm:^2.0.1"
@@ -3632,7 +3632,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10c0/b9c96e9c78ac07af5d1fad7316e21db002340ae5a4d20cd463bd4851ca5cc951c83faf542c9bd2ea6c4725150da8913276418951c33b7886e50db11f8a33f4ae
+  checksum: 10c0/7080439e1f6d11503d8871dddfd5a3ad2dc549c0f82dc0329052abb5b156de249361008cf159458dfa37b64c0c06fc9513527a84552ec996a0b7aa9840d425e6
   languageName: node
   linkType: hard
 
@@ -9714,7 +9714,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^4.0.0, js-yaml@npm:^4.3.2":
+"js-yaml@npm:^4.3.2":
   version: 4.3.2
   resolution: "js-yaml@npm:4.3.2"
   dependencies:
