@@ -2193,18 +2193,18 @@ __metadata:
   linkType: hard
 
 "@flydotio/dockerfile@npm:^0.7.8":
-  version: 0.7.10
-  resolution: "@flydotio/dockerfile@npm:0.7.10"
+  version: 0.7.12
+  resolution: "@flydotio/dockerfile@npm:0.7.12"
   dependencies:
     chalk: "npm:^5.4.1"
-    diff: "npm:^7.0.0"
+    diff: "npm:^8.0.4"
     ejs: "npm:^3.1.10"
     inquirer: "npm:^12.4.1"
     shell-quote: "npm:^1.8.2"
     yargs: "npm:^17.7.2"
   bin:
     dockerfile: index.js
-  checksum: 10c0/790f0cf35c45f8f311d0890db3b7a4ed85b20d6029ef4a9cabf24c508da14f6093ac996db63189c93e6b296adc2d33d8c7f36c7681f5694dc42043e689cf2c71
+  checksum: 10c0/74eed4cec088a2f06c04ccb530170ca7fb9ebccd3e7b862a451f30d9ce35dc31c54dc3193c98bc38985b980ad951e4da5dbece0cab04f617717906fd0a6460cd
   languageName: node
   linkType: hard
 
@@ -7397,10 +7397,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "diff@npm:7.0.0"
-  checksum: 10c0/251fd15f85ffdf814cfc35a728d526b8d2ad3de338dcbd011ac6e57c461417090766b28995f8ff733135b5fbc3699c392db1d5e27711ac4e00244768cd1d577b
+"diff@npm:^8.0.4":
+  version: 8.0.4
+  resolution: "diff@npm:8.0.4"
+  checksum: 10c0/7ee5d03926db4039be7252ac3b0abaae1bd122a2ca971e5ca7270e444e36ff83dd906fad1a719740ca347e97ed5dc8f458a76a8391dbcd7aff363bdafb348a00
   languageName: node
   linkType: hard
 
