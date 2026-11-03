@@ -1,5 +1,5 @@
 import type { CountryCode } from "libphonenumber-js";
-import { createTransport, type Transporter } from "nodemailer";
+import { createTransport, type SendMailOptions } from "nodemailer";
 import Twilio from "twilio";
 import type { MessageListInstanceCreateOptions } from "twilio/lib/rest/api/v2010/account/message";
 import { connectDb } from "drizzle/db";
@@ -11,7 +11,7 @@ import type { Db } from "~/.server/db";
  */
 export type JobContext = {
   db: Db;
-  mailTransport: Pick<Transporter, "sendMail">;
+  mailTransport: { sendMail(options: SendMailOptions): Promise<unknown> };
   twilioClient: {
     messages: {
       create(params: MessageListInstanceCreateOptions): Promise<unknown>;

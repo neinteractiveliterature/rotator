@@ -5799,15 +5799,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/nodemailer@npm:^8.0.0":
-  version: 8.0.2
-  resolution: "@types/nodemailer@npm:8.0.2"
-  dependencies:
-    "@types/node": "npm:*"
-  checksum: 10c0/1ad3f83ac130cf9af65ce9eb7985b08b27b4723316c2be621522effc31c63d7d2d76880815490499fbe8b1aff3da889d24b54b3db892526d1166b12702404ff0
-  languageName: node
-  linkType: hard
-
 "@types/pg@npm:^8.11.11":
   version: 8.23.1
   resolution: "@types/pg@npm:8.23.1"
@@ -10526,10 +10517,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nodemailer@npm:^8.0.0":
-  version: 8.0.11
-  resolution: "nodemailer@npm:8.0.11"
-  checksum: 10c0/19229216c63a32eae59d7b39f3dffeba20be317f2335d08d86fb70bd01845a1bf108fecd019c0e90ef186e3d9177cf478192b333cf38620ad0f8c7a6e1e5ae05
+"nodemailer@npm:^10.3.1":
+  version: 10.3.1
+  resolution: "nodemailer@npm:10.3.1"
+  checksum: 10c0/a960ba9e7cb8f7135b828fb72bcdfd061bb914c6357578ed6613dd5303e8461710a1151210e95a92542461128e900038dd0794fc27bd74b297bd822013cfe8e8
   languageName: node
   linkType: hard
 
@@ -11972,7 +11963,6 @@ __metadata:
     "@types/lodash": "npm:^4"
     "@types/luxon": "npm:^3"
     "@types/node": "npm:^22.13.4"
-    "@types/nodemailer": "npm:^8.0.0"
     "@types/pg": "npm:^8.11.11"
     "@types/react": "npm:^19.0.10"
     "@types/react-dom": "npm:^19.0.4"
@@ -12002,7 +11992,7 @@ __metadata:
     liquidjs: "npm:^10.21.0"
     lodash: "npm:^4.17.21"
     luxon: "npm:^3.5.0"
-    nodemailer: "npm:^8.0.0"
+    nodemailer: "npm:^10.3.1"
     pg: "npm:^8.13.3"
     react: "npm:^19.0.0"
     react-bootstrap4-modal: "npm:^3.0.10"
