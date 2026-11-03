@@ -11,6 +11,22 @@ if (dsn) {
   Sentry.init({
     dsn,
     tracesSampleRate: 1.0,
+    // Sentry 11 collects much more by default than 10 did (sendDefaultPii off). This keeps the 10 behavior: texts and
+    // voicemail details are personal data.
+    dataCollection: {
+      userInfo: false,
+      cookies: false,
+      httpHeaders: {
+        request: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+        response: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      },
+      httpBodies: [],
+      urlQueryParams: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      genAI: { inputs: false, outputs: false },
+      databaseQueryData: false,
+      queues: false,
+      graphQL: { document: false, variables: false },
+    },
     debug: !!process.env.SENTRY_DEBUG_LOGGING,
   });
 }
