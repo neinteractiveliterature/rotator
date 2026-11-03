@@ -63,6 +63,69 @@ export default $config({
 
     const { migratorInvocation } = buildAndRunMigrator(DATABASE_URL.value);
 
+    // Side effects of Twilio webhooks (texts and emails to responders) run as background jobs, so a slow or retried
+    // webhook can't send them twice. Every job shares this one queue and is dispatched by name (app/.server/jobs).
+    const jobsDlq = new sst.aws.Queue("JobsDLQ");
+    const jobsQueue = new sst.aws.Queue("Jobs", {
+      // 6x the consumer's timeout, AWS's rule of thumb, so a slow job isn't redelivered while still running
+      visibilityTimeout: "6 minutes",
+      dlq: jobsDlq.arn,
+    });
+
+    // The jobs consumer and the web app both talk to the database, SMTP and Twilio
+    const appEnvironment = {
+      APP_URL_BASE: APP_URL_BASE.value,
+      DATABASE_URL: DATABASE_URL.value,
+      DEFAULT_COUNTRY_CODE: DEFAULT_COUNTRY_CODE.value,
+      OAUTH2_SERVER_BASE: OAUTH2_SERVER_BASE.value,
+      OAUTH2_CLIENT_ID: OAUTH2_CLIENT_ID.value,
+      OAUTH2_CLIENT_SECRET: OAUTH2_CLIENT_SECRET.value,
+      SECRET_KEY_BASE: SECRET_KEY_BASE.value,
+      SENTRY_DSN: SENTRY_DSN.value,
+      SMTP_URL: SMTP_URL.value,
+      TWILIO_AUTH_TOKEN: TWILIO_AUTH_TOKEN.value,
+      TWILIO_SID: TWILIO_SID.value,
+      JOB_ADAPTER: "sqs",
+      JOBS_QUEUE_URL: jobsQueue.url,
+    };
+
+    // Anything in JobsDLQ is a job that failed all of its attempts. Sentry sees a handler that throws, but not one the
+    // Lambda runtime kills (timeout, out of memory), so this alarm is what makes either case visible. It notifies the
+    // JobsAlerts topic; add the subscriptions (email, Slack, ...) that should hear about it.
+    if ($app.stage === "production") {
+      const alertsTopic = new aws.sns.Topic("JobsAlerts");
+      new aws.cloudwatch.MetricAlarm("JobsDlqNotEmpty", {
+        name: `${$app.name}-${$app.stage}-JobsDlqNotEmpty`,
+        alarmDescription:
+          "A background job failed all of its attempts and is waiting in the dead-letter queue (JobsDLQ). Inspect and redrive or delete the message.",
+        namespace: "AWS/SQS",
+        metricName: "ApproximateNumberOfMessagesVisible",
+        dimensions: { QueueName: jobsDlq.nodes.queue.name },
+        statistic: "Maximum",
+        period: 300,
+        evaluationPeriods: 1,
+        threshold: 0,
+        comparisonOperator: "GreaterThanThreshold",
+        // An idle queue may publish no datapoints at all, which is the healthy case
+        treatMissingData: "notBreaching",
+        alarmActions: [alertsTopic.arn],
+        okActions: [alertsTopic.arn],
+      });
+    }
+
+    jobsQueue.subscribe(
+      {
+        handler: "app/.server/jobs/handler.handler",
+        runtime: "nodejs22.x",
+        nodejs: { sourcemap: true, loader: { ".node": "file" } },
+        copyFiles: COPY_FILES,
+        timeout: "1 minute",
+        memory: "256 MB",
+        environment: appEnvironment,
+      },
+      { batch: { partialResponses: true } },
+    );
+
     new sst.aws.React(
       "Rotator",
       {
@@ -70,19 +133,11 @@ export default $config({
           name: "rotator.interactiveliterature.org",
           dns: sst.cloudflare.dns(),
         },
-        environment: {
-          APP_URL_BASE: APP_URL_BASE.value,
-          DATABASE_URL: DATABASE_URL.value,
-          DEFAULT_COUNTRY_CODE: DEFAULT_COUNTRY_CODE.value,
-          OAUTH2_SERVER_BASE: OAUTH2_SERVER_BASE.value,
-          OAUTH2_CLIENT_ID: OAUTH2_CLIENT_ID.value,
-          OAUTH2_CLIENT_SECRET: OAUTH2_CLIENT_SECRET.value,
-          SECRET_KEY_BASE: SECRET_KEY_BASE.value,
-          SENTRY_DSN: SENTRY_DSN.value,
-          SMTP_URL: SMTP_URL.value,
-          TWILIO_AUTH_TOKEN: TWILIO_AUTH_TOKEN.value,
-          TWILIO_SID: TWILIO_SID.value,
-        },
+        environment: appEnvironment,
+        permissions: [
+          // lets .perform() enqueue jobs
+          { actions: ["sqs:SendMessage"], resources: [jobsQueue.arn] },
+        ],
         server: {
           runtime: "nodejs22.x",
           loader: {

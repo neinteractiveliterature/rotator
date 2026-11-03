@@ -29,11 +29,12 @@ export default tseslint.config(
   tseslint.configs.recommended,
   {
     // Routes read through readDbContext and write through app/.server/repositories. Add each route group here as its
-    // writes move out of the route; webhooks/ and oauth/ are still to come.
+    // writes move out of the route; oauth/ is still to come.
     files: [
       "app/routes/schedules/**/*.{ts,tsx}",
       "app/routes/phone-numbers/**/*.{ts,tsx}",
       "app/routes/responders/**/*.{ts,tsx}",
+      "app/routes/webhooks/**/*.{ts,tsx}",
     ],
     rules: {
       "@typescript-eslint/no-restricted-imports": [

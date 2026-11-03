@@ -1,8 +1,7 @@
 import type { UnwrapPromise } from "@neinteractiveliterature/litform";
 import { eq, and, sql, type InferSelectModel } from "drizzle-orm";
 import sortBy from "lodash/sortBy";
-import type { RouterContextProvider } from "react-router";
-import { dbContext } from "~/contexts";
+import type { ReadDb } from "~/.server/db";
 import {
   schedulesTable,
   phoneNumbersSchedulesTable,
@@ -10,40 +9,47 @@ import {
   respondersTable,
 } from "~/db/schema";
 
+/**
+ * The timespan columns are `timestamp` (no zone) holding UTC wall-clock times. Passing a Date straight through would be
+ * serialized in the Node process's local zone and then have its offset dropped by the `::timestamp` cast, which is only
+ * right when that zone is UTC.
+ */
+function utcTimestamp(at: Date) {
+  return sql`(${at.toISOString()}::timestamptz AT TIME ZONE 'UTC')`;
+}
+
 export async function activeSchedulesForPhoneNumber(
-  context: Readonly<RouterContextProvider>,
+  db: ReadDb,
   phoneNumber: string,
-  at: Date
+  at: Date,
 ) {
-  const db = context.get(dbContext);
   return await db
     .select()
     .from(schedulesTable)
     .innerJoin(
       phoneNumbersSchedulesTable,
-      eq(phoneNumbersSchedulesTable.scheduleId, schedulesTable.id)
+      eq(phoneNumbersSchedulesTable.scheduleId, schedulesTable.id),
     )
     .innerJoin(
       phoneNumbersTable,
-      eq(phoneNumbersTable.id, phoneNumbersSchedulesTable.phoneNumberId)
+      eq(phoneNumbersTable.id, phoneNumbersSchedulesTable.phoneNumberId),
     )
     .where(
       and(
-        sql`schedules.timespan @> ${at}::timestamp`,
-        eq(phoneNumbersTable.phoneNumber, phoneNumber)
-      )
+        sql`schedules.timespan @> ${utcTimestamp(at)}`,
+        eq(phoneNumbersTable.phoneNumber, phoneNumber),
+      ),
     );
 }
 
 export async function activeShiftForSchedule(
-  context: Readonly<RouterContextProvider>,
+  db: ReadDb,
   scheduleId: number,
-  at: Date
+  at: Date,
 ) {
-  const db = context.get(dbContext);
   return await db.query.shiftsTable.findFirst({
     where: (tbl, { sql, and, eq }) =>
-      and(sql`timespan @> ${at}::timestamp`, eq(tbl.scheduleId, scheduleId)),
+      and(sql`timespan @> ${utcTimestamp(at)}`, eq(tbl.scheduleId, scheduleId)),
     with: {
       shiftAssignments: {
         with: {
@@ -55,23 +61,23 @@ export async function activeShiftForSchedule(
 }
 
 export function sortShiftAssignments<T>(
-  shiftAssignments: { position: number; responder: T }[]
+  shiftAssignments: { position: number; responder: T }[],
 ): T[] {
   return sortBy(
     shiftAssignments,
-    (shiftAssignment) => shiftAssignment.position
+    (shiftAssignment) => shiftAssignment.position,
   ).map((shiftAssignment) => shiftAssignment.responder);
 }
 
 export function bestResponderForShift(
   shift: NonNullable<UnwrapPromise<ReturnType<typeof activeShiftForSchedule>>>,
-  afterResponderId?: number
+  afterResponderId?: number,
 ): InferSelectModel<typeof respondersTable> | undefined {
   const sortedResponders = sortShiftAssignments(shift.shiftAssignments);
   const afterResponderIndex = afterResponderId
-    ? sortedResponders.findIndex(
-        (responder) => responder.id === afterResponderId
-      ) ?? -1
+    ? (sortedResponders.findIndex(
+        (responder) => responder.id === afterResponderId,
+      ) ?? -1)
     : -1;
   return sortedResponders[afterResponderIndex + 1];
 }

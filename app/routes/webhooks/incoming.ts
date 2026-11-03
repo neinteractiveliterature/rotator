@@ -7,20 +7,20 @@ import {
   activeSchedulesForPhoneNumber,
   activeShiftForSchedule,
   bestResponderForShift,
-} from "./schedules";
+} from "~/.server/repositories/onCall.server";
 import { normalizePhoneNumber } from "./normalizePhoneNumber";
 import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
-import { dbContext } from "~/contexts";
+import { readDbContext } from "~/contexts";
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const params = VoiceWebhookParams.parse(await validateTwilioWebhook(request));
 
   const calledNumber = normalizePhoneNumber(params.To);
   const now = new Date();
 
   const schedules = await activeSchedulesForPhoneNumber(
-    context,
+    db,
     calledNumber,
     now
   );
@@ -46,7 +46,7 @@ export async function action({ context, request }: Route.ActionArgs) {
 
   const activeSchedule = schedules[0];
   const activeShift = await activeShiftForSchedule(
-    context,
+    db,
     activeSchedule.schedules.id,
     now
   );

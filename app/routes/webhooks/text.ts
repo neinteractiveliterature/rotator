@@ -1,36 +1,28 @@
-import { type InferSelectModel } from "drizzle-orm";
 import type { Route } from "./+types/text";
 import { normalizePhoneNumber } from "./normalizePhoneNumber";
 import {
   activeSchedulesForPhoneNumber,
   activeShiftForSchedule,
   sortShiftAssignments,
-} from "./schedules";
+} from "~/.server/repositories/onCall.server";
+import {
+  notifyTextReceivedJob,
+  type TextReceivedTemplateVariables,
+} from "~/.server/jobs/notifyTextReceived";
 import { MessagingWebhookParams } from "./twimlWebhookParams";
-import type { respondersTable } from "~/db/schema";
 import { twimlMessageResponse } from "./twimlUtils";
 import i18n from "~/i18n";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { Liquid } from "liquidjs";
 import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
-import {
-  dbContext,
-  defaultCountryCodeContext,
-  mailTransportContext,
-} from "~/contexts";
+import { readDbContext, defaultCountryCodeContext } from "~/contexts";
 
-export type TextReceivedTemplateVariables = {
-  from: string;
-  body: string;
-  responderIndex: number;
-  responder: InferSelectModel<typeof respondersTable>;
-};
+export type { TextReceivedTemplateVariables };
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const defaultCountryCode = context.get(defaultCountryCodeContext);
-  const mailTransport = context.get(mailTransportContext);
 
   const params = MessagingWebhookParams.parse(
     await validateTwilioWebhook(request)
@@ -40,7 +32,7 @@ export async function action({ context, request }: Route.ActionArgs) {
   const now = new Date();
 
   const schedules = await activeSchedulesForPhoneNumber(
-    context,
+    db,
     textedNumber,
     now
   );
@@ -74,7 +66,7 @@ export async function action({ context, request }: Route.ActionArgs) {
 
   const activeSchedule = schedules[0];
   const activeShift = await activeShiftForSchedule(
-    context,
+    db,
     activeSchedule.schedules.id,
     now
   );
@@ -90,30 +82,14 @@ export async function action({ context, request }: Route.ActionArgs) {
   if (activeShift) {
     const sortedResponders = sortShiftAssignments(activeShift.shiftAssignments);
 
-    const emailSubjectTemplate = liquid.parse(
-      activeSchedule.schedules.textEmailSubjectTemplate
-    );
-    const emailBodyTemplate = liquid.parse(
-      activeSchedule.schedules.textEmailBodyTemplate
-    );
-
-    const mailPromises = sortedResponders.map((responder, index) => {
-      const templateVars: TextReceivedTemplateVariables = {
-        from: fromNumberForDisplay,
-        body: params.Body,
-        responderIndex: index,
-        responder,
-      };
-
-      return mailTransport.sendMail({
-        from: activeSchedule.schedules.emailFrom,
-        to: responder.email,
-        subject: liquid.renderSync(emailSubjectTemplate, templateVars),
-        text: liquid.renderSync(emailBodyTemplate, templateVars),
-      });
+    // The emails go out in the background: Twilio retries a webhook that's slow to answer, and doing the sends inline
+    // meant a retry sent them again.
+    await notifyTextReceivedJob.perform({
+      scheduleId: activeSchedule.schedules.id,
+      from: params.From,
+      body: params.Body,
+      receivedAt: now.toISOString(),
     });
-
-    await Promise.all(mailPromises);
 
     return twimlMessageResponse({
       fromPhoneNumber: activeSchedule.phone_numbers.phoneNumber,

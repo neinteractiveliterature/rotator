@@ -1,38 +1,28 @@
 import type { Route } from "./+types/voicemail";
 import { TwilioRecordResponseParams } from "./twimlWebhookParams";
 import { twimlHangupResponse } from "./twimlUtils";
+import { activeSchedulesForPhoneNumber } from "~/.server/repositories/onCall.server";
 import {
-  activeSchedulesForPhoneNumber,
-  activeShiftForSchedule,
-  sortShiftAssignments,
-} from "./schedules";
-import { Liquid } from "liquidjs";
-import type { InferSelectModel } from "drizzle-orm";
-import type { respondersTable } from "~/db/schema";
+  notifyVoicemailReceivedJob,
+  type VoicemailReceivedTemplateVariables,
+} from "~/.server/jobs/notifyVoicemailReceived";
 import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
-import { mailTransportContext, twilioClientContext } from "~/contexts";
+import { readDbContext } from "~/contexts";
 
-export type VoicemailReceivedTemplateVariables = {
-  from: string;
-  recordingUrlMp3: string;
-  recordingUrlWav: string;
-  responderIndex: number;
-  responder: InferSelectModel<typeof respondersTable>;
-};
+export type { VoicemailReceivedTemplateVariables };
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const mailTransport = context.get(mailTransportContext);
-  const twilioClient = context.get(twilioClientContext);
+  const db = context.get(readDbContext);
 
   const webhookParams = TwilioRecordResponseParams.parse(
-    await validateTwilioWebhook(request)
+    await validateTwilioWebhook(request),
   );
 
   const now = new Date();
   const schedules = await activeSchedulesForPhoneNumber(
-    context,
+    db,
     webhookParams.To,
-    now
+    now,
   );
 
   if (schedules.length == 0) {
@@ -42,58 +32,15 @@ export async function action({ context, request }: Route.ActionArgs) {
 
   const activeSchedule = schedules[0];
 
-  const liquid = new Liquid();
-
-  const activeShift = await activeShiftForSchedule(
-    context,
-    activeSchedule.schedules.id,
-    now
-  );
-
-  const sortedResponders = sortShiftAssignments(
-    activeShift?.shiftAssignments ?? []
-  );
-
-  const emailSubjectTemplate = liquid.parse(
-    activeSchedule.schedules.voicemailEmailSubjectTemplate
-  );
-  const emailBodyTemplate = liquid.parse(
-    activeSchedule.schedules.voicemailEmailBodyTemplate
-  );
-
-  const mailPromises = sortedResponders.map((responder, index) => {
-    const templateVars: VoicemailReceivedTemplateVariables = {
-      from: webhookParams.From,
-      recordingUrlMp3: webhookParams.RecordingUrl + ".mp3",
-      recordingUrlWav: webhookParams.RecordingUrl,
-      responderIndex: index,
-      responder,
-    };
-
-    return mailTransport.sendMail({
-      from: activeSchedule.schedules.emailFrom,
-      to: responder.email,
-      subject: liquid.renderSync(emailSubjectTemplate, templateVars),
-      text: liquid.renderSync(emailBodyTemplate, templateVars),
-    });
+  // The emails and text go out in the background: Twilio retries a webhook that's slow to answer, and doing the sends
+  // inline meant a retry sent them again.
+  await notifyVoicemailReceivedJob.perform({
+    scheduleId: activeSchedule.schedules.id,
+    from: webhookParams.From,
+    to: webhookParams.To,
+    recordingUrl: webhookParams.RecordingUrl,
+    receivedAt: now.toISOString(),
   });
-
-  const textPromise = twilioClient.messages.create({
-    from: webhookParams.To,
-    to: sortedResponders[0].phoneNumber,
-    body: liquid.parseAndRenderSync(
-      activeSchedule.schedules.voicemailTextTemplate,
-      {
-        from: webhookParams.From,
-        recordingUrlMp3: webhookParams.RecordingUrl + ".mp3",
-        recordingUrlWav: webhookParams.RecordingUrl,
-        responderIndex: 0,
-        responder: sortedResponders[0],
-      } satisfies VoicemailReceivedTemplateVariables
-    ),
-  });
-
-  await Promise.all([...mailPromises, textPromise]);
 
   return twimlHangupResponse();
 }

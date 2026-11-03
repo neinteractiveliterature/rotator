@@ -45,6 +45,7 @@ const config = defineConfig((config) => ({
         process.env.TEST_DATABASE_URL ??
         "postgres://postgres@localhost/rotator_test",
       SKIP_TWILIO_WEBHOOK_VALIDATION: "true",
+      JOB_ADAPTER: "test",
     },
     coverage: {
       enabled: process.env["COVERAGE"] ? true : false,

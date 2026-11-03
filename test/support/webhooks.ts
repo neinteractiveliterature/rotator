@@ -1,27 +1,28 @@
 import { RouterContextProvider } from "react-router";
 import { vi } from "vitest";
-import type { Transporter } from "nodemailer";
-import type { Twilio } from "twilio";
-import {
-  dbContext,
-  defaultCountryCodeContext,
-  mailTransportContext,
-  twilioClientContext,
-} from "~/contexts";
+import type { JobContext } from "~/.server/jobs/jobContext.server";
+import { defaultCountryCodeContext, readDbContext } from "~/contexts";
 import { db } from "./db";
 
-/** Fakes for the outside world, so tests can assert on the side effects webhook handlers have */
 export function buildWebhookContext() {
-  const sendMail = vi.fn().mockResolvedValue({});
-  const createMessage = vi.fn().mockResolvedValue({});
   const context = new RouterContextProvider();
-  context.set(dbContext, db);
+  context.set(readDbContext, db);
   context.set(defaultCountryCodeContext, "US");
-  context.set(mailTransportContext, { sendMail } as unknown as Transporter);
-  context.set(twilioClientContext, {
-    messages: { create: createMessage },
-  } as unknown as Twilio);
-  return { context, sendMail, createMessage };
+  return context;
+}
+
+/** A job context on the test database, with fakes for the outside world so tests can assert on what a job sent */
+export function buildJobContext() {
+  const sendMail = vi.fn<JobContext["mailTransport"]["sendMail"]>();
+  const createMessage =
+    vi.fn<JobContext["twilioClient"]["messages"]["create"]>();
+  const ctx: JobContext = {
+    db,
+    mailTransport: { sendMail },
+    twilioClient: { messages: { create: createMessage } },
+    defaultCountryCode: "US",
+  };
+  return { ctx, sendMail, createMessage };
 }
 
 export function twilioRequest(path: string, params: Record<string, string>) {
