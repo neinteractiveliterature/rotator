@@ -9,7 +9,7 @@ import {
   bestResponderForShift,
 } from "./schedules";
 import { normalizePhoneNumber } from "./normalizePhoneNumber";
-import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
 import { dbContext } from "~/contexts";
 
 export async function action({ context, request }: Route.ActionArgs) {

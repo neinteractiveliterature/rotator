@@ -9,7 +9,7 @@ import { TwilioDialResponseParams } from "./twimlWebhookParams";
 import { assertFound, coerceId } from "~/db/utils";
 import { Liquid } from "liquidjs";
 import { twimlHangupResponse } from "./twimlUtils";
-import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
 import { dbContext, twilioClientContext } from "~/contexts";
 
 export type PostCallTextTemplateVariables = {

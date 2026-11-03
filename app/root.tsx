@@ -21,8 +21,8 @@ import {
   RotatorGlobalContext,
 } from "./global-context";
 import { defaultCountryCodeContext } from "./contexts";
-import { initializeContextMiddleware } from "./server/initializeContext.server";
-import { getCurrentUserMiddleware } from "./server/authMiddleware.server";
+import { initializeContextMiddleware } from "./.server/initializeContext.server";
+import { getCurrentUserMiddleware } from "./.server/authMiddleware.server";
 import { Confirm } from "@neinteractiveliterature/litform";
 
 export function Layout({ children }: { children: React.ReactNode }) {

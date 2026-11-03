@@ -1,6 +1,6 @@
 import { createContext } from "react-router";
 import type { Authenticator } from "remix-auth";
-import { type DBCachedOAuth2Strategy, type AuthResult } from "./server/oauth2";
+import { type DBCachedOAuth2Strategy, type AuthResult } from "./.server/oauth2";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import * as schema from "app/db/schema";
 import type { CountryCode } from "libphonenumber-js";

@@ -13,7 +13,7 @@ import i18n from "~/i18n";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { Liquid } from "liquidjs";
-import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
 import {
   dbContext,
   defaultCountryCodeContext,

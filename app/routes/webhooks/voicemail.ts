@@ -9,7 +9,7 @@ import {
 import { Liquid } from "liquidjs";
 import type { InferSelectModel } from "drizzle-orm";
 import type { respondersTable } from "~/db/schema";
-import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
+import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
 import { mailTransportContext, twilioClientContext } from "~/contexts";
 
 export type VoicemailReceivedTemplateVariables = {
