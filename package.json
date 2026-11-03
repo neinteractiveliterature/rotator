@@ -74,7 +74,6 @@
     "@babel/preset-typescript": "^8.0.0",
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^10.0.0",
-    "@flydotio/dockerfile": "^0.7.8",
     "@pulumi/aws": "^7.23.0",
     "@pulumi/command": "^1.2.1",
     "@pulumi/docker-build": "^0.0.22",
