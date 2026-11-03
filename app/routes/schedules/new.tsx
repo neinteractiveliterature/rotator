@@ -5,8 +5,8 @@ import ScheduleFormFields, {
   parseScheduleFormData,
   type ScheduleFormFieldsProps,
 } from "~/components/forms/schedule";
-import { schedulesTable } from "~/db/schema";
-import { dbContext } from "~/contexts";
+import type { schedulesTable } from "~/db/schema";
+import { createSchedule } from "~/.server/repositories/schedules.server";
 import { type InferInsertModel } from "drizzle-orm";
 import type { TimestampRange } from "~/db/tsRange";
 import { ErrorDisplay, serializeError } from "~/components/error-display";
@@ -46,7 +46,6 @@ const blankFormFields: ScheduleFormFieldsProps["schedule"] = {
 };
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
     const values = {
@@ -58,9 +57,7 @@ export async function action({ context, request }: Route.ActionArgs) {
       ),
     };
 
-    const schedule = (
-      await db.insert(schedulesTable).values(values).returning()
-    )[0];
+    const schedule = await createSchedule(context, values);
 
     return redirect(`/schedules/${schedule.id}`);
   } catch (error) {

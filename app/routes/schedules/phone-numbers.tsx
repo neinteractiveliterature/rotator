@@ -1,17 +1,19 @@
 import { use } from "react";
 import { useTranslation } from "react-i18next";
 import { Form } from "react-router";
-import { and, eq } from "drizzle-orm";
 import parsePhoneNumberFromString from "libphonenumber-js";
-import { dbContext } from "~/contexts";
-import { phoneNumbersSchedulesTable } from "~/db/schema";
+import { readDbContext } from "~/contexts";
+import {
+  addPhoneNumberToSchedule,
+  removePhoneNumberFromSchedule,
+} from "~/.server/repositories/phoneNumbers.server";
 import { coerceId } from "~/db/utils";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 import { RotatorGlobalContext } from "~/global-context";
 import type { Route } from "./+types/phone-numbers";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const scheduleId = coerceId(params.scheduleId);
 
   const [allPhoneNumbers, schedulePhoneNumbers] = await Promise.all([
@@ -26,7 +28,6 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 }
 
 export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
   const formData = await request.formData();
   const scheduleId = coerceId(params.scheduleId);
   const phoneNumberId = coerceId(
@@ -34,19 +35,9 @@ export async function action({ context, request, params }: Route.ActionArgs) {
   );
 
   if (request.method === "POST") {
-    await db
-      .insert(phoneNumbersSchedulesTable)
-      .values({ phoneNumberId, scheduleId })
-      .onConflictDoNothing();
+    await addPhoneNumberToSchedule(context, phoneNumberId, scheduleId);
   } else if (request.method === "DELETE") {
-    await db
-      .delete(phoneNumbersSchedulesTable)
-      .where(
-        and(
-          eq(phoneNumbersSchedulesTable.scheduleId, scheduleId),
-          eq(phoneNumbersSchedulesTable.phoneNumberId, phoneNumberId)
-        )
-      );
+    await removePhoneNumberFromSchedule(context, phoneNumberId, scheduleId);
   }
 
   return null;

@@ -26,5 +26,35 @@ export default tseslint.config(
   ...compat.extends("plugin:drizzle/recommended"),
   // @ts-expect-error Mommy and Daddy are fighting
   i18next.configs["flat/recommended"],
-  tseslint.configs.recommended
+  tseslint.configs.recommended,
+  {
+    // Routes read through readDbContext and write through app/.server/repositories. Add each route group here as its
+    // writes move out of the route; webhooks/ and oauth/ are still to come.
+    files: [
+      "app/routes/schedules/**/*.{ts,tsx}",
+      "app/routes/phone-numbers/**/*.{ts,tsx}",
+      "app/routes/responders/**/*.{ts,tsx}",
+    ],
+    rules: {
+      "@typescript-eslint/no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "~/db/schema",
+              allowTypeImports: true,
+              message:
+                "Routes don't touch tables directly; use a function in app/.server/repositories.",
+            },
+            {
+              name: "~/contexts",
+              importNames: ["dbContext"],
+              message:
+                "Routes get a read-only database from readDbContext; writes go through app/.server/repositories.",
+            },
+          ],
+        },
+      ],
+    },
+  },
 );

@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import type { Route } from "./+types/list";
 import { Link } from "react-router";
-import { dbContext } from "~/contexts";
+import { readDbContext } from "~/contexts";
 import BootstrapIcon from "~/components/bootstrap-icon";
 
 export async function loader({ context }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const schedules = await db.query.schedulesTable.findMany();
   return { schedules };
 }

@@ -5,6 +5,7 @@ import {
   dbContext,
   defaultCountryCodeContext,
   mailTransportContext,
+  readDbContext,
   oauth2StrategyContext,
   twilioClientContext,
 } from "~/contexts";
@@ -26,6 +27,7 @@ export async function getLoadContext() {
 
   provider.set(authenticatorContext, authenticator);
   provider.set(dbContext, db);
+  provider.set(readDbContext, db);
   if (process.env.DEFAULT_COUNTRY_CODE) {
     provider.set(
       defaultCountryCodeContext,

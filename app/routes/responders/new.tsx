@@ -5,22 +5,17 @@ import ResponderFormFields, {
   parseResponderFormData,
   type ResponderFormFieldsProps,
 } from "~/components/forms/responder";
-import { respondersTable } from "~/db/schema";
+import { createResponder } from "~/.server/repositories/responders.server";
 import { Form, redirect } from "react-router";
-import { dbContext } from "~/contexts";
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const db = context.get(dbContext);
-
-  try {
+ try {
     const formData = await request.formData();
 
-    const responder = (
-      await db
-        .insert(respondersTable)
-        .values(parseResponderFormData(formData))
-        .returning()
-    )[0];
+    const responder = await createResponder(
+      context,
+      parseResponderFormData(formData),
+    );
 
     return redirect(`/responders/${responder.id}`);
   } catch (error) {

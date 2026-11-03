@@ -5,6 +5,7 @@ import {
   dbContext,
   defaultCountryCodeContext,
   mailTransportContext,
+  readDbContext,
   oauth2StrategyContext,
   twilioClientContext,
 } from "~/contexts";
@@ -33,6 +34,7 @@ export const initializeContextMiddleware: MiddlewareFunction = async ({
 
   context.set(authenticatorContext, authenticator);
   context.set(dbContext, db);
+  context.set(readDbContext, db);
   if (process.env.DEFAULT_COUNTRY_CODE) {
     context.set(
       defaultCountryCodeContext,
