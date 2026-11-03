@@ -110,7 +110,6 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^7.0.0",
     "jsdom": "^29.0.0",
-    "react-router-devtools": "^6.2.0",
     "rollup": "^4.55.2",
     "sst": "4.17.2",
     "tsx": "^4.21.0",
