@@ -38,6 +38,13 @@ const config = defineConfig((config) => ({
   test: {
     env: {
       OAUTH2_SERVER_BASE: "http://localhost",
+      APP_URL_BASE: "http://localhost:3000",
+      // The Postgres server the database tests run against (each test worker makes its own database on it; see
+      // test/support/db.ts). Set TEST_DATABASE_URL to use a different one.
+      TEST_DATABASE_URL:
+        process.env.TEST_DATABASE_URL ??
+        "postgres://postgres@localhost/rotator_test",
+      SKIP_TWILIO_WEBHOOK_VALIDATION: "true",
     },
     coverage: {
       enabled: process.env["COVERAGE"] ? true : false,
