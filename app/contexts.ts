@@ -3,7 +3,7 @@ import type { Authenticator } from "remix-auth";
 import { type DBCachedOAuth2Strategy, type AuthResult } from "./.server/oauth2";
 import type { NodePgDatabase } from "drizzle-orm/node-postgres";
 import type { ReadDb } from "./.server/db";
-import * as schema from "app/db/schema";
+import * as schema from "~/db/schema";
 import type { CountryCode } from "libphonenumber-js";
 import type { Transporter } from "nodemailer";
 import type { Twilio } from "twilio";
