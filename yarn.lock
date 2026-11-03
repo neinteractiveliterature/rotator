@@ -12641,6 +12641,7 @@ __metadata:
     "@rollup/plugin-node-resolve": "npm:^16.0.3"
     "@rollup/plugin-typescript": "npm:^12.3.0"
     "@sentry/aws-serverless": "npm:^10.39.0"
+    "@sentry/cli": "npm:^2.58.5"
     "@sentry/profiling-node": "npm:^10.39.0"
     "@sentry/react-router": "npm:^10.39.0"
     "@testing-library/dom": "npm:^10.4.0"

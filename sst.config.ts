@@ -14,6 +14,75 @@ const COPY_FILES = [
   },
 ];
 
+async function deleteSourceMaps(dir: string) {
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  for (const entry of await fs.promises.readdir(dir, {
+    withFileTypes: true,
+  })) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      await deleteSourceMaps(entryPath);
+    } else if (entry.name.endsWith(".map")) {
+      await fs.promises.rm(entryPath);
+    }
+  }
+}
+
+async function loadSentryBuildEnv() {
+  const fs = await import("node:fs");
+  const path = await import("node:path");
+  const envFilePath = path.join(process.cwd(), ".env.sentry-build-plugin");
+  if (!fs.existsSync(envFilePath)) return;
+  for (const line of fs.readFileSync(envFilePath, "utf-8").split("\n")) {
+    const match = line.match(/^([^=\s#][^=]*)=(.+)$/);
+    if (match && !process.env[match[1]]) {
+      process.env[match[1]] = match[2].trim();
+    }
+  }
+}
+
+// The release the Sentry SDKs tag events with. It has to match the release the web build's source maps are uploaded
+// under, which the Sentry build plugin names from GITHUB_SHA in CI and from the current git commit otherwise.
+async function sentryRelease() {
+  if (process.env.SENTRY_RELEASE) return process.env.SENTRY_RELEASE;
+  if (process.env.GITHUB_SHA) return process.env.GITHUB_SHA;
+  const { execSync } = await import("node:child_process");
+  try {
+    return execSync("git rev-parse HEAD", { encoding: "utf-8" }).trim();
+  } catch {
+    return undefined;
+  }
+}
+
+// Maps the jobs Lambda's stack frames back to source in Sentry: injects debug IDs into the bundle, uploads its source
+// maps, and strips the .map files from the deployed zip. (The web app's source maps are uploaded by the Sentry Vite
+// plugin during `react-router build`.)
+async function processSentrySourceMaps(dir: string) {
+  await loadSentryBuildEnv();
+  const { default: SentryCLI } = await import("@sentry/cli");
+
+  // Injecting is a local file operation, so it always runs
+  await new SentryCLI(null, {}).execute(["sourcemaps", "inject", dir], true);
+
+  const authToken = process.env.SENTRY_AUTH_TOKEN;
+  const org = process.env.SENTRY_ORG;
+  const project = process.env.SENTRY_PROJECT;
+  if (!authToken || !org || !project) {
+    console.log(
+      "[Sentry] Skipping Lambda sourcemap upload: set SENTRY_AUTH_TOKEN, SENTRY_ORG and SENTRY_PROJECT",
+    );
+  } else {
+    await new SentryCLI(null, { authToken, org, project }).execute(
+      ["sourcemaps", "upload", dir],
+      true,
+    );
+  }
+
+  // The injected debug IDs are all Sentry needs; the .map files are never read by Node at runtime
+  await deleteSourceMaps(dir);
+}
+
 export function buildAndRunMigrator(databaseUrl: string | Output<string>) {
   const migrator = new sst.aws.Function("MigratorFn", {
     handler: "drizzle/migrate.handler",
@@ -61,6 +130,8 @@ export default $config({
     const TWILIO_AUTH_TOKEN = new sst.Secret("TWILIO_AUTH_TOKEN");
     const TWILIO_SID = new sst.Secret("TWILIO_SID");
 
+    const release = await sentryRelease();
+
     const { migratorInvocation } = buildAndRunMigrator(DATABASE_URL.value);
 
     // Side effects of Twilio webhooks (texts and emails to responders) run as background jobs, so a slow or retried
@@ -82,6 +153,9 @@ export default $config({
       OAUTH2_CLIENT_SECRET: OAUTH2_CLIENT_SECRET.value,
       SECRET_KEY_BASE: SECRET_KEY_BASE.value,
       SENTRY_DSN: SENTRY_DSN.value,
+      // Read by the Sentry SDKs themselves, which otherwise tag every event with the default environment and no release
+      SENTRY_ENVIRONMENT: $app.stage,
+      ...(release ? { SENTRY_RELEASE: release } : {}),
       SMTP_URL: SMTP_URL.value,
       TWILIO_AUTH_TOKEN: TWILIO_AUTH_TOKEN.value,
       TWILIO_SID: TWILIO_SID.value,
@@ -119,6 +193,7 @@ export default $config({
         runtime: "nodejs22.x",
         nodejs: { sourcemap: true, loader: { ".node": "file" } },
         copyFiles: COPY_FILES,
+        hook: { postbuild: (dir) => processSentrySourceMaps(dir) },
         timeout: "1 minute",
         memory: "256 MB",
         environment: appEnvironment,
