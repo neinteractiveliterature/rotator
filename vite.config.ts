@@ -46,6 +46,7 @@ const config = defineConfig((config) => ({
         "postgres://postgres@localhost/rotator_test",
       SKIP_TWILIO_WEBHOOK_VALIDATION: "true",
       JOB_ADAPTER: "test",
+      SECRET_KEY_BASE: "test-secret-key-base",
     },
     coverage: {
       enabled: process.env["COVERAGE"] ? true : false,
