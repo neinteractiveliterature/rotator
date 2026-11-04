@@ -31,7 +31,7 @@ const config = defineConfig((config) => ({
   server: {
     allowedHosts: [
       "silkworm-calm-evenly.ngrok-free.app",
-      "nbudin.opossum-bass.ts.net",
+      "samus.opossum-bass.ts.net",
     ],
     host: "0.0.0.0",
   },
