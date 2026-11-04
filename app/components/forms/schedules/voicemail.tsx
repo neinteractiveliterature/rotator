@@ -51,7 +51,7 @@ export function VoicemailForm({ save }: VoicemailFormProps) {
                 onChange={(value) =>
                   setEditingData((prevEditingData) => ({
                     ...prevEditingData,
-                    postCallTextTemplate: value,
+                    voicemailMessage: value,
                   }))
                 }
               />
