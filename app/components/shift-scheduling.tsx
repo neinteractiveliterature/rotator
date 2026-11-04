@@ -7,7 +7,7 @@ import sortBy from "lodash/sortBy";
 import { Link, useFetcher } from "react-router";
 import dateTimeFormats from "~/dateTimeFormats";
 import { useTranslation } from "react-i18next";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   BootstrapFormSelect,
   useArrayBasicSortableHandlers,
@@ -395,6 +395,47 @@ export function serializeShift(
   };
 }
 
+/**
+ * `useFetcher` with a `submit` that settles when the route's action has finished: it resolves if the action returned
+ * nothing, and rejects with whatever it returned (a returned Error, say) otherwise.
+ *
+ * `fetcher.submit()`'s own promise can't be used for this: the fetcher's data isn't available to the code that awaits
+ * it (a click handler only sees the render it was created in), so the result has to be read once the fetcher goes idle.
+ */
+function useSettlingFetcher() {
+  const fetcher = useFetcher();
+  const pending = useRef<{
+    resolve: () => void;
+    reject: (reason: unknown) => void;
+  }>(undefined);
+  const previousState = useRef(fetcher.state);
+
+  useEffect(() => {
+    const wasBusy = previousState.current !== "idle";
+    previousState.current = fetcher.state;
+
+    if (wasBusy && fetcher.state === "idle" && pending.current) {
+      const { resolve, reject } = pending.current;
+      pending.current = undefined;
+      if (fetcher.data) {
+        reject(fetcher.data);
+      } else {
+        resolve();
+      }
+    }
+  }, [fetcher.state, fetcher.data]);
+
+  const submit = (...args: Parameters<typeof fetcher.submit>) => {
+    fetcher.reset();
+    return new Promise<void>((resolve, reject) => {
+      pending.current = { resolve, reject };
+      void fetcher.submit(...args);
+    });
+  };
+
+  return { submit };
+}
+
 export function ShiftScheduleRow({
   hourStart,
   shiftsById,
@@ -431,7 +472,7 @@ export function ShiftScheduleRow({
     .apply(hourStart)
     .toZonedDateTimeISO(timeZone);
   const { t } = useTranslation();
-  const fetcher = useFetcher();
+  const fetcher = useSettlingFetcher();
   const confirm = useConfirm();
 
   return (
@@ -454,15 +495,11 @@ export function ShiftScheduleRow({
               initialShift={shift}
               cancel={() => setEditing(false)}
               save={async (newShift) => {
-                fetcher.reset();
                 await fetcher.submit(serializeShift(newShift), {
                   action: `./${shift.id}`,
                   method: "patch",
                   encType: "application/json",
                 });
-                if (fetcher.data) {
-                  throw fetcher.data;
-                }
                 setEditing(false);
               }}
               responders={responders}
@@ -502,16 +539,12 @@ export function ShiftScheduleRow({
                     onClick={() =>
                       confirm({
                         prompt: "Are you sure you want to delete this shift?",
-                        action: async () => {
-                          fetcher.reset();
-                          await fetcher.submit(null, {
+                        action: () =>
+                          fetcher.submit(null, {
                             action: `./${shift.id}`,
                             method: "delete",
-                          });
-                          if (fetcher.data) {
-                            throw fetcher.data;
-                          }
-                        },
+                          }),
+                        renderError: (error) => <ErrorDisplay error={error} />,
                       })
                     }
                   >
@@ -539,15 +572,10 @@ export function ShiftScheduleRow({
             }}
             cancel={() => setEditing(false)}
             save={async (newShift) => {
-              fetcher.reset();
               await fetcher.submit(serializeShift(newShift), {
                 method: "post",
                 encType: "application/json",
               });
-              if (fetcher.data) {
-                throw fetcher.data;
-              }
-
               setEditing(false);
             }}
             responders={responders}

@@ -1,5 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { Confirm } from "@neinteractiveliterature/litform";
 import { I18nextProvider } from "react-i18next";
 import { createRoutesStub } from "react-router";
 import { describe, expect, test, vi } from "vitest";
@@ -64,7 +65,9 @@ function renderTable({
   ]);
   render(
     <I18nextProvider i18n={i18n}>
-      <Stub initialEntries={["/schedules/1/shifts"]} />
+      <Confirm>
+        <Stub initialEntries={["/schedules/1/shifts"]} />
+      </Confirm>
     </I18nextProvider>,
   );
   return submissions;
@@ -153,16 +156,57 @@ describe("ShiftScheduleTable", () => {
     expect(await screen.findByRole("button", { name: /edit shift/i })).toBeInTheDocument();
   });
 
-  // KNOWN BUG: ShiftScheduleRow checks `fetcher.data` right after `await fetcher.submit(...)`, but that's the value from
-  // the render the click handler closed over, so it's always the pre-submit (empty) data. An error returned by the route
-  // (an overlapping shift, say) is never shown, and the form closes as if the save had worked. When that's fixed, this
-  // test will start passing and `test.fails` will complain: switch it back to `test`.
-  test.fails("an error the route returns is shown on the form", async () => {
+  test("an error the route returns is shown on the form", async () => {
     const user = userEvent.setup();
     renderTable({ actionResult: new Error("Shifts can't overlap") });
     await user.click(await screen.findByRole("button", { name: /edit shift/i }));
     await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(await screen.findByText("Shifts can't overlap")).toBeInTheDocument();
+  });
+
+  test("a successful save closes the form", async () => {
+    const user = userEvent.setup();
+    const submissions = renderTable();
+    await user.click(await screen.findByRole("button", { name: /edit shift/i }));
+    await user.click(screen.getByRole("button", { name: "Save" }));
+
+    expect(await screen.findByRole("button", { name: /edit shift/i })).toBeInTheDocument();
+    expect(screen.queryByRole("group", { name: "Responders" })).not.toBeInTheDocument();
+    expect(submissions).toHaveLength(1);
+  });
+
+  test("a failed save can be retried", async () => {
+    const user = userEvent.setup();
+    const submissions = renderTable({ actionResult: new Error("Shifts can't overlap") });
+    await user.click(await screen.findByRole("button", { name: /edit shift/i }));
+
+    await user.click(screen.getByRole("button", { name: "Save" }));
+    await screen.findByText("Shifts can't overlap");
+    await user.click(screen.getByRole("button", { name: "Save" }));
+
+    await vi.waitFor(() => expect(submissions).toHaveLength(2));
+    expect(await screen.findByText("Shifts can't overlap")).toBeInTheDocument();
+  });
+
+  test("removing a shift asks first, then deletes that shift's route", async () => {
+    const user = userEvent.setup();
+    const submissions = renderTable();
+    await user.click(await screen.findByRole("button", { name: /remove shift/i }));
+    expect(submissions).toHaveLength(0);
+
+    await user.click(await screen.findByRole("button", { name: "OK" }));
+
+    await vi.waitFor(() => expect(submissions).toHaveLength(1));
+    expect(submissions[0]).toMatchObject({ method: "DELETE", path: "/schedules/1/shifts/7" });
+  });
+
+  test("an error from removing a shift is shown", async () => {
+    const user = userEvent.setup();
+    renderTable({ actionResult: new Error("Couldn't remove the shift") });
+    await user.click(await screen.findByRole("button", { name: /remove shift/i }));
+    await user.click(await screen.findByRole("button", { name: "OK" }));
+
+    expect(await screen.findByText(/Couldn't remove the shift/)).toBeInTheDocument();
   });
 });
