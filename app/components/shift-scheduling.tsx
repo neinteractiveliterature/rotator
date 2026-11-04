@@ -36,6 +36,10 @@ export type ShiftForSchedule = {
   }[];
 };
 
+// The table has one row per hour, so a very long schedule timespan (e.g. the
+// old 1970-2100 default) would mean over a million rows.  Cap the range shown.
+const MAX_HOUR_BY_HOUR_RANGE_MS = 14 * 24 * 60 * 60 * 1000;
+
 export function calculateHourByHourShiftSchedule({
   shifts: unsortedShifts,
   schedule,
@@ -48,13 +52,13 @@ export function calculateHourByHourShiftSchedule({
   );
   const shiftsById = new Map(shifts.map((shift) => [shift.id, shift]));
 
-  const start = new Date(
+  let start = new Date(
     Math.min(
       ...(shifts.length > 0 ? [shifts[0].timespan.start.getTime()] : []),
       schedule.timespan.start.getTime(),
     ),
   );
-  const finish = new Date(
+  let finish = new Date(
     Math.max(
       ...(shifts.length > 0
         ? [shifts[shifts.length - 1].timespan.finish.getTime()]
@@ -62,6 +66,18 @@ export function calculateHourByHourShiftSchedule({
       schedule.timespan.finish.getTime(),
     ),
   );
+
+  if (finish.getTime() - start.getTime() > MAX_HOUR_BY_HOUR_RANGE_MS) {
+    // Start from the first shift if there is one, otherwise from now, but
+    // never before the beginning of the range.
+    const anchor = shifts.length > 0 ? shifts[0].timespan.start : new Date();
+    start = new Date(
+      Math.min(Math.max(start.getTime(), anchor.getTime()), finish.getTime()),
+    );
+    finish = new Date(
+      Math.min(finish.getTime(), start.getTime() + MAX_HOUR_BY_HOUR_RANGE_MS),
+    );
+  }
 
   const hourStarts: Date[] = [];
   const shiftIdByHourStart = new Map();
