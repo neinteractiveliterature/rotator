@@ -50,7 +50,7 @@ function renderPage(loaderData: LoaderData) {
   const Stub = createRoutesStub([
     {
       path: "/phone_numbers/:phoneNumberId",
-      Component: PhoneNumberPage as React.ComponentType<any>,
+      Component: PhoneNumberPage as React.ComponentType,
       loader() {
         return loaderData;
       },
