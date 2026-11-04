@@ -7,11 +7,9 @@ import {
   mailTransportContext,
   readDbContext,
   oauth2StrategyContext,
-  twilioClientContext,
 } from "~/contexts";
 import type { CountryCode } from "libphonenumber-js";
 import { createTransport } from "nodemailer";
-import Twilio from "twilio";
 import { connectDb } from "drizzle/db";
 
 const db = connectDb();
@@ -21,8 +19,6 @@ const { authenticator, oauth2Strategy } = await setupOAuth2(db);
 const mailTransport = createTransport({
   url: process.env.SMTP_URL,
 });
-
-const twilioClient = new Twilio.Twilio();
 
 export const initializeContextMiddleware: MiddlewareFunction = async ({
   context,
@@ -43,5 +39,4 @@ export const initializeContextMiddleware: MiddlewareFunction = async ({
   }
   context.set(mailTransportContext, mailTransport);
   context.set(oauth2StrategyContext, oauth2Strategy);
-  context.set(twilioClientContext, twilioClient);
 };

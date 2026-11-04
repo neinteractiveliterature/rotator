@@ -20,17 +20,24 @@ export type JobContext = {
   defaultCountryCode: CountryCode;
 };
 
+// Built from the app's own TWILIO_SID and TWILIO_AUTH_TOKEN. (Called with no arguments the Twilio SDK reads
+// TWILIO_ACCOUNT_SID instead, a name this app has never set, and then fails on its first request.)
+function buildTwilioClient() {
+  const accountSid = process.env.TWILIO_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  if (!accountSid || !authToken) {
+    throw new Error("TWILIO_SID and TWILIO_AUTH_TOKEN must be set to send texts");
+  }
+  return new Twilio.Twilio(accountSid, authToken);
+}
+
 let jobContext: JobContext | undefined;
 
 export function getJobContext(): JobContext {
   jobContext ??= {
     db: connectDb(),
     mailTransport: createTransport({ url: process.env.SMTP_URL }),
-    // The app's secret is named TWILIO_SID, which the Twilio SDK doesn't look for on its own (it reads TWILIO_ACCOUNT_SID)
-    twilioClient: new Twilio.Twilio(
-      process.env.TWILIO_ACCOUNT_SID ?? process.env.TWILIO_SID,
-      process.env.TWILIO_AUTH_TOKEN,
-    ),
+    twilioClient: buildTwilioClient(),
     defaultCountryCode: (process.env.DEFAULT_COUNTRY_CODE ??
       "US") as CountryCode,
   };

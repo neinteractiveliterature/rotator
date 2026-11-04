@@ -7,11 +7,9 @@ import {
   mailTransportContext,
   readDbContext,
   oauth2StrategyContext,
-  twilioClientContext,
 } from "~/contexts";
 import type { CountryCode } from "libphonenumber-js";
 import { createTransport } from "nodemailer";
-import Twilio from "twilio";
 import { connectDb } from "drizzle/db";
 
 export async function getLoadContext() {
@@ -36,7 +34,6 @@ export async function getLoadContext() {
   }
   provider.set(mailTransportContext, mailTransport);
   provider.set(oauth2StrategyContext, oauth2Strategy);
-  provider.set(twilioClientContext, new Twilio.Twilio());
 
   return provider;
 }
