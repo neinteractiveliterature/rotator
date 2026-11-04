@@ -281,6 +281,7 @@ export function ShiftForm({
                             id: new Date().getTime(),
                             position:
                               Math.max(
+                                0,
                                 ...prevShiftAssignments.map(
                                   (shiftAssignment) => shiftAssignment.position,
                                 ),

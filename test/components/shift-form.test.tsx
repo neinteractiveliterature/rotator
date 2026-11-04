@@ -29,14 +29,16 @@ const initialShift: Omit<ShiftForSchedule, "id"> = {
 function renderForm({
   save = async () => {},
   cancel = () => {},
+  shift = initialShift,
 }: {
   save?: (shift: Omit<ShiftForSchedule, "id">) => Promise<unknown>;
   cancel?: () => void;
+  shift?: Omit<ShiftForSchedule, "id">;
 } = {}) {
   render(
     <I18nextProvider i18n={i18n}>
       <ShiftForm
-        initialShift={initialShift}
+        initialShift={shift}
         save={save}
         cancel={cancel}
         responders={responders}
@@ -103,6 +105,25 @@ describe("ShiftForm", () => {
 
     await user.click(screen.getByRole("button", { name: "Save" }));
     expect(save.mock.calls[0][0].shiftAssignments.map((sa) => sa.responderId)).toEqual([1, 2, 3]);
+  });
+
+  test("responders added to an empty shift get positions counting up from 1", async () => {
+    const user = userEvent.setup();
+    const save = vi.fn<(shift: Omit<ShiftForSchedule, "id">) => Promise<unknown>>(async () => {});
+    renderForm({ save, shift: { ...initialShift, shiftAssignments: [] } });
+
+    for (const name of ["Alex", "Blake"]) {
+      await user.click(screen.getByRole("button", { name: /add responder/i }));
+      await user.selectOptions(screen.getByLabelText("Add responder"), name);
+      const [addSave] = screen.getAllByRole("button", { name: "Save" });
+      await user.click(addSave);
+    }
+    await user.click(screen.getByRole("button", { name: "Save" }));
+
+    expect(save.mock.calls[0][0].shiftAssignments.map((sa) => [sa.responderId, sa.position])).toEqual([
+      [1, 1],
+      [2, 2],
+    ]);
   });
 
   test("cancelling the add row adds nobody", async () => {
