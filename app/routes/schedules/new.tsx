@@ -5,21 +5,23 @@ import ScheduleFormFields, {
   parseScheduleFormData,
   type ScheduleFormFieldsProps,
 } from "~/components/forms/schedule";
-import { schedulesTable } from "~/db/schema";
-import { dbContext } from "~/contexts";
+import type { schedulesTable } from "~/db/schema";
+import { createSchedule } from "~/.server/repositories/schedules.server";
 import { type InferInsertModel } from "drizzle-orm";
 import type { TimestampRange } from "~/db/tsRange";
 import { ErrorDisplay, serializeError } from "~/components/error-display";
 import i18n from "~/i18n";
 
-const blankTimespan: TimestampRange = {
-  start: new Date("1970-01-01T00:00:00Z"),
-  finish: new Date("2100-01-01T00:00:00Z"),
-  includeFinish: false,
-  includeStart: true,
-};
+function buildBlankTimespan(): TimestampRange {
+  const start = new Date();
+  start.setUTCHours(0, 0, 0, 0);
+  const finish = new Date(start);
+  finish.setUTCDate(finish.getUTCDate() + 3);
 
-const blankSchedule: InferInsertModel<typeof schedulesTable> = {
+  return { start, finish, includeFinish: false, includeStart: true };
+}
+
+const buildBlankSchedule = (): InferInsertModel<typeof schedulesTable> => ({
   callTimeout: 10,
   emailFrom: "",
   name: "",
@@ -29,28 +31,30 @@ const blankSchedule: InferInsertModel<typeof schedulesTable> = {
   textEmailSubjectTemplate: "",
   textResponderTemplate: "",
   timeZone: "America/New_York",
-  timespan: blankTimespan,
+  timespan: buildBlankTimespan(),
   voicemailEmailBodyTemplate: "",
   voicemailEmailSubjectTemplate: "",
   voicemailMessage: "",
   voicemailSilenceTimeout: 10,
   voicemailTextTemplate: "",
   welcomeMessage: "",
-};
+});
 
-const blankFormFields: ScheduleFormFieldsProps["schedule"] = {
-  emailFrom: blankSchedule.emailFrom,
-  name: blankSchedule.name,
-  timespan: blankTimespan,
-  timeZone: blankSchedule.timeZone,
+const buildBlankFormFields = (): ScheduleFormFieldsProps["schedule"] => {
+  const blankSchedule = buildBlankSchedule();
+  return {
+    emailFrom: blankSchedule.emailFrom,
+    name: blankSchedule.name,
+    timespan: buildBlankTimespan(),
+    timeZone: blankSchedule.timeZone,
+  };
 };
 
 export async function action({ context, request }: Route.ActionArgs) {
-  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
     const values = {
-      ...blankSchedule,
+      ...buildBlankSchedule(),
       ...Object.fromEntries(
         Object.entries(parseScheduleFormData(formData)).filter(
           ([, value]) => typeof value !== "undefined",
@@ -58,9 +62,7 @@ export async function action({ context, request }: Route.ActionArgs) {
       ),
     };
 
-    const schedule = (
-      await db.insert(schedulesTable).values(values).returning()
-    )[0];
+    const schedule = await createSchedule(context, values);
 
     return redirect(`/schedules/${schedule.id}`);
   } catch (error) {
@@ -78,7 +80,7 @@ export default function NewSchedule({ actionData }: Route.ComponentProps) {
       </header>
 
       <Form method="POST">
-        <ScheduleFormFields schedule={blankFormFields} />
+        <ScheduleFormFields schedule={buildBlankFormFields()} />
 
         <ErrorDisplay error={actionData} />
 

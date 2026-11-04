@@ -29,9 +29,37 @@ jobs:
       - run: yarn run react-router typegen
       - name: type check
         run: yarn run tsc --noEmit
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Read .node-version
+        id: node-version
+        run: echo "node-version=$(cat .node-version)" >> $GITHUB_OUTPUT
+      - name: install node
+        uses: actions/setup-node@v6
+        with:
+          cache: yarn
+          node-version: ${{ steps.node-version.outputs.node-version }}
+      - name: yarn install
+        run: yarn install
+      - name: oxlint
+        run: yarn run lint
   vitest:
     name: vitest
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    env:
+      TEST_DATABASE_URL: postgres://postgres@localhost/postgres
     steps:
       - uses: actions/checkout@v6
       - name: Read .node-version
@@ -69,6 +97,7 @@ jobs:
     if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
     needs:
       - typescript
+      - lint
       - vitest
     outputs:
       name: ${{ steps.release-drafter.outputs.name }}

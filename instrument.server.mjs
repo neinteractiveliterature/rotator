@@ -4,12 +4,22 @@ import { nodeProfilingIntegration } from "@sentry/profiling-node";
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
 
-  // Adds request headers and IP for users, for more info visit:
-  // https://docs.sentry.io/platforms/javascript/guides/react-router/configuration/options/#sendDefaultPii
-  sendDefaultPii: false,
-
-  // Enable logs to be sent to Sentry
-  enableLogs: true,
+  // Sentry 11 collects much more by default than 10 did (sendDefaultPii off). This keeps the 10 behavior: texts and
+  // voicemail details are personal data.
+  dataCollection: {
+    userInfo: false,
+    cookies: false,
+    httpHeaders: {
+      request: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+      response: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+    },
+    httpBodies: [],
+    urlQueryParams: { deny: ["forwarded", "-ip", "remote-", "via", "-user"] },
+    genAI: { inputs: false, outputs: false },
+    databaseQueryData: false,
+    queues: false,
+    graphQL: { document: false, variables: false },
+  },
 
   integrations: [nodeProfilingIntegration()],
   tracesSampleRate: 1.0, // Capture 100% of the transactions

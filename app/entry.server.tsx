@@ -1,4 +1,4 @@
-import "../instrument.server";
+import "../instrument.server.mjs";
 import * as Sentry from "@sentry/react-router";
 import { PassThrough } from "node:stream";
 
@@ -10,7 +10,7 @@ import type { RenderToPipeableStreamOptions } from "react-dom/server";
 import { renderToPipeableStream } from "react-dom/server";
 
 export const handleError = Sentry.createSentryHandleError({
-  logErrors: false,
+  logErrors: true,
 });
 
 export const streamTimeout = 5_000;

@@ -6,12 +6,11 @@ import { ErrorDisplay } from "@neinteractiveliterature/litform";
 import ScheduleFormFields, {
   parseScheduleFormData,
 } from "~/components/forms/schedule";
-import { schedulesTable } from "~/db/schema";
-import { eq } from "drizzle-orm";
-import { dbContext } from "~/contexts";
+import { updateSchedule } from "~/.server/repositories/schedules.server";
+import { readDbContext } from "~/contexts";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const schedule = assertFound(
     await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
@@ -22,14 +21,14 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 }
 
 export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
 
-    await db
-      .update(schedulesTable)
-      .set(parseScheduleFormData(formData))
-      .where(eq(schedulesTable.id, coerceId(params.scheduleId)));
+    await updateSchedule(
+      context,
+      coerceId(params.scheduleId),
+      parseScheduleFormData(formData),
+    );
 
     return redirect(`/schedules/${params.scheduleId}`);
   } catch (error) {

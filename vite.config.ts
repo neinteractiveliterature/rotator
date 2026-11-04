@@ -1,5 +1,5 @@
 import { reactRouter } from "@react-router/dev/vite";
-import { sentryReactRouter } from "@sentry/react-router";
+import { sentryReactRouter } from "@sentry/react-router/vite";
 import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 
@@ -31,13 +31,22 @@ const config = defineConfig((config) => ({
   server: {
     allowedHosts: [
       "silkworm-calm-evenly.ngrok-free.app",
-      "nbudin.opossum-bass.ts.net",
+      "samus.opossum-bass.ts.net",
     ],
     host: "0.0.0.0",
   },
   test: {
     env: {
       OAUTH2_SERVER_BASE: "http://localhost",
+      APP_URL_BASE: "http://localhost:3000",
+      // The Postgres server the database tests run against (each test worker makes its own database on it; see
+      // test/support/db.ts). Set TEST_DATABASE_URL to use a different one.
+      TEST_DATABASE_URL:
+        process.env.TEST_DATABASE_URL ??
+        "postgres://postgres@localhost/rotator_test",
+      SKIP_TWILIO_WEBHOOK_VALIDATION: "true",
+      JOB_ADAPTER: "test",
+      SECRET_KEY_BASE: "test-secret-key-base",
     },
     coverage: {
       enabled: process.env["COVERAGE"] ? true : false,

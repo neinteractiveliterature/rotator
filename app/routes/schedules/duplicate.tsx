@@ -4,14 +4,14 @@ import { Form, redirect } from "react-router";
 import ScheduleFormFields, {
   parseScheduleFormData,
 } from "~/components/forms/schedule";
-import { schedulesTable } from "~/db/schema";
-import { dbContext } from "~/contexts";
+import { duplicateSchedule } from "~/.server/repositories/schedules.server";
+import { readDbContext } from "~/contexts";
 import { assertFound, coerceId } from "~/db/utils";
 import { ErrorDisplay, serializeError } from "~/components/error-display";
 import i18n from "~/i18n";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const schedule = assertFound(
     await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
@@ -22,28 +22,19 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 }
 
 export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { id: _unusedId, ...prevSchedule } = assertFound(
-      await db.query.schedulesTable.findFirst({
-        where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
-      }),
+    const overrides = Object.fromEntries(
+      Object.entries(parseScheduleFormData(formData)).filter(
+        ([, value]) => typeof value !== "undefined",
+      ),
     );
 
-    const values = {
-      ...prevSchedule,
-      ...Object.fromEntries(
-        Object.entries(parseScheduleFormData(formData)).filter(
-          ([, value]) => typeof value !== "undefined",
-        ),
-      ),
-    };
-
-    const schedule = (
-      await db.insert(schedulesTable).values(values).returning()
-    )[0];
+    const schedule = await duplicateSchedule(
+      context,
+      coerceId(params.scheduleId),
+      overrides,
+    );
 
     return redirect(`/schedules/${schedule.id}`);
   } catch (error) {

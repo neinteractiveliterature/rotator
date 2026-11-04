@@ -26,7 +26,7 @@ function renderPage(loaderData: LoaderData) {
   const Stub = createRoutesStub([
     {
       path: "/schedules/:scheduleId/phone-numbers",
-      Component: SchedulePhoneNumbers as React.ComponentType<any>,
+      Component: SchedulePhoneNumbers as React.ComponentType,
       loader() {
         return loaderData;
       },

@@ -1,18 +1,17 @@
 import { useTranslation } from "react-i18next";
 import { coerceId } from "~/db/utils";
 import type { Route } from "./+types/shifts";
-import { dbContext } from "~/contexts";
+import { readDbContext } from "~/contexts";
+import { createShift } from "~/.server/repositories/schedules.server";
 import {
   SerializedShift,
   ShiftScheduleTable,
 } from "~/components/shift-scheduling";
-import { shiftAssignmentsTable, shiftsTable } from "~/db/schema";
-import type { TimestampRange } from "~/db/tsRange";
 import { serializeError } from "~/components/error-display";
 import i18n from "~/i18n";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
 
   const schedule = await db.query.schedulesTable.findFirst({
     where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
@@ -48,30 +47,14 @@ export async function action({ request, params, context }: Route.ActionArgs) {
   }
 
   const data = SerializedShift.parse(await request.json());
-  const db = context.get(dbContext);
 
   try {
-    await db.transaction(async (tx) => {
-      const [{ id: shiftId }] = await tx
-        .insert(shiftsTable)
-        .values({
-          scheduleId: Number.parseInt(params.scheduleId),
-          timespan: {
-            start: new Date(data.timespan.start),
-            finish: new Date(data.timespan.finish),
-            includeStart: true,
-            includeFinish: false,
-          } satisfies TimestampRange,
-        })
-        .returning({ id: shiftsTable.id });
-
-      await tx.insert(shiftAssignmentsTable).values(
-        data.shiftAssignments.map((shiftAssignment, index) => ({
-          position: index + 1,
-          responderId: shiftAssignment.responderId,
-          shiftId,
-        })),
-      );
+    await createShift(context, coerceId(params.scheduleId), {
+      timespan: {
+        start: new Date(data.timespan.start),
+        finish: new Date(data.timespan.finish),
+      },
+      responderIds: data.shiftAssignments.map((sa) => sa.responderId),
     });
   } catch (err) {
     return serializeError(err, i18n.t);

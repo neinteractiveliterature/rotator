@@ -4,28 +4,28 @@ import {
   activeSchedulesForPhoneNumber,
   activeShiftForSchedule,
   bestResponderForShift,
-} from "./schedules";
+} from "~/.server/repositories/onCall.server";
 import { TwilioDialResponseParams } from "./twimlWebhookParams";
 import { assertFound, coerceId } from "~/db/utils";
-import { Liquid } from "liquidjs";
+import {
+  sendPostCallTextJob,
+  type PostCallTextTemplateVariables,
+} from "~/.server/jobs/sendPostCallText";
 import { twimlHangupResponse } from "./twimlUtils";
-import { validateTwilioWebhook } from "~/server/validateTwilioWebhook.server";
-import { dbContext, twilioClientContext } from "~/contexts";
+import { validateTwilioWebhook } from "~/.server/validateTwilioWebhook.server";
+import { readDbContext } from "~/contexts";
 
-export type PostCallTextTemplateVariables = {
-  from: string;
-};
+export type { PostCallTextTemplateVariables };
 
 export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
-  const twilioClient = context.get(twilioClientContext);
+  const db = context.get(readDbContext);
   const webhookParams = TwilioDialResponseParams.parse(
     await validateTwilioWebhook(request)
   );
 
   const now = new Date();
   const schedules = await activeSchedulesForPhoneNumber(
-    context,
+    db,
     webhookParams.To,
     now
   );
@@ -41,26 +41,21 @@ export async function action({ context, request, params }: Route.ActionArgs) {
     const responder = assertFound(
       await db.query.respondersTable.findFirst({
         where: (tbl, { eq }) => eq(tbl.id, coerceId(params.responderId)),
-      })
+      }),
     );
 
-    const liquid = new Liquid();
-
-    twilioClient.messages.create({
-      from: webhookParams.To,
-      to: responder.phoneNumber,
-      body: liquid.parseAndRenderSync(
-        activeSchedule.schedules.postCallTextTemplate,
-        {
-          from: webhookParams.From,
-        } satisfies PostCallTextTemplateVariables
-      ),
+    // Texted in the background so that a Twilio retry of this webhook can't send it twice
+    await sendPostCallTextJob.perform({
+      scheduleId: activeSchedule.schedules.id,
+      responderId: responder.id,
+      from: webhookParams.From,
+      to: webhookParams.To,
     });
 
     return twimlHangupResponse();
   } else {
     const activeShift = await activeShiftForSchedule(
-      context,
+      db,
       activeSchedule.schedules.id,
       now
     );

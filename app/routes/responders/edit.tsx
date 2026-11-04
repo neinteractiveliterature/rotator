@@ -5,20 +5,19 @@ import { ErrorDisplay } from "@neinteractiveliterature/litform";
 import ResponderFormFields, {
   parseResponderFormData,
 } from "~/components/forms/responder";
-import { respondersTable } from "~/db/schema";
-import { eq } from "drizzle-orm";
+import { updateResponder } from "~/.server/repositories/responders.server";
 import { Form, redirect } from "react-router";
-import { dbContext } from "~/contexts";
+import { readDbContext } from "~/contexts";
 
 export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
   try {
     const formData = await request.formData();
 
-    await db
-      .update(respondersTable)
-      .set(parseResponderFormData(formData))
-      .where(eq(respondersTable.id, coerceId(params.responderId)));
+    await updateResponder(
+      context,
+      coerceId(params.responderId),
+      parseResponderFormData(formData),
+    );
 
     return redirect(`/responders/${params.responderId}`);
   } catch (error) {
@@ -27,7 +26,7 @@ export async function action({ context, request, params }: Route.ActionArgs) {
 }
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const responder = assertFound(
     await db.query.respondersTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.responderId)),

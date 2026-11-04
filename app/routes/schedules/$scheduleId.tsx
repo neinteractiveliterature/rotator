@@ -2,13 +2,12 @@ import { assertFound, coerceId } from "~/db/utils";
 import type { Route } from "./+types/$scheduleId";
 import { NavLink, Outlet, useRouteLoaderData } from "react-router";
 import { useTranslation } from "react-i18next";
-import { dbContext } from "~/contexts";
-import { schedulesTable } from "~/db/schema";
+import { readDbContext } from "~/contexts";
+import { updateSchedule } from "~/.server/repositories/schedules.server";
 import { parseScheduleFormData } from "~/components/forms/schedule";
-import { eq } from "drizzle-orm";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const schedule = assertFound(
     await db.query.schedulesTable.findFirst({
       where: (tbl, { eq }) => eq(tbl.id, coerceId(params.scheduleId)),
@@ -19,16 +18,15 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 }
 
 export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
-
   if (request.method === "PATCH") {
     try {
       const formData = await request.formData();
 
-      await db
-        .update(schedulesTable)
-        .set(parseScheduleFormData(formData))
-        .where(eq(schedulesTable.id, coerceId(params.scheduleId)));
+      await updateSchedule(
+        context,
+        coerceId(params.scheduleId),
+        parseScheduleFormData(formData),
+      );
     } catch (error) {
       return error;
     }

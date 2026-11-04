@@ -4,12 +4,14 @@ import { Form, Link } from "react-router";
 import parsePhoneNumberFromString from "libphonenumber-js";
 import { formatPhoneNumberForDisplay } from "~/phoneNumberUtils";
 import { assertFound, coerceId } from "~/db/utils";
-import { dbContext, defaultCountryCodeContext } from "~/contexts";
-import { phoneNumbersSchedulesTable, schedulesTable } from "~/db/schema";
-import { and, eq } from "drizzle-orm";
+import { readDbContext, defaultCountryCodeContext } from "~/contexts";
+import {
+  addPhoneNumberToSchedule,
+  removePhoneNumberFromSchedule,
+} from "~/.server/repositories/phoneNumbers.server";
 
 export async function loader({ context, params }: Route.LoaderArgs) {
-  const db = context.get(dbContext);
+  const db = context.get(readDbContext);
   const defaultCountryCode = context.get(defaultCountryCodeContext);
 
   const [phoneNumberResult, allSchedules] = await Promise.all([
@@ -26,25 +28,14 @@ export async function loader({ context, params }: Route.LoaderArgs) {
 }
 
 export async function action({ context, request, params }: Route.ActionArgs) {
-  const db = context.get(dbContext);
   const formData = await request.formData();
   const phoneNumberId = coerceId(params.phoneNumberId);
   const scheduleId = coerceId(formData.get("scheduleId")?.toString() ?? "");
 
   if (request.method === "POST") {
-    await db
-      .insert(phoneNumbersSchedulesTable)
-      .values({ phoneNumberId, scheduleId })
-      .onConflictDoNothing();
+    await addPhoneNumberToSchedule(context, phoneNumberId, scheduleId);
   } else if (request.method === "DELETE") {
-    await db
-      .delete(phoneNumbersSchedulesTable)
-      .where(
-        and(
-          eq(phoneNumbersSchedulesTable.phoneNumberId, phoneNumberId),
-          eq(phoneNumbersSchedulesTable.scheduleId, scheduleId)
-        )
-      );
+    await removePhoneNumberFromSchedule(context, phoneNumberId, scheduleId);
   }
 
   return null;
