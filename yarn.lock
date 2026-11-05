@@ -7488,17 +7488,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"i18next@npm:^25.0.0":
-  version: 25.10.10
-  resolution: "i18next@npm:25.10.10"
-  dependencies:
-    "@babel/runtime": "npm:^7.29.2"
+"i18next@npm:^26.0.0":
+  version: 26.7.1
+  resolution: "i18next@npm:26.7.1"
   peerDependencies:
-    typescript: ^5 || ^6
+    typescript: ^5 || ^6 || ^7
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/6ff601b52363c9c974ef293af4a6de04d9f76b4bf2ad9a56c8546235aaf19ff1a7c2109ddba3a73922d418e208ec5b688e5afb323eba6e27c75d629e93827ae1
+  checksum: 10c0/742c0d5ea25a68e0380de3be5c4b7d1f2a9ab9da81d5f2a85ea2892a500f60ba1a87a2c1fd6e0cd16588f37175dc88da817d3b26dda1963044f045bd86202960
   languageName: node
   linkType: hard
 
@@ -9840,7 +9838,7 @@ __metadata:
     eslint-plugin-drizzle: "npm:^0.2.3"
     eslint-plugin-i18next: "npm:^6.1.5"
     graphql: "npm:^16.10.0"
-    i18next: "npm:^25.0.0"
+    i18next: "npm:^26.0.0"
     isbot: "npm:^5.1.23"
     jose: "npm:^6.0.8"
     jsdom: "npm:^29.0.0"
