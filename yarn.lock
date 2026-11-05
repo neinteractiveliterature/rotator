@@ -7346,6 +7346,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql@npm:^17.0.0":
+  version: 17.1.0
+  resolution: "graphql@npm:17.1.0"
+  checksum: 10c0/7bebb1c13c352577c14e10accd38ce51c642bf8e7bfb474c49790c893636f8abf7d61802c47f3ce413703b0a669220c142de9aed67b3e961da3c00d005c9cfd3
+  languageName: node
+  linkType: hard
+
 "has-flag@npm:^4.0.0":
   version: 4.0.0
   resolution: "has-flag@npm:4.0.0"
@@ -9839,7 +9846,7 @@ __metadata:
     eslint: "npm:^10"
     eslint-plugin-drizzle: "npm:^0.2.3"
     eslint-plugin-i18next: "npm:^6.1.5"
-    graphql: "npm:^16.10.0"
+    graphql: "npm:^17.0.0"
     i18next: "npm:^25.0.0"
     isbot: "npm:^5.1.23"
     jose: "npm:^6.0.8"
