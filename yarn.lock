@@ -3653,11 +3653,11 @@ __metadata:
   linkType: hard
 
 "@pulumi/tls@npm:^5.3.0":
-  version: 5.6.2
-  resolution: "@pulumi/tls@npm:5.6.2"
+  version: 5.6.3
+  resolution: "@pulumi/tls@npm:5.6.3"
   dependencies:
     "@pulumi/pulumi": "npm:^3.142.0"
-  checksum: 10c0/6afa3735069e71d6d659150378b5d4dc773b0232995e765e8f9e8807b356efced7aed9092b6f3fbfa3e41c000ff29f391d7cfb6fb82a005801c57a1c8e98366b
+  checksum: 10c0/11f731a216e30b1767e4ee17078889fd0181bc8a9e8d2938899efb87595cef7063428b3e78850605e695b8cde112f7a109c5e28412e5d6d4124ff9568d0e41da
   languageName: node
   linkType: hard
 
