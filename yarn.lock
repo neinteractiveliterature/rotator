@@ -5341,9 +5341,9 @@ __metadata:
   linkType: hard
 
 "@vvo/tzdb@npm:^6.198.0":
-  version: 6.198.0
-  resolution: "@vvo/tzdb@npm:6.198.0"
-  checksum: 10c0/f1425eba7bb3875ad7198322fd9b3aa3324af36261f63611c024fcc5e1129cf49688427215b7bb08c83ca15387f207f4b57878263c6adcc95da888430e22341d
+  version: 6.203.0
+  resolution: "@vvo/tzdb@npm:6.203.0"
+  checksum: 10c0/3c5ed137d8ed3897726826c02b9405d1229e361b3a035995f9c1890fb4d94bb356879f13cec87d5227e413b02abf10edb3014dec9b5961a01f45bd61d249b705
   languageName: node
   linkType: hard
 
