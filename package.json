@@ -78,7 +78,7 @@
     "@react-router/dev": "8.5.1",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@sentry/cli": "^2.58.5",
+    "@sentry/cli": "^3.0.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
