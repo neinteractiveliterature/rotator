@@ -15,7 +15,7 @@ jobs:
     name: typescript
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Read .node-version
         id: node-version
         run: echo "node-version=$(cat .node-version)" >> $GITHUB_OUTPUT
@@ -33,7 +33,7 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Read .node-version
         id: node-version
         run: echo "node-version=$(cat .node-version)" >> $GITHUB_OUTPUT
@@ -61,7 +61,7 @@ jobs:
     env:
       TEST_DATABASE_URL: postgres://postgres@localhost/postgres
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Read .node-version
         id: node-version
         run: echo "node-version=$(cat .node-version)" >> $GITHUB_OUTPUT
