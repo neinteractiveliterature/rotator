@@ -4820,10 +4820,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tsconfig/node24@npm:^24.0.0":
-  version: 24.0.6
-  resolution: "@tsconfig/node24@npm:24.0.6"
-  checksum: 10c0/804ad3d4673e631b626a9debee8d688d27a13aeddec24d59d6a09737df856d89c705dfbc801e2fd7c81f672a650e04df62585ab3f216a18ef90fc7cd579be2c1
+"@tsconfig/node26@npm:^26.0.0":
+  version: 26.0.2
+  resolution: "@tsconfig/node26@npm:26.0.2"
+  checksum: 10c0/8ffd2ad1a67cf804c553e82da6422c544d2d047eb6a40b9a0cd9066440291b1472da2aa53c3ae6957e4f7f3d8d0b181461918e078ac0a689271e8bfd10f94406
   languageName: node
   linkType: hard
 
@@ -9239,7 +9239,7 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.6.3"
     "@testing-library/react": "npm:^16.2.0"
     "@testing-library/user-event": "npm:^14.6.1"
-    "@tsconfig/node24": "npm:^24.0.0"
+    "@tsconfig/node26": "npm:^26.0.0"
     "@types/archiver": "npm:^8.0.0"
     "@types/aws-lambda": "npm:^8.10.164"
     "@types/babel__core": "npm:^7"
