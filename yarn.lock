@@ -2205,9 +2205,9 @@ __metadata:
   linkType: hard
 
 "@lezer/common@npm:^1.0.0, @lezer/common@npm:^1.0.2, @lezer/common@npm:^1.1.0, @lezer/common@npm:^1.2.0, @lezer/common@npm:^1.2.3, @lezer/common@npm:^1.3.0, @lezer/common@npm:^1.5.0":
-  version: 1.5.6
-  resolution: "@lezer/common@npm:1.5.6"
-  checksum: 10c0/a1a17c7b370f4b354e973acd76edf80ef5a33457fd3be94a5884da1189ddb851cb5581a689fa9aa7de38235c9aa8d503cf7ffb92d8266b07802face7cbbd6965
+  version: 1.5.7
+  resolution: "@lezer/common@npm:1.5.7"
+  checksum: 10c0/67a25392e4c5e3f7d61fe90e77ba3ebb8f1d1edaa25a3e74ef84a79e04e00a26436a2a116a7e4bacb2251734eb722718c4d1d1e99a4ddcac1d2cdd4f0121d1f1
   languageName: node
   linkType: hard
 
